@@ -944,6 +944,7 @@
     </table>
     <table id="240" parent="16" name="student">
       <Engine>InnoDB</Engine>
+      <Collation>utf8_general_ci</Collation>
     </table>
     <column id="241" parent="239" name="id">
       <Position>1</Position>
@@ -1014,10 +1015,18 @@
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="253" parent="240" name="PRIMARY">
+    <index id="253" parent="240" name="UK_fe0i52si7ybu0wjedj6motiim">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="254" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
+    </key>
+    <key id="255" parent="240" name="UK_fe0i52si7ybu0wjedj6motiim">
+      <ColNames>email</ColNames>
+      <UnderlyingIndexName>UK_fe0i52si7ybu0wjedj6motiim</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

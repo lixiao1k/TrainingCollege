@@ -1,6 +1,7 @@
 package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.repository.StudentRepository;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,14 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public Long saveStudent(Student student) {
-        return studentRepository.save(student);
+    public Long saveStudent(Student student) throws RepeatInsertException {
+        Long id = -1L;
+        try {
+            id = studentRepository.save(student);
+        }catch (Exception e){
+            throw new RepeatInsertException();
+        }
+        return id;
     }
 
     @Override

@@ -13,7 +13,7 @@ public class Student {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "email", columnDefinition = "varchar(255)", nullable = false)
+    @Column(name = "email", columnDefinition = "varchar(255)", nullable = false, unique = true)
     private String email;
 
     @Column(name = "level", nullable = false, columnDefinition = "INT default 0")

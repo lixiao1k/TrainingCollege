@@ -1,6 +1,7 @@
 package com.xrom.ssh.controller;
 
 import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.service.PersonService;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,17 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/saveStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveStudent", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String saveStudent() {
         Student student = new Student();
-        student.setEmail("lixiao1k@163.com");
-        student.setUserName("shelton");
-        studentService.saveStudent(student);
+        student.setEmail("shfjhjk");
+        student.setUserName("立夏的");
+        try {
+            studentService.saveStudent(student);
+        } catch (RepeatInsertException e) {
+            return "重复值";
+        }
         return "success!";
     }
 
