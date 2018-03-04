@@ -939,49 +939,48 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="239" parent="16" name="person">
-      <Engine>InnoDB</Engine>
-    </table>
-    <table id="240" parent="16" name="student">
+    <table id="239" parent="16" name="card">
       <Engine>InnoDB</Engine>
       <Collation>utf8_general_ci</Collation>
     </table>
-    <column id="241" parent="239" name="id">
+    <table id="240" parent="16" name="person">
+      <Engine>InnoDB</Engine>
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="241" parent="16" name="student">
+      <Engine>InnoDB</Engine>
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <column id="242" parent="239" name="user_id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="242" parent="239" name="address">
+    <column id="243" parent="239" name="balance">
       <Position>2</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="243" parent="239" name="created">
+    <column id="244" parent="239" name="card_number">
       <Position>3</Position>
-      <DataType>bigint(20)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="244" parent="239" name="phone">
-      <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="239" name="remark">
-      <Position>5</Position>
-      <DataType>varchar(255)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="246" parent="239" name="username">
-      <Position>6</Position>
-      <DataType>varchar(255)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="247" parent="239" name="PRIMARY">
+    <index id="245" parent="239" name="UK_by1nk98m2hq5onhl68bo09sc1">
+      <ColNames>card_number</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="246" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>user_id</ColNames>
       <Primary>1</Primary>
+    </key>
+    <key id="247" parent="239" name="UK_by1nk98m2hq5onhl68bo09sc1">
+      <ColNames>card_number</ColNames>
+      <UnderlyingIndexName>UK_by1nk98m2hq5onhl68bo09sc1</UnderlyingIndexName>
     </key>
     <column id="248" parent="240" name="id">
       <Position>1</Position>
@@ -990,41 +989,78 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="240" name="email">
+    <column id="249" parent="240" name="address">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="250" parent="240" name="created">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="251" parent="240" name="phone">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="252" parent="240" name="remark">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="253" parent="240" name="username">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="254" parent="240" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="255" parent="241" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="256" parent="241" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="250" parent="240" name="level">
+    <column id="257" parent="241" name="level">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="251" parent="240" name="user_name">
+    <column id="258" parent="241" name="user_name">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="252" parent="240" name="user_state">
+    <column id="259" parent="241" name="user_state">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="253" parent="240" name="UK_fe0i52si7ybu0wjedj6motiim">
+    <index id="260" parent="241" name="UK_fe0i52si7ybu0wjedj6motiim">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="254" parent="240" name="PRIMARY">
+    <key id="261" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="255" parent="240" name="UK_fe0i52si7ybu0wjedj6motiim">
+    <key id="262" parent="241" name="UK_fe0i52si7ybu0wjedj6motiim">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UK_fe0i52si7ybu0wjedj6motiim</UnderlyingIndexName>
     </key>

@@ -1,7 +1,9 @@
 package com.xrom.ssh.controller;
 
+import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.exceptions.RepeatInsertException;
+import com.xrom.ssh.service.CardService;
 import com.xrom.ssh.service.PersonService;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -20,6 +23,9 @@ public class TestController {
 
     @Autowired(required = true)
     private StudentService studentService;
+
+    @Autowired(required = true)
+    private CardService cardService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
@@ -34,24 +40,22 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/saveStudent", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/saveCard", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveStudent() {
-        Student student = new Student();
-        student.setEmail("shfjhjk");
-        student.setUserName("立夏的");
-        try {
-            studentService.saveStudent(student);
-        } catch (RepeatInsertException e) {
-            return "重复值";
-        }
+    public String saveCard() {
+        Card card = new Card();
+        card.setUserId(2L);
+        card.setCardNumber("1234567890");
+        cardService.saveCard(card);
+        cardService.flush();
+        System.out.print("Here");
         return "success!";
     }
 
-    @RequestMapping(value = "/deleteStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteCard", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteStudent() {
-        studentService.delete(1L);
+    public String deleteCard() {
+        cardService.deleteCard(2L);
         return "success!";
     }
 
@@ -76,11 +80,11 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/getStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/getCard", method = RequestMethod.GET)
     @ResponseBody
-    public String getStudent() {
-        Student student = studentService.getStudent(2L);
-        System.out.print(student.getUserName());
+    public String getCard() {
+        Card card = cardService.getCard(2L);
+        System.out.print(card.getBalance());
         return "success!";
     }
 

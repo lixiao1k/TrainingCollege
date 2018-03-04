@@ -11,4 +11,5 @@ public interface StudentService {
     List<Student> getAllStudents();
     void update(Student student);
     Student getStudent(Long id);
+    void flush();
 }

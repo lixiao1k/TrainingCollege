@@ -45,4 +45,9 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.get(id);
     }
 
+    @Override
+    public void flush() {
+        studentRepository.flush();
+    }
+
 }
