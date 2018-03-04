@@ -1,5 +1,6 @@
 package com.xrom.ssh.controller;
 
+import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.service.PersonService;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
 @Controller
 public class TestController {
 
@@ -32,7 +36,47 @@ public class TestController {
     @RequestMapping(value = "/saveStudent", method = RequestMethod.GET)
     @ResponseBody
     public String saveStudent() {
-        studentService.saveStudent();
+        Student student = new Student();
+        student.setEmail("lixiao1k@163.com");
+        student.setUserName("shelton");
+        studentService.saveStudent(student);
         return "success!";
     }
+
+    @RequestMapping(value = "/deleteStudent", method = RequestMethod.GET)
+    @ResponseBody
+    public String deleteStudent() {
+        studentService.delete(1L);
+        return "success!";
+    }
+
+    @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
+    @ResponseBody
+    public String getStudentList() {
+        List<Student> students = studentService.getAllStudents();
+        for(Student student: students){
+            System.out.println(student.getEmail());
+        }
+        return "success!";
+    }
+
+    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.GET)
+    @ResponseBody
+    public String saveOrUpdate() {
+        Student student = new Student();
+        student.setEmail("lixiao1k@163.com");
+        student.setUserName("mike");
+        student.setId(2L);
+        studentService.update(student);
+        return "success!";
+    }
+
+    @RequestMapping(value = "/getStudent", method = RequestMethod.GET)
+    @ResponseBody
+    public String getStudent() {
+        Student student = studentService.getStudent(2L);
+        System.out.print(student.getUserName());
+        return "success!";
+    }
+
 }

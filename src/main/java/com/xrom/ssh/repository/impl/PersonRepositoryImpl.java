@@ -58,4 +58,9 @@ public class PersonRepositoryImpl implements PersonRepository {
     public void flush() {
         getCurrentSession().flush();
     }
+
+    @Override
+    public void update(Person entity) {
+
+    }
 }

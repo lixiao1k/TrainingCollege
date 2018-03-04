@@ -20,4 +20,6 @@ public interface DomainRepository<T, PK extends Serializable> {
     void delete(PK id);
 
     void flush();
+
+    void update(T entity);
 }

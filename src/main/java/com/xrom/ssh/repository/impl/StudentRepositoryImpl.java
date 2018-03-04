@@ -44,8 +44,6 @@ public class StudentRepositoryImpl implements StudentRepository {
             tx.commit();
         }catch (Exception e){
             tx.rollback();
-        }finally {
-            session.close();
         }
         return list;
     }
@@ -62,17 +60,24 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void saveOrUpdate(Student entity) {
-        getCurrentSession().saveOrUpdate(entity);
     }
 
     @Override
     public void delete(Long id) {
         Student student = load(id);
         getCurrentSession().delete(student);
+        flush();
     }
 
     @Override
     public void flush() {
         getCurrentSession().flush();
     }
+
+    @Override
+    public void update(Student entity) {
+        getCurrentSession().update(entity);
+        flush();
+    }
+
 }
