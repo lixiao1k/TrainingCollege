@@ -30,4 +30,12 @@ public class CardServiceImpl implements CardService {
     public void flush() {
         cardRepository.flush();
     }
+
+    @Override
+    public void update(Long userId, int amount) {
+        Card card= cardRepository.get(userId);
+        card.setBalance(card.getBalance() + amount);
+        cardRepository.update(card);
+        cardRepository.flush();
+    }
 }

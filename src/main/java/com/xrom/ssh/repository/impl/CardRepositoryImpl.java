@@ -63,6 +63,6 @@ public class CardRepositoryImpl implements CardRepository {
 
     @Override
     public void update(Card entity) {
-
+        getCurrentSession().update(entity);
     }
 }

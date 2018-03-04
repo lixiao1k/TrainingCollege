@@ -80,11 +80,10 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/getCard", method = RequestMethod.GET)
+    @RequestMapping(value = "/addbalance", method = RequestMethod.GET)
     @ResponseBody
     public String getCard() {
-        Card card = cardService.getCard(2L);
-        System.out.print(card.getBalance());
+        cardService.update(2L, 50);
         return "success!";
     }
 

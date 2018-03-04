@@ -7,4 +7,5 @@ public interface CardService {
     Card getCard(Long userId);
     void deleteCard(Long userId);
     void flush();
+    void update(Long userId, int amount);
 }
