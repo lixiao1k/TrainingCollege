@@ -17,7 +17,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     private SessionFactory sessionFactory;
 
     private Session getCurrentSession(){
-        return this.sessionFactory.openSession();
+        return this.sessionFactory.getCurrentSession();
     }
 
     @Override

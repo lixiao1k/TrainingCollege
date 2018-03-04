@@ -39,6 +39,7 @@
                 <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>     <!--在控制台显示执行的数据哭操作语句（格式）-->
             </props>
         </property>
+
     </bean>
 
     <!-- 事物管理器配置  -->
