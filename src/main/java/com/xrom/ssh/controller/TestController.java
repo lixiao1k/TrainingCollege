@@ -1,6 +1,7 @@
 package com.xrom.ssh.controller;
 
 import com.xrom.ssh.entity.*;
+import com.xrom.ssh.enums.ApplicationState;
 import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +27,16 @@ public class TestController {
     private StudentService studentService;
 
     @Autowired(required = true)
-    private CardService cardService;
-
-    @Autowired(required = true)
     private AccountService accountService;
-
-    @Autowired(required = true)
-    private InstitutionService institutionService;
 
     @Autowired(required = true)
     private TeacherService teacherService;
 
     @Autowired(required = true)
     private CourseService courseService;
+
+    @Autowired(required = true)
+    private ModifyApplicationService modifyApplicationService;
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -76,72 +74,76 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/createCourse", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createModify", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveCourse() throws ParseException {
-        Course course = new Course();
-        SimpleDateFormat simFormat = new SimpleDateFormat("yyyy.MM.dd");
-        course.setBeginDate(simFormat.parse("2017.11.19"));
-        course.setEndDate(simFormat.parse("2017.12.19"));
-        course.setHourPerWeek(4);
-        course.setInstitutionCode("1234567");
-        course.setWeeks(4);
-        course.setDescription("Course for English");
-        course.setPrice(25);
-        course.setType("English");
-        courseService.saveCourse(course);
-        courseService.flush();
+    public String saveModify() throws ParseException {
+        ModifyApplication modifyApplication = new ModifyApplication();
+        modifyApplication.setAddress("Nanjing,Jiangsu");
+        modifyApplication.setCreateTime(new Date());
+        modifyApplication.setDescription("Our goal is to .....");
+        modifyApplication.setInstitutionCode("1234567");
+        modifyApplication.setPhone("15951921161");
+        modifyApplicationService.saveApplication(modifyApplication);
+        modifyApplicationService.flush();
         return "success!";
     }
 
-    @RequestMapping(value = "/getCoursesOnWay", method = RequestMethod.GET)
+    @RequestMapping(value = "/getModify", method = RequestMethod.GET)
     @ResponseBody
-    public String getCourseOnWayList() {
-        List<Course> courses = courseService.findAll(true);
-        for (Course course : courses){
-            System.out.println(course.getDescription());
+    public String getModify() {
+        ModifyApplication modifyApplication = modifyApplicationService.getApplication(1L);
+        System.out.println(modifyApplication.getDescription());
+        return "success!";
+    }
+
+    @RequestMapping(value = "/getAllModify", method = RequestMethod.GET)
+    @ResponseBody
+    public String getModifyList() {
+        List<ModifyApplication> applications = modifyApplicationService.findAll();
+        for(ModifyApplication application : applications){
+            System.out.println(application.getDescription());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/getCoursesOnWayCode", method = RequestMethod.GET)
+    @RequestMapping(value = "/getModifyByCode", method = RequestMethod.GET)
     @ResponseBody
-    public String getCourseOnWayCodeList() {
-        List<Course> courses = courseService.findAll("1234567", true);
-        for (Course course : courses){
-            System.out.println(course.getDescription());
+    public String getModifyByCode() {
+        List<ModifyApplication> applications = modifyApplicationService.findAll("1234567");
+        for(ModifyApplication application : applications){
+            System.out.println(application.getDescription());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/getCoursesType", method = RequestMethod.GET)
+    @RequestMapping(value = "/getModifyRejected", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getCourseTypeList() {
-        List<Course> courses = courseService.findAllByType("English");
-        for (Course course : courses){
-            System.out.println(course.getDescription());
+    public String getModifyRejected() {
+        List<ModifyApplication> applications = modifyApplicationService.findAll(ApplicationState.RESERVED);
+        for(ModifyApplication application : applications){
+            System.out.println(application.getDescription());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/updatePhone", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/deleteModify", method = RequestMethod.GET)
     @ResponseBody
-    public String updatePhone() {
-        teacherService.updatePhone(1L, "15896257359");
+    public String deleteModify() {
+        modifyApplicationService.deleteApplication(1L);
         return "success!";
     }
 
-    @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
+    @RequestMapping(value = "/reject", method = RequestMethod.GET)
     @ResponseBody
-    public String addAccount() {
-        accountService.updateAccount(2L, 500);
+    public String reject() {
+        modifyApplicationService.reject(1L);
         return "success!";
     }
 
-    @RequestMapping(value = "/deleteTeacher", method = RequestMethod.GET)
+    @RequestMapping(value = "/agree", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteTeacher() {
-        teacherService.deleteTeacher(1L);
+    public String agree() {
+        modifyApplicationService.agree(2L);
         return "success!";
     }
 
