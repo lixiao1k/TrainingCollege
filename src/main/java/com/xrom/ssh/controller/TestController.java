@@ -1,9 +1,6 @@
 package com.xrom.ssh.controller;
 
-import com.xrom.ssh.entity.Account;
-import com.xrom.ssh.entity.Card;
-import com.xrom.ssh.entity.Institution;
-import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.entity.*;
 import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +31,9 @@ public class TestController {
     @Autowired(required = true)
     private InstitutionService institutionService;
 
+    @Autowired(required = true)
+    private TeacherService teacherService;
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "test";
@@ -59,31 +59,32 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/getAllInstitutions", method = RequestMethod.GET)
+    @RequestMapping(value = "/getTeachers", method = RequestMethod.GET)
     @ResponseBody
-    public String getStudentList() {
-        List<Institution> institutions = institutionService.getAllInstitutions();
-        for(Institution institution: institutions){
-            System.out.println(institution.getDescription());
+    public String getTeacherList() {
+        List<Teacher> teachers = teacherService.findTeachersOfInstitution("cf01a9c");
+        for(Teacher teacher : teachers){
+            System.out.println(teacher.getName());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/createInstitution", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createTeacher", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveInstitution() {
-        Institution institution = new Institution();
-        institution.setPhone("15951921161");
-        institution.setAddress("NanJing,JiangSu");
-        institution.setDescription("Our institution is head for people who want to get education abroad.");
-        institutionService.createInstitution(institution);
-        institutionService.flush();
+    public String saveTeacher() {
+        Teacher teacher = new Teacher();
+        teacher.setName("Shelton");
+        teacher.setPhone("15951921161");
+        teacher.setInstitutionCode("cf01a9c");
+        teacher.setTeachingType("English");
+        teacherService.saveTeacher(teacher);
+        teacherService.flush();
         return "success!";
     }
     @RequestMapping(value = "/updatePhone", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String updatePhone() {
-        institutionService.updatePhone("1234567", "13641281522");
+        teacherService.updatePhone(1L, "15896257359");
         return "success!";
     }
 
@@ -94,10 +95,10 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/deleteInstitution", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteTeacher", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteInstitution() {
-        institutionService.deleteInstitution("1234567");
+    public String deleteTeacher() {
+        teacherService.deleteTeacher(1L);
         return "success!";
     }
 
