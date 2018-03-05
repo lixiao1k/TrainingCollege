@@ -10,14 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AccountRepositoryImpl implements AccountRepository {
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession(){
-        return this.sessionFactory.getCurrentSession();
-    }
-
+public class AccountRepositoryImpl extends BaseRepositoryImpl implements AccountRepository {
 
     @Override
     public Account load(Long id) {

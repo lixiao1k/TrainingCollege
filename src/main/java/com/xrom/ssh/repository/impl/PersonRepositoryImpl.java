@@ -9,14 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class PersonRepositoryImpl implements PersonRepository {
-
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession() {
-        return this.sessionFactory.getCurrentSession();
-    }
+public class PersonRepositoryImpl extends BaseRepositoryImpl implements PersonRepository {
 
     @Override
     public Person load(Long id) {

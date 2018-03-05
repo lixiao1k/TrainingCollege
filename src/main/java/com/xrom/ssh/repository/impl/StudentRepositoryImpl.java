@@ -12,14 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class StudentRepositoryImpl implements StudentRepository {
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession(){
-        return this.sessionFactory.getCurrentSession();
-    }
-
+public class StudentRepositoryImpl extends BaseRepositoryImpl implements StudentRepository {
     @Override
     public Student load(Long id) {
         return (Student) getCurrentSession().load(Student.class, id);

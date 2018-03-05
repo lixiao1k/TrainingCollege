@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +36,10 @@ public class TestController {
 
     @Autowired(required = true)
     private TeacherService teacherService;
+
+    @Autowired(required = true)
+    private CourseService courseService;
+
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
@@ -59,28 +66,64 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/getTeachers", method = RequestMethod.GET)
+    @RequestMapping(value = "/getCourses", method = RequestMethod.GET)
     @ResponseBody
-    public String getTeacherList() {
-        List<Teacher> teachers = teacherService.findTeachersOfInstitution("cf01a9c");
-        for(Teacher teacher : teachers){
-            System.out.println(teacher.getName());
+    public String getCourseList() {
+        List<Course> courses = courseService.findAll();
+        for (Course course : courses){
+            System.out.println(course.getDescription());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/createTeacher", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createCourse", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveTeacher() {
-        Teacher teacher = new Teacher();
-        teacher.setName("Shelton");
-        teacher.setPhone("15951921161");
-        teacher.setInstitutionCode("cf01a9c");
-        teacher.setTeachingType("English");
-        teacherService.saveTeacher(teacher);
-        teacherService.flush();
+    public String saveCourse() throws ParseException {
+        Course course = new Course();
+        SimpleDateFormat simFormat = new SimpleDateFormat("yyyy.MM.dd");
+        course.setBeginDate(simFormat.parse("2017.11.19"));
+        course.setEndDate(simFormat.parse("2017.12.19"));
+        course.setHourPerWeek(4);
+        course.setInstitutionCode("1234567");
+        course.setWeeks(4);
+        course.setDescription("Course for English");
+        course.setPrice(25);
+        course.setType("English");
+        courseService.saveCourse(course);
+        courseService.flush();
         return "success!";
     }
+
+    @RequestMapping(value = "/getCoursesOnWay", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCourseOnWayList() {
+        List<Course> courses = courseService.findAll(true);
+        for (Course course : courses){
+            System.out.println(course.getDescription());
+        }
+        return "success!";
+    }
+
+    @RequestMapping(value = "/getCoursesOnWayCode", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCourseOnWayCodeList() {
+        List<Course> courses = courseService.findAll("1234567", true);
+        for (Course course : courses){
+            System.out.println(course.getDescription());
+        }
+        return "success!";
+    }
+
+    @RequestMapping(value = "/getCoursesType", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCourseTypeList() {
+        List<Course> courses = courseService.findAllByType("English");
+        for (Course course : courses){
+            System.out.println(course.getDescription());
+        }
+        return "success!";
+    }
+
     @RequestMapping(value = "/updatePhone", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String updatePhone() {

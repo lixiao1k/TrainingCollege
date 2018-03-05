@@ -10,14 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CardRepositoryImpl implements CardRepository {
-
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession(){
-        return this.sessionFactory.getCurrentSession();
-    }
+public class CardRepositoryImpl  extends BaseRepositoryImpl implements CardRepository {
 
     @Override
     public Card load(Long id) {

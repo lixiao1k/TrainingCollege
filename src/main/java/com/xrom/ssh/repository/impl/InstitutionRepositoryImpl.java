@@ -12,14 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class InstitutionRepositoryImpl implements InstitutionRepository {
-    @Autowired
-    private SessionFactory sessionFactory;
-
-
-    private Session getCurrentSession(){
-        return this.sessionFactory.getCurrentSession();
-    }
+public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements InstitutionRepository {
 
     @Override
     public Institution load(String id) {
