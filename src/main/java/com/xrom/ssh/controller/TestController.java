@@ -2,12 +2,10 @@ package com.xrom.ssh.controller;
 
 import com.xrom.ssh.entity.Account;
 import com.xrom.ssh.entity.Card;
+import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.exceptions.RepeatInsertException;
-import com.xrom.ssh.service.AccountService;
-import com.xrom.ssh.service.CardService;
-import com.xrom.ssh.service.PersonService;
-import com.xrom.ssh.service.StudentService;
+import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class TestController {
@@ -32,6 +31,9 @@ public class TestController {
     @Autowired(required = true)
     private AccountService accountService;
 
+    @Autowired(required = true)
+    private InstitutionService institutionService;
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "test";
@@ -46,17 +48,6 @@ public class TestController {
     }
 
 
-
-    @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
-    @ResponseBody
-    public String getStudentList() {
-        List<Student> students = studentService.getAllStudents();
-        for(Student student: students){
-            System.out.println(student.getEmail());
-        }
-        return "success!";
-    }
-
     @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.GET)
     @ResponseBody
     public String saveOrUpdate() {
@@ -68,14 +59,31 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/createAccount", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/getAllInstitutions", method = RequestMethod.GET)
     @ResponseBody
-    public String saveAccount() {
-        Account account = new Account();
-        account.setUserId(2L);
-        account.setCardNumber("1234567890");
-        accountService.createAccount(account);
-        accountService.flush();
+    public String getStudentList() {
+        List<Institution> institutions = institutionService.getAllInstitutions();
+        for(Institution institution: institutions){
+            System.out.println(institution.getDescription());
+        }
+        return "success!";
+    }
+
+    @RequestMapping(value = "/createInstitution", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String saveInstitution() {
+        Institution institution = new Institution();
+        institution.setPhone("15951921161");
+        institution.setAddress("NanJing,JiangSu");
+        institution.setDescription("Our institution is head for people who want to get education abroad.");
+        institutionService.createInstitution(institution);
+        institutionService.flush();
+        return "success!";
+    }
+    @RequestMapping(value = "/updatePhone", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String updatePhone() {
+        institutionService.updatePhone("1234567", "13641281522");
         return "success!";
     }
 
@@ -86,10 +94,10 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/deleteAccount", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteInstitution", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteAccount() {
-        accountService.deleteAccount(2L);
+    public String deleteInstitution() {
+        institutionService.deleteInstitution("1234567");
         return "success!";
     }
 
