@@ -24,6 +24,7 @@ public class CardServiceImpl implements CardService {
     @Override
     public void deleteCard(Long userId) {
         cardRepository.delete(userId);
+        flush();
     }
 
     @Override

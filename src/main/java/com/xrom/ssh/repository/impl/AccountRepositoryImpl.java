@@ -1,7 +1,7 @@
 package com.xrom.ssh.repository.impl;
 
-import com.xrom.ssh.entity.Card;
-import com.xrom.ssh.repository.CardRepository;
+import com.xrom.ssh.entity.Account;
+import com.xrom.ssh.repository.AccountRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CardRepositoryImpl implements CardRepository {
-
+public class AccountRepositoryImpl implements AccountRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -19,40 +18,41 @@ public class CardRepositoryImpl implements CardRepository {
         return this.sessionFactory.getCurrentSession();
     }
 
+
     @Override
-    public Card load(Long id) {
-        return (Card) getCurrentSession().load(Card.class, id);
+    public Account load(Long id) {
+        return (Account) getCurrentSession().load(Account.class, id);
     }
 
     @Override
-    public Card get(Long id) {
-        return (Card) getCurrentSession().get(Card.class, id);
+    public Account get(Long id) {
+        return (Account) getCurrentSession().get(Account.class,id);
     }
 
     @Override
-    public List<Card> findAll() {
+    public List<Account> findAll() {
         return null;
     }
 
     @Override
-    public void persist(Card entity) {
+    public void persist(Account entity) {
         getCurrentSession().persist(entity);
     }
 
     @Override
-    public Long save(Card entity) {
+    public Long save(Account entity) {
         return (Long) getCurrentSession().save(entity);
     }
 
     @Override
-    public void saveOrUpdate(Card entity) {
+    public void saveOrUpdate(Account entity) {
 
     }
 
     @Override
     public void delete(Long id) {
-        Card card = load(id);
-        getCurrentSession().delete(card);
+        Account account = load(id);
+        getCurrentSession().delete(account);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CardRepositoryImpl implements CardRepository {
     }
 
     @Override
-    public void update(Card entity) {
+    public void update(Account entity) {
         getCurrentSession().update(entity);
     }
 }

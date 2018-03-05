@@ -1,8 +1,10 @@
 package com.xrom.ssh.controller;
 
+import com.xrom.ssh.entity.Account;
 import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.exceptions.RepeatInsertException;
+import com.xrom.ssh.service.AccountService;
 import com.xrom.ssh.service.CardService;
 import com.xrom.ssh.service.PersonService;
 import com.xrom.ssh.service.StudentService;
@@ -27,6 +29,9 @@ public class TestController {
     @Autowired(required = true)
     private CardService cardService;
 
+    @Autowired(required = true)
+    private AccountService accountService;
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "test";
@@ -40,24 +45,7 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/saveCard", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String saveCard() {
-        Card card = new Card();
-        card.setUserId(2L);
-        card.setCardNumber("1234567890");
-        cardService.saveCard(card);
-        cardService.flush();
-        System.out.print("Here");
-        return "success!";
-    }
 
-    @RequestMapping(value = "/deleteCard", method = RequestMethod.GET)
-    @ResponseBody
-    public String deleteCard() {
-        cardService.deleteCard(2L);
-        return "success!";
-    }
 
     @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
     @ResponseBody
@@ -80,10 +68,28 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/addbalance", method = RequestMethod.GET)
+    @RequestMapping(value = "/createAccount", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getCard() {
-        cardService.update(2L, 50);
+    public String saveAccount() {
+        Account account = new Account();
+        account.setUserId(2L);
+        account.setCardNumber("1234567890");
+        accountService.createAccount(account);
+        accountService.flush();
+        return "success!";
+    }
+
+    @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
+    @ResponseBody
+    public String addAccount() {
+        accountService.updateAccount(2L, 500);
+        return "success!";
+    }
+
+    @RequestMapping(value = "/deleteAccount", method = RequestMethod.GET)
+    @ResponseBody
+    public String deleteAccount() {
+        accountService.deleteAccount(2L);
         return "success!";
     }
 
