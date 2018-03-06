@@ -27,16 +27,13 @@ public class TestController {
     private StudentService studentService;
 
     @Autowired(required = true)
-    private AccountService accountService;
-
-    @Autowired(required = true)
-    private TeacherService teacherService;
-
-    @Autowired(required = true)
     private CourseService courseService;
 
     @Autowired(required = true)
     private ModifyApplicationService modifyApplicationService;
+
+    @Autowired(required = true)
+    private RegisterApplicationService registerApplicationService;
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -74,76 +71,66 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/createModify", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createRegister", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveModify() throws ParseException {
-        ModifyApplication modifyApplication = new ModifyApplication();
-        modifyApplication.setAddress("Nanjing,Jiangsu");
-        modifyApplication.setCreateTime(new Date());
-        modifyApplication.setDescription("Our goal is to .....");
-        modifyApplication.setInstitutionCode("1234567");
-        modifyApplication.setPhone("15951921161");
-        modifyApplicationService.saveApplication(modifyApplication);
-        modifyApplicationService.flush();
+    public String saveRegister() throws ParseException {
+        RegisterApplication application = new RegisterApplication();
+        application.setAddress("ShenZheng");
+        application.setDescription("Goal is to make you better and better");
+        application.setPhone("10086");
+        application.setCreated_time(new Date());
+        registerApplicationService.saveApplication(application);
+        registerApplicationService.flush();
         return "success!";
     }
 
-    @RequestMapping(value = "/getModify", method = RequestMethod.GET)
+    @RequestMapping(value = "/getRegister", method = RequestMethod.GET)
     @ResponseBody
-    public String getModify() {
-        ModifyApplication modifyApplication = modifyApplicationService.getApplication(1L);
-        System.out.println(modifyApplication.getDescription());
+    public String getRegister() {
+        RegisterApplication application = registerApplicationService.getApplication(1L);
+        System.out.println(application.getDescription());
         return "success!";
     }
 
-    @RequestMapping(value = "/getAllModify", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllRegister", method = RequestMethod.GET)
     @ResponseBody
-    public String getModifyList() {
-        List<ModifyApplication> applications = modifyApplicationService.findAll();
-        for(ModifyApplication application : applications){
+    public String getRegisterList() {
+        List<RegisterApplication> applications = registerApplicationService.findAll();
+        for(RegisterApplication application : applications){
             System.out.println(application.getDescription());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/getModifyByCode", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/getModifyReserved", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getModifyByCode() {
-        List<ModifyApplication> applications = modifyApplicationService.findAll("1234567");
-        for(ModifyApplication application : applications){
+    public String getRegisterReserved() {
+        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.RESERVED);
+        for(RegisterApplication application : applications){
             System.out.println(application.getDescription());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/getModifyRejected", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/deleteRegister", method = RequestMethod.GET)
     @ResponseBody
-    public String getModifyRejected() {
-        List<ModifyApplication> applications = modifyApplicationService.findAll(ApplicationState.RESERVED);
-        for(ModifyApplication application : applications){
-            System.out.println(application.getDescription());
-        }
-        return "success!";
-    }
-
-    @RequestMapping(value = "/deleteModify", method = RequestMethod.GET)
-    @ResponseBody
-    public String deleteModify() {
-        modifyApplicationService.deleteApplication(1L);
+    public String deleteRegister() {
+        registerApplicationService.deleteApplication(1L);
         return "success!";
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.GET)
     @ResponseBody
     public String reject() {
-        modifyApplicationService.reject(1L);
+        registerApplicationService.reject(2L);
         return "success!";
     }
 
     @RequestMapping(value = "/agree", method = RequestMethod.GET)
     @ResponseBody
     public String agree() {
-        modifyApplicationService.agree(2L);
+        registerApplicationService.agree(2L);
         return "success!";
     }
 

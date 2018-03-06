@@ -84,19 +84,14 @@ public class ModifyApplicationServiceImpl implements ModifyApplicationService{
 
     @Override
     public void reject(Long id) {
-        ModifyApplication application = getApplication(id);
-        application.setIsRejected(1);
-        application.setIsAgreed(0);
-        repository.update(application);
+        repository.reject(id);
         flush();
     }
 
     @Override
     public void agree(Long id) {
-        ModifyApplication application = getApplication(id);
-        application.setIsAgreed(1);
-        application.setIsRejected(0);
-        repository.update(application);
+        repository.agree(id);
+        ModifyApplication application = repository.get(id);
         flush();
         Institution institution = institutionRepository.get(application.getInstitutionCode());
         institution.setDescription(application.getDescription());
