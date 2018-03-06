@@ -35,6 +35,9 @@ public class TestController {
     @Autowired(required = true)
     private GradeService gradeService;
 
+    @Autowired(required = true)
+    private LearnSignService learnSignService;
+
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
@@ -71,42 +74,34 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/createGrade", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createSign", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveGrade() throws ParseException {
-        Grade grade = new Grade();
-        grade.setStudentId(1L);
-        grade.setClassId(2L);
-        grade.setGrade(100);
-        gradeService.createGrade(grade);
-        gradeService.flush();
+    public String saveSign() throws ParseException {
+        LearnSign sign = new LearnSign();
+        sign.setStudentId(2L);
+        sign.setClassId(2L);
+        sign.setDate(new Date());
+        learnSignService.createSign(sign);
         return "success!";
     }
 
-    @RequestMapping(value = "/getGrade", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllSigns", method = RequestMethod.GET)
     @ResponseBody
-    public String getGrade() {
-        System.out.println(gradeService.get(1L,2L).getGrade());
-        return "success!";
-    }
-
-    @RequestMapping(value = "/getAllClass", method = RequestMethod.GET)
-    @ResponseBody
-    public String getClassList() {
-        List<Classroom> classrooms = classroomService.findAll();
-        for(Classroom classroom : classrooms){
-            System.out.println(classroom.getStudentNumNow());
+    public String getSignList() {
+        List<LearnSign> signs = learnSignService.findAll(2L);
+        for(LearnSign sign : signs){
+            System.out.println(sign.getDate());
         }
         return "success!";
     }
 
 
-    @RequestMapping(value = "/getClassByCode", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/getSigns", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String getClassByCode() {
-        List<Classroom> classrooms = classroomService.findAll(1L);
-        for(Classroom classroom : classrooms){
-            System.out.println(classroom.getStudentNumPlan());
+        List<LearnSign> signs = learnSignService.findAll(1L, 2L);
+        for(LearnSign sign : signs){
+            System.out.println(sign.getDate());
         }
         return "success!";
     }
