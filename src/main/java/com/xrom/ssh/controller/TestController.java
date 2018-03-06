@@ -30,10 +30,10 @@ public class TestController {
     private CourseService courseService;
 
     @Autowired(required = true)
-    private RegisterApplicationService registerApplicationService;
+    private ClassroomService classroomService;
 
     @Autowired(required = true)
-    private ClassroomService classroomService;
+    private GradeService gradeService;
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -71,23 +71,22 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/createClass", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createGrade", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveClass() throws ParseException {
-        Classroom classroom = new Classroom();
-        classroom.setTeacherId(1L);
-        classroom.setCourseId(1L);
-        classroom.setStudentNumPlan(50);
-        classroom.setStudentNumNow(48);
-        classroomService.saveClass(classroom);
-        classroomService.flush();
+    public String saveGrade() throws ParseException {
+        Grade grade = new Grade();
+        grade.setStudentId(1L);
+        grade.setClassId(2L);
+        grade.setGrade(100);
+        gradeService.createGrade(grade);
+        gradeService.flush();
         return "success!";
     }
 
-    @RequestMapping(value = "/getClass", method = RequestMethod.GET)
+    @RequestMapping(value = "/getGrade", method = RequestMethod.GET)
     @ResponseBody
-    public String getClassroom() {
-        System.out.println(classroomService.getClass(1L).getStudentNumPlan());
+    public String getGrade() {
+        System.out.println(gradeService.get(1L,2L).getGrade());
         return "success!";
     }
 
@@ -118,5 +117,4 @@ public class TestController {
         classroomService.deleteClass(1L);
         return "success!";
     }
-
 }

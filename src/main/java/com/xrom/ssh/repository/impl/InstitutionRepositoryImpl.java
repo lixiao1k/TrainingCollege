@@ -45,7 +45,6 @@ public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements Ins
     @Override
     public void persist(Institution entity) {
         getCurrentSession().persist(entity);
-
     }
 
     @Override
