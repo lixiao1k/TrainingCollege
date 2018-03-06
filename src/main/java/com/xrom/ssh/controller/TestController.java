@@ -30,10 +30,10 @@ public class TestController {
     private CourseService courseService;
 
     @Autowired(required = true)
-    private ModifyApplicationService modifyApplicationService;
+    private RegisterApplicationService registerApplicationService;
 
     @Autowired(required = true)
-    private RegisterApplicationService registerApplicationService;
+    private ClassroomService classroomService;
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -71,66 +71,51 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/createRegister", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createClass", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveRegister() throws ParseException {
-        RegisterApplication application = new RegisterApplication();
-        application.setAddress("ShenZheng");
-        application.setDescription("Goal is to make you better and better");
-        application.setPhone("10086");
-        application.setCreated_time(new Date());
-        registerApplicationService.saveApplication(application);
-        registerApplicationService.flush();
+    public String saveClass() throws ParseException {
+        Classroom classroom = new Classroom();
+        classroom.setTeacherId(1L);
+        classroom.setCourseId(1L);
+        classroom.setStudentNumPlan(50);
+        classroom.setStudentNumNow(48);
+        classroomService.saveClass(classroom);
+        classroomService.flush();
         return "success!";
     }
 
-    @RequestMapping(value = "/getRegister", method = RequestMethod.GET)
+    @RequestMapping(value = "/getClass", method = RequestMethod.GET)
     @ResponseBody
-    public String getRegister() {
-        RegisterApplication application = registerApplicationService.getApplication(1L);
-        System.out.println(application.getDescription());
+    public String getClassroom() {
+        System.out.println(classroomService.getClass(1L).getStudentNumPlan());
         return "success!";
     }
 
-    @RequestMapping(value = "/getAllRegister", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllClass", method = RequestMethod.GET)
     @ResponseBody
-    public String getRegisterList() {
-        List<RegisterApplication> applications = registerApplicationService.findAll();
-        for(RegisterApplication application : applications){
-            System.out.println(application.getDescription());
+    public String getClassList() {
+        List<Classroom> classrooms = classroomService.findAll();
+        for(Classroom classroom : classrooms){
+            System.out.println(classroom.getStudentNumNow());
         }
         return "success!";
     }
 
 
-    @RequestMapping(value = "/getModifyReserved", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/getClassByCode", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getRegisterReserved() {
-        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.RESERVED);
-        for(RegisterApplication application : applications){
-            System.out.println(application.getDescription());
+    public String getClassByCode() {
+        List<Classroom> classrooms = classroomService.findAll(1L);
+        for(Classroom classroom : classrooms){
+            System.out.println(classroom.getStudentNumPlan());
         }
         return "success!";
     }
 
-    @RequestMapping(value = "/deleteRegister", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteClass", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteRegister() {
-        registerApplicationService.deleteApplication(1L);
-        return "success!";
-    }
-
-    @RequestMapping(value = "/reject", method = RequestMethod.GET)
-    @ResponseBody
-    public String reject() {
-        registerApplicationService.reject(2L);
-        return "success!";
-    }
-
-    @RequestMapping(value = "/agree", method = RequestMethod.GET)
-    @ResponseBody
-    public String agree() {
-        registerApplicationService.agree(2L);
+    public String deleteClass() {
+        classroomService.deleteClass(1L);
         return "success!";
     }
 
