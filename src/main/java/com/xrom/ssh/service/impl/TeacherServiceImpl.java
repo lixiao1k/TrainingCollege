@@ -64,4 +64,14 @@ public class TeacherServiceImpl implements TeacherService {
     public void flush() {
         teacherRepository.flush();
     }
+
+    @Override
+    public void createTeacher(String name, String phone, String type, String institutionCode) {
+        Teacher teacher = new Teacher();
+        teacher.setName(name);
+        teacher.setPhone(phone);
+        teacher.setTeachingType(type);
+        teacher.setInstitutionCode(institutionCode);
+        saveTeacher(teacher);
+    }
 }

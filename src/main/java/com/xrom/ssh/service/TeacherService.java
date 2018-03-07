@@ -13,4 +13,5 @@ public interface TeacherService {
     void updateInstitution(Long id, String institution_code);
     List<Teacher> findTeachersOfInstitution(String institution_code);
     void flush();
+    void createTeacher(String name, String phone, String type, String institutionCode);
 }
