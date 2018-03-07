@@ -2,8 +2,10 @@ package com.xrom.ssh.controller;
 
 import com.xrom.ssh.entity.*;
 import com.xrom.ssh.enums.ApplicationState;
+import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.service.*;
+import net.sf.ehcache.search.expression.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +35,10 @@ public class TestController {
     private ClassroomService classroomService;
 
     @Autowired(required = true)
-    private GradeService gradeService;
-
-    @Autowired(required = true)
     private LearnSignService learnSignService;
 
+    @Autowired(required = true)
+    private OrderService orderService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
@@ -74,24 +75,22 @@ public class TestController {
         return "success!";
     }
 
-    @RequestMapping(value = "/createSign", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createOrder", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String saveSign() throws ParseException {
-        LearnSign sign = new LearnSign();
-        sign.setStudentId(2L);
-        sign.setClassId(2L);
-        sign.setDate(new Date());
-        learnSignService.createSign(sign);
+    public String saveOrder(){
+        Order order = new Order();
+        order.setClassId(1L);
+        order.setCreateTime(new Date());
+        order.setStudentId(1L);
+        orderService.save(order);
+        orderService.flush();
         return "success!";
     }
 
-    @RequestMapping(value = "/getAllSigns", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllOrdersOfStudent", method = RequestMethod.GET)
     @ResponseBody
-    public String getSignList() {
-        List<LearnSign> signs = learnSignService.findAll(2L);
-        for(LearnSign sign : signs){
-            System.out.println(sign.getDate());
-        }
+    public String getOrdersOfStudent() {
+        orderService.payOffline(1L,3L);
         return "success!";
     }
 
