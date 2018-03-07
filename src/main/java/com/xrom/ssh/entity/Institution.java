@@ -15,6 +15,9 @@ public class Institution {
     @Column(name = "code", length = 7, nullable = false, unique = true)
     private String code;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "address")
     private String address;
 

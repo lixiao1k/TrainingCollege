@@ -43,18 +43,30 @@ public class TestController {
     @Autowired(required = true)
     private AccountService accountService;
 
+    @Autowired(required = true)
+    private InstitutionService institutionService;
+
+    @Autowired(required = true)
+    private RegisterApplicationService registerApplicationService;
+
+    @Autowired(required = true)
+    private ModifyApplicationService modifyApplicationService;
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "test";
     }
 
-    @RequestMapping(value = "/saveAccount", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveInstitution", method = RequestMethod.GET)
     @ResponseBody
     public String savePerson() {
-        Account account = new Account();
-        account.setUserId(1L);
-        accountService.createAccount(account);
-        accountService.flush();
+        Institution institution = new Institution();
+        institution.setAddress("Shanghai");
+        institution.setPhone("15951921161");
+        institution.setName("NanDa");
+        institution.setDescription("Gooooooood!");
+        institutionService.createInstitution(institution);
+        institutionService.flush();
         return "success!";
     }
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -85,13 +86,25 @@ public class RegisterApplicationServiceImpl implements RegisterApplicationServic
     @Override
     public void agree(Long id) {
         repository.agree(id);
-        System.out.println("here");
         RegisterApplication application = repository.get(id);
         Institution institution = new Institution();
         institution.setDescription(application.getDescription());
         institution.setPhone(application.getPhone());
         institution.setAddress(application.getAddress());
+        institution.setName(application.getName());
         institutionService.createInstitution(institution);
         institutionService.flush();
+    }
+
+    @Override
+    public void register(String name, String phone, String description, String address) {
+        RegisterApplication application = new RegisterApplication();
+        application.setName(name);
+        application.setPhone(phone);
+        application.setDescription(description);
+        application.setAddress(address);
+        application.setCreated_time(new Date());
+        saveApplication(application);
+        flush();
     }
 }

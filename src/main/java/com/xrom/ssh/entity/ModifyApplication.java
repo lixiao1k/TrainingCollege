@@ -14,6 +14,9 @@ public class ModifyApplication {
     @GeneratedValue
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "address")
     private String address;
 
