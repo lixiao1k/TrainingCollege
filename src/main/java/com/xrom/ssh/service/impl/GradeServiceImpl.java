@@ -1,6 +1,7 @@
 package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Grade;
+import com.xrom.ssh.exceptions.GradeExistException;
 import com.xrom.ssh.repository.GradeRepository;
 import com.xrom.ssh.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,20 @@ public class GradeServiceImpl implements GradeService {
         }else {
             return grade.getGrade();
         }
+    }
+
+    @Override
+    public void createGrade(Long sid, Long cid, int gradeValue) throws GradeExistException {
+        Grade grade = get(sid, cid);
+        if(grade != null){
+            throw new GradeExistException();
+        }else {
+            grade = new Grade();
+        }
+        grade.setStudentId(sid);
+        grade.setClassId(cid);
+        grade.setGrade(gradeValue);
+        createGrade(grade);
     }
 
     @Override
