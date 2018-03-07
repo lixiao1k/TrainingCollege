@@ -1436,61 +1436,66 @@
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="333" parent="250" name="user_name">
+    <column id="333" parent="250" name="password">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="334" parent="250" name="user_state">
+    <column id="334" parent="250" name="user_name">
       <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="335" parent="250" name="user_state">
+      <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="335" parent="250" name="UK_fe0i52si7ybu0wjedj6motiim">
+    <index id="336" parent="250" name="UK_fe0i52si7ybu0wjedj6motiim">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="336" parent="250" name="PRIMARY">
+    <key id="337" parent="250" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="337" parent="250" name="UK_fe0i52si7ybu0wjedj6motiim">
+    <key id="338" parent="250" name="UK_fe0i52si7ybu0wjedj6motiim">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UK_fe0i52si7ybu0wjedj6motiim</UnderlyingIndexName>
     </key>
-    <column id="338" parent="251" name="id">
+    <column id="339" parent="251" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="339" parent="251" name="institution_code">
+    <column id="340" parent="251" name="institution_code">
       <Position>2</Position>
       <DataType>varchar(7)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="340" parent="251" name="name">
+    <column id="341" parent="251" name="name">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="341" parent="251" name="phone">
+    <column id="342" parent="251" name="phone">
       <Position>4</Position>
       <DataType>varchar(20)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="342" parent="251" name="teaching_type">
+    <column id="343" parent="251" name="teaching_type">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="343" parent="251" name="PRIMARY">
+    <key id="344" parent="251" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

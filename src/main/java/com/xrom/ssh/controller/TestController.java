@@ -40,28 +40,34 @@ public class TestController {
     @Autowired(required = true)
     private OrderService orderService;
 
+    @Autowired(required = true)
+    private AccountService accountService;
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "test";
     }
 
-    @RequestMapping(value = "/savePerson", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveAccount", method = RequestMethod.GET)
     @ResponseBody
     public String savePerson() {
-        System.out.print("here");
-        personService.savePerson();
+        Account account = new Account();
+        account.setUserId(1L);
+        accountService.createAccount(account);
+        accountService.flush();
         return "success!";
     }
 
 
-    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveStudent", method = RequestMethod.GET)
     @ResponseBody
-    public String saveOrUpdate() {
+    public String saveOrUpdate() throws RepeatInsertException {
         Student student = new Student();
         student.setEmail("lixiao1k@163.com");
         student.setUserName("mike");
-        student.setId(2L);
-        studentService.update(student);
+        student.setPassword("hello");
+        studentService.saveStudent(student);
+        studentService.flush();
         return "success!";
     }
 
