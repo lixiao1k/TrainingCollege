@@ -73,4 +73,51 @@ public class StudentRepositoryImpl extends BaseRepositoryImpl implements Student
         flush();
     }
 
+    @Override
+    public Student getStudent(String mail) {
+        Session session = null;
+        Transaction tx = null;
+        List<Student> list = null;
+        try {
+            session = getCurrentSession();
+            tx = session.beginTransaction();
+            SQLQuery sqlQuery = session.createSQLQuery("select * from student where email=:EM");
+            sqlQuery.setString("EM", mail);
+            sqlQuery.addEntity(Student.class);
+            list = sqlQuery.list();
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+        }
+        if(list == null || list.size() == 0){
+            return null;
+        }else {
+            return list.get(0);
+        }
+    }
+
+    @Override
+    public Student getStudent(String mail, String password) {
+        Session session = null;
+        Transaction tx = null;
+        List<Student> list = null;
+        try {
+            session = getCurrentSession();
+            tx = session.beginTransaction();
+            SQLQuery sqlQuery = session.createSQLQuery("select * from student where email=:EM and " +
+                    "password=:PW");
+            sqlQuery.setString("EM", mail);
+            sqlQuery.setString("PW",password);
+            sqlQuery.addEntity(Student.class);
+            list = sqlQuery.list();
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+        }
+        if(list == null || list.size() == 0){
+            return null;
+        }else {
+            return list.get(0);
+        }
+    }
 }

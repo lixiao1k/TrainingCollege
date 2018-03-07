@@ -2,6 +2,8 @@ package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.exceptions.RepeatInsertException;
+import com.xrom.ssh.exceptions.SignInFailedException;
+import com.xrom.ssh.exceptions.UsedMailException;
 import com.xrom.ssh.repository.StudentRepository;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,19 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Long register(String username, String mail, String password) throws UsedMailException {
+        Student student = getStudent(mail);
+        if(student != null){
+            throw new UsedMailException();
+        }else{
+            student.setPassword(password);
+            student.setUserName(username);
+            student.setEmail(mail);
+            return studentRepository.save(student);
+        }
+    }
+
+    @Override
     public void delete(Long id) {
         studentRepository.delete(id);
     }
@@ -46,8 +61,49 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getStudent(String mail) {
+        return studentRepository.getStudent(mail);
+    }
+
+    @Override
+    public Student getStudent(String mail, String password) {
+        return studentRepository.getStudent(mail, password);
+    }
+
+    @Override
     public void flush() {
         studentRepository.flush();
+    }
+
+    @Override
+    public void validate(String mail) {
+        Student student = getStudent(mail);
+        student.setUserState(1);
+        update(student);
+        flush();
+    }
+
+    @Override
+    public void cancel(String mail) {
+        Student student = getStudent(mail);
+        student.setUserState(2);
+        update(student);
+        flush();
+    }
+
+    @Override
+    public int getLevel(String mail) {
+        return 0;
+    }
+
+    @Override
+    public Student signIn(String mail, String password) throws SignInFailedException {
+        Student student = getStudent(mail, password);
+        if(student == null){
+            throw new SignInFailedException();
+        }else {
+            return student;
+        }
     }
 
 }
