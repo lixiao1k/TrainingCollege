@@ -1,10 +1,13 @@
 package com.xrom.ssh.service.impl;
 
+import com.xrom.ssh.entity.Account;
 import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.exceptions.NotValidatedUserException;
 import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
 import com.xrom.ssh.repository.StudentRepository;
+import com.xrom.ssh.service.AccountService;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,9 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Autowired(required = true)
     private StudentRepository studentRepository;
+
+    @Autowired(required = true)
+    private AccountService accountService;
 
     @Override
     public Long saveStudent(Student student) throws RepeatInsertException {
@@ -33,6 +39,7 @@ public class StudentServiceImpl implements StudentService {
         if(student != null){
             throw new UsedMailException();
         }else{
+            student = new Student();
             student.setPassword(password);
             student.setUserName(username);
             student.setEmail(mail);
@@ -81,6 +88,7 @@ public class StudentServiceImpl implements StudentService {
         student.setUserState(1);
         update(student);
         flush();
+        accountService.createAccount(student.getId());
     }
 
     @Override
@@ -93,7 +101,20 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int getLevel(String mail) {
-        return 0;
+        int[] levelValue = new int[]{1000, 3000, 10000, 20000, 50000, 100000, 200000, Integer.MAX_VALUE};
+        Student student = getStudent(mail);
+        int consumption = 0;
+        try {
+            consumption = accountService.getConsumption(student.getId());
+        } catch (NotValidatedUserException e) {
+            return 0;
+        }
+        int level = 0;
+        while (consumption >= levelValue[level]){
+            level++;
+        }
+
+        return level;
     }
 
     @Override
