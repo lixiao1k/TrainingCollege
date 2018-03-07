@@ -67,4 +67,14 @@ public class InstitutionServiceImpl implements InstitutionService {
     public void flush() {
         institutionRepository.flush();
     }
+
+    @Override
+    public Boolean signIn(String code) {
+        Institution institution = getInstitution(code);
+        if(institution == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

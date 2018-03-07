@@ -13,4 +13,5 @@ public interface InstitutionService {
     void updateDescription(String code, String description);
     List<Institution> getAllInstitutions();
     void flush();
+    Boolean signIn(String code);
 }
