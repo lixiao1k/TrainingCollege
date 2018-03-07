@@ -1,10 +1,13 @@
 package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Account;
+import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.exceptions.NotValidatedUserException;
 import com.xrom.ssh.repository.AccountRepository;
+import com.xrom.ssh.repository.CardRepository;
 import com.xrom.ssh.service.AccountService;
+import com.xrom.ssh.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,9 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
     @Autowired(required = true)
     private AccountRepository accountRepository;
+
+    @Autowired(required = true)
+    private CardService cardService;
 
     @Override
     public Long createAccount(Long userId) {
@@ -46,7 +52,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void insertCard(String cardNumber, Long userId) {
-
+        Card card = cardService.getCard(userId);
+        Account account = accountRepository.get(userId);
+        account.setCardNumber(card.getCardNumber());
+        accountRepository.update(account);
+        flush();
     }
 
     @Override

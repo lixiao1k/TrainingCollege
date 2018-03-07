@@ -34,4 +34,12 @@ public class LearnSignServiceImpl implements LearnSignService {
     public List<LearnSign> findAll(Long sid, Long cid) {
         return repository.findAll(sid, cid);
     }
+
+    @Override
+    public void createSign(Long sid, Long cid) {
+        LearnSign sign = new LearnSign();
+        sign.setStudentId(sid);
+        sign.setClassId(cid);
+        createSign(sign);
+    }
 }

@@ -12,4 +12,6 @@ public interface LearnSignService {
     List<LearnSign> findAll(Long cid);
 
     List<LearnSign> findAll(Long sid, Long cid);
+
+    void createSign(Long sid, Long cid);
 }
