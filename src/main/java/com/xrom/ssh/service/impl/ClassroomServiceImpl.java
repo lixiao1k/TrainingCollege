@@ -59,4 +59,16 @@ public class ClassroomServiceImpl implements ClassroomService {
         repository.update(classroom);
         flush();
     }
+
+    @Override
+    public Long createClass(Long courseId, int studentNumPlan, int studentNumNow, Long teacherId) {
+        Classroom classroom = new Classroom();
+        classroom.setCourseId(courseId);
+        classroom.setStudentNumPlan(studentNumPlan);
+        classroom.setStudentNumNow(studentNumNow);
+        classroom.setTeacherId(teacherId);
+        Long id = saveClass(classroom);
+        flush();
+        return id;
+    }
 }

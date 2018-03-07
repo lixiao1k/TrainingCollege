@@ -13,4 +13,5 @@ public interface ClassroomService {
     List<Classroom> findAll(Long courseId);
     void updateNumPlan(Long id, int newValue);
     void updateNumNow(Long id, int change);
+    Long createClass(Long courseId, int studentNumPlan, int studentNumNow, Long teacherId);
 }
