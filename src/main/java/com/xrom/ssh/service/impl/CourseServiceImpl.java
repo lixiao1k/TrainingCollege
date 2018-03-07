@@ -85,4 +85,20 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> findAllByType(String type) {
         return courseRepository.findAllByType(type);
     }
+
+    @Override
+    public Long createCourse(Date begin, Date end, String type, String description, int hourPerWeek, int weeks, String institutionCode, int price) {
+        Course course = new Course();
+        course.setBeginDate(begin);
+        course.setEndDate(end);
+        course.setType(type);
+        course.setDescription(description);
+        course.setHourPerWeek(hourPerWeek);
+        course.setWeeks(weeks);
+        course.setInstitutionCode(institutionCode);
+        course.setPrice(price);
+        Long id = saveCourse(course);
+        flush();
+        return id;
+    }
 }

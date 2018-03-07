@@ -3,6 +3,7 @@ package com.xrom.ssh.service;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.xrom.ssh.entity.Course;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CourseService {
@@ -15,4 +16,6 @@ public interface CourseService {
     List<Course> findAll(String institutionCode);
     List<Course> findAll(String institutionCode, Boolean isUnderWay);
     List<Course> findAllByType(String type);
+    Long createCourse(Date begin, Date end, String type, String description,
+                      int hourPerWeek, int weeks, String institutionCode, int price);
 }
