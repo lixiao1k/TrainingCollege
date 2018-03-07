@@ -100,4 +100,16 @@ public class ModifyApplicationServiceImpl implements ModifyApplicationService{
         institutionRepository.update(institution);
         flush();
     }
+
+    @Override
+    public void modifyApplication(String code, String address, String description, String phone, String name) {
+        ModifyApplication application = new ModifyApplication();
+        application.setInstitutionCode(code);
+        application.setAddress(address);
+        application.setDescription(description);
+        application.setPhone(phone);
+        application.setName(name);
+        saveApplication(application);
+        flush();
+    }
 }
