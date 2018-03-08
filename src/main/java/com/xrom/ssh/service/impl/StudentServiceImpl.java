@@ -88,6 +88,7 @@ public class StudentServiceImpl implements StudentService {
         student.setUserState(1);
         update(student);
         flush();
+        System.out.println("Yes");
         accountService.createAccount(student.getId());
     }
 
@@ -101,7 +102,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int getLevel(String mail) {
-        int[] levelValue = new int[]{1000, 3000, 10000, 20000, 50000, 100000, 200000, Integer.MAX_VALUE};
+        int[] levelValue = new int[]{1, 1000, 3000, 10000, 20000, 50000, 100000, 200000, Integer.MAX_VALUE};
         Student student = getStudent(mail);
         int consumption = 0;
         try {

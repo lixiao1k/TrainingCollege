@@ -21,9 +21,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Long createAccount(Long userId) {
+        System.out.println("here");
         Account account = new Account();
         account.setUserId(userId);
-        return accountRepository.save(account);
+        Long id = accountRepository.save(account);
+        flush();
+        return id;
     }
 
     @Override
