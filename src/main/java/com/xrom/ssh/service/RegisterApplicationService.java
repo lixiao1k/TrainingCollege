@@ -15,5 +15,4 @@ public interface RegisterApplicationService {
     void reject(Long id);
     void agree(Long id);
     void register(String name, String phone, String description, String address);
-
 }
