@@ -7,17 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9c2d483-b88a-464e-84b5-836ff83b35ac" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/exceptions/NoCardException.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/CardService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/CardService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/CardServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/CardServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/TestController.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/TestController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/CardService.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/CardService.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/impl/CardServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/impl/CardServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/TestController.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/TestController.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/CardService.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/CardService.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/impl/CardServiceImpl.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/impl/CardServiceImpl.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,11 +54,21 @@
       <file leaf-file-name="TestController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="106" column="32" lean-forward="false" selection-start-line="106" selection-start-column="32" selection-end-line="106" selection-end-column="32" />
+            <state relative-caret-position="378">
+              <caret line="119" column="30" lean-forward="false" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterApplicationService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/RegisterApplicationService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -98,16 +98,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="349">
               <caret line="104" column="38" lean-forward="false" selection-start-line="104" selection-start-column="38" selection-end-line="104" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="62" lean-forward="false" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -180,11 +170,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/LearnSignService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/LearnSignServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/RegisterApplicationService.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/StudentServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/AccountServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/exceptions/NoCardException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/CardServiceImpl.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java" />
       </list>
     </option>
@@ -589,12 +579,12 @@
       <workItem from="1520126009196" duration="15466000" />
       <workItem from="1520163231740" duration="49627000" />
       <workItem from="1520335172457" duration="8264000" />
-      <workItem from="1520387686870" duration="21313000" />
+      <workItem from="1520387686870" duration="22004000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99918000" />
+    <option name="totallyTimeSpent" value="100609000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -606,7 +596,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14806867" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14806867" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -687,17 +677,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/exceptions/UsedMailException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding>
-            <element signature="e#128#129#0" expanded="false" />
-            <element signature="e#158#159#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Student.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -1020,14 +999,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/RegisterApplicationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/CardService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1068,22 +1039,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="62" lean-forward="false" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/StudentServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="104" column="38" lean-forward="false" selection-start-line="104" selection-start-column="38" selection-end-line="104" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/AccountServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
@@ -1111,10 +1066,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/repository/RegisterApplicationRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/RegisterApplicationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="78" lean-forward="false" selection-start-line="26" selection-start-column="78" selection-end-line="26" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/StudentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="104" column="38" lean-forward="false" selection-start-line="104" selection-start-column="38" selection-end-line="104" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="106" column="32" lean-forward="false" selection-start-line="106" selection-start-column="32" selection-end-line="106" selection-end-column="32" />
+        <state relative-caret-position="378">
+          <caret line="119" column="30" lean-forward="false" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

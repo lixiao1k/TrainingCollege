@@ -57,58 +57,78 @@ public class TestController {
     }
 
 
-    @RequestMapping(value = "/getCard", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/register", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getCard(){
-        Card card = cardService.getCard(5L);
-        if (card == null){
-            return "无卡";
-        }else {
-            return card.toString();
-        }
-    }
-    @RequestMapping(value = "/getCard1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String getCard1(){
-        Card card = cardService.getCard(4L);
-        if (card == null){
-            return "无卡";
-        }else {
-            return card.toString();
-        }
+    public String register(){
+        registerApplicationService.register("NJU", "82816783", "Best university in Jiangsu", "Nanjing");
+        return "Success!";
     }
 
-    @RequestMapping(value = "/getCard2", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/vertify", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getCard2(){
-        Card card = cardService.getCard("123456789");
-        if (card == null){
-            return "无卡";
-        }else {
-            return card.toString();
-        }
+    public String vertify(){
+        registerApplicationService.agree(1L);
+        return "Success!";
     }
 
-    @RequestMapping(value = "/getCard3", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/reject", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getCard3(){
-        Card card = cardService.getCard("1234");
-        if (card == null){
-            return "无卡";
-        }else {
-            return card.toString();
-        }
+    public String reject(){
+        registerApplicationService.reject(1L);
+        return "Success!";
     }
 
-    @RequestMapping(value = "/changeBalance", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String changeBalance(){
-        try {
-            cardService.update(5L, 50);
-        } catch (NoCardException e) {
-            return e.toString();
+    public String findAll(){
+        List<RegisterApplication> applications = registerApplicationService.findAll();
+        if(applications == null || applications.size() == 0){
+            return "WU";
+        }else {
+            for (RegisterApplication application : applications){
+                System.out.println(application);
+            }
         }
-        return "success!";
+        return "Success!";
+    }
+    @RequestMapping(value = "/findReserved", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String findReserved(){
+        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.RESERVED);
+        if(applications == null || applications.size() == 0){
+            return "WU";
+        }else {
+            for (RegisterApplication application : applications){
+                System.out.println(application);
+            }
+        }
+        return "Success!";
+    }
+    @RequestMapping(value = "/findRejected", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String findRejected(){
+        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.REJECTED);
+        if(applications == null || applications.size() == 0){
+            return "WU";
+        }else {
+            for (RegisterApplication application : applications){
+                System.out.println(application);
+            }
+        }
+        return "Success!";
+    }
+    @RequestMapping(value = "/findAgreed", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String findAgreed(){
+        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.AGREED);
+        if(applications == null || applications.size() == 0){
+            return "WU";
+        }else {
+            for (RegisterApplication application : applications){
+                System.out.println(application);
+            }
+        }
+        return "Success!";
     }
 
 }
