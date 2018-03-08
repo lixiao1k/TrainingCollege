@@ -56,6 +56,8 @@ public class TestController {
     @Autowired(required = true)
     private TeacherService teacherService;
 
+    @Autowired(required = true)
+    private GradeService gradeService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
@@ -63,43 +65,15 @@ public class TestController {
     }
 
 
-    @RequestMapping(value = "/createClass", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/createSign", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String createClass(){
-        classroomService.createClass(2L, 45, 34, 2L);
-        return "success";
-    }
-
-    @RequestMapping(value = "/getClass", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String getClassroom(){
-        List<Classroom> classrooms = classroomService.findAll(2L);
-        for(Classroom classroom : classrooms){
-            System.out.println(classroom);
+    public String createSign(){
+        try {
+            learnSignService.createSign(4L, 5L);
+        } catch (LearnSignExistException e) {
+            return e.toString();
         }
         return "success";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String update(){
-        classroomService.updateNumPlan(2L, 46);
-        return "success";
-    }
-
-    @RequestMapping(value = "/update1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String update1(){
-        classroomService.updateNumNow(2L, 34);
-        return "success";
-    }
-
-
-    @RequestMapping(value = "/deleteClass", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String delete(){
-        classroomService.deleteClass(2L);
-        return "Success!";
     }
 
 }

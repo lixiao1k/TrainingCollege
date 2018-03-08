@@ -1,6 +1,7 @@
 package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.LearnSign;
+import com.xrom.ssh.exceptions.LearnSignExistException;
 import com.xrom.ssh.repository.LearnSignRepository;
 import com.xrom.ssh.service.LearnSignService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,18 @@ public class LearnSignServiceImpl implements LearnSignService {
     }
 
     @Override
-    public void createSign(Long sid, Long cid) {
-        LearnSign sign = new LearnSign();
+    public LearnSign get(Long sid, Long cid) {
+        return repository.get(sid, cid);
+    }
+
+    @Override
+    public void createSign(Long sid, Long cid) throws LearnSignExistException {
+        LearnSign sign = get(sid, cid);
+        if(sign == null){
+            sign = new LearnSign();
+        }else {
+            throw new LearnSignExistException();
+        }
         sign.setStudentId(sid);
         sign.setClassId(cid);
         createSign(sign);

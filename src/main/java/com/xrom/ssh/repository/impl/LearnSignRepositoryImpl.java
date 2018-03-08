@@ -52,6 +52,30 @@ public class LearnSignRepositoryImpl extends BaseRepositoryImpl implements Learn
     }
 
     @Override
+    public LearnSign get(Long sid, Long cid) {
+        Session session = null;
+        Transaction tx = null;
+        List<LearnSign> signs= null;
+        try {
+            session = getCurrentSession();
+            tx = session.beginTransaction();
+            SQLQuery sqlQuery = session.createSQLQuery("select * from learning_sign where class_id=:CID and student_id=:SID");
+            sqlQuery.setLong("CID", cid);
+            sqlQuery.setLong("SID", sid);
+            sqlQuery.addEntity(LearnSign.class);
+            signs = sqlQuery.list();
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+        }
+        if(signs == null || signs.size() == 0){
+            return null;
+        }else {
+            return signs.get(0);
+        }
+    }
+
+    @Override
     public LearnSign load(Long id) {
         return (LearnSign) getCurrentSession().load(LearnSign.class, id);
     }
