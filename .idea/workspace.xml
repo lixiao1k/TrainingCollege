@@ -7,11 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9c2d483-b88a-464e-84b5-836ff83b35ac" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/exceptions/NoInstitutionException.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/ModifyApplicationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/ModifyApplicationService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/ModifyApplicationServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/ModifyApplicationServiceImpl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -58,8 +54,8 @@
       <file leaf-file-name="TestController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="141" column="59" lean-forward="false" selection-start-line="141" selection-start-column="59" selection-end-line="141" selection-end-column="59" />
+            <state relative-caret-position="396">
+              <caret line="86" column="25" lean-forward="false" selection-start-line="86" selection-start-column="25" selection-end-line="86" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -622,12 +618,12 @@
       <workItem from="1520126009196" duration="15466000" />
       <workItem from="1520163231740" duration="49627000" />
       <workItem from="1520335172457" duration="8264000" />
-      <workItem from="1520387686870" duration="24658000" />
+      <workItem from="1520387686870" duration="25191000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103263000" />
+    <option name="totallyTimeSpent" value="103796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -1146,8 +1142,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="141" column="59" lean-forward="false" selection-start-line="141" selection-start-column="59" selection-end-line="141" selection-end-column="59" />
+        <state relative-caret-position="396">
+          <caret line="86" column="25" lean-forward="false" selection-start-line="86" selection-start-column="25" selection-end-line="86" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
