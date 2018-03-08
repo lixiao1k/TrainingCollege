@@ -3,6 +3,7 @@ package com.xrom.ssh.controller;
 import com.xrom.ssh.entity.*;
 import com.xrom.ssh.enums.ApplicationState;
 import com.xrom.ssh.enums.OrderState;
+import com.xrom.ssh.exceptions.NotValidatedUserException;
 import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
@@ -57,18 +58,32 @@ public class TestController {
     }
 
 
-    @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/insertCard", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getAllStudents(){
-        List<Student> students = studentService.getAllStudents();
-        if(students == null || students.size() == 0){
-            return "wu";
-        }else {
-            for (Student student : students){
-                System.out.println(student);
-            }
-        }
+    public String insertCard(){
+        accountService.insertCard("123456789", 5L);
         return "success!";
+    }
+
+
+    @RequestMapping(value = "/getConsumption", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getConsumption(){
+        try {
+            return Integer.toString(accountService.getConsumption(5L));
+        } catch (NotValidatedUserException e) {
+            return "未验证用户";
+        }
+    }
+
+    @RequestMapping(value = "/getConsumption1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getConsumption1(){
+        try {
+            return Integer.toString(accountService.getConsumption(4L));
+        } catch (NotValidatedUserException e) {
+            return "未验证用户";
+        }
     }
 
     @RequestMapping(value = "/signIn1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")

@@ -43,6 +43,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updateAccount(Long userId, int amount) {
         Account account = getAccount(userId);
+        System.out.println(userId);
+        System.out.println(account);
         account.setTotalConsumption(account.getTotalConsumption() + amount);
         accountRepository.update(account);
         flush();
@@ -55,7 +57,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void insertCard(String cardNumber, Long userId) {
-        Card card = cardService.getCard(userId);
+        Card card = new Card();
+        card.setUserId(userId);
+        card.setCardNumber(cardNumber);
+        cardService.saveCard(card);
+        cardService.flush();
         Account account = accountRepository.get(userId);
         account.setCardNumber(card.getCardNumber());
         accountRepository.update(account);
