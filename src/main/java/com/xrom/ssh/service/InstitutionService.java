@@ -11,6 +11,7 @@ public interface InstitutionService {
     void updateAddress(String code, String address);
     void updatePhone(String code, String phone);
     void updateDescription(String code, String description);
+    void updateName(String code, String name);
     List<Institution> getAllInstitutions();
     void flush();
     Boolean signIn(String code);

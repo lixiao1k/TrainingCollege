@@ -1,5 +1,6 @@
 package com.xrom.ssh.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.xrom.ssh.entity.*;
 import com.xrom.ssh.enums.ApplicationState;
 import com.xrom.ssh.enums.OrderState;
@@ -51,83 +52,102 @@ public class TestController {
 
     @Autowired(required = true)
     private CardService cardService;
+
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "test";
     }
 
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/signIn", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String register(){
-        registerApplicationService.register("NJU", "82816783", "Best university in Jiangsu", "Nanjing");
+    public String signIn(){
+        Boolean result = institutionService.signIn("1098678");
+        if(result == true){
+            return "Success!";
+        }else {
+            return "Failed!";
+        }
+    }
+    @RequestMapping(value = "/signIn1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String signIn1(){
+        Boolean result = institutionService.signIn("10988");
+        if(result == true){
+            return "Success!";
+        }else {
+            return "Failed!";
+        }
+    }
+
+    @RequestMapping(value = "/getInstitution", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getInstitution(){
+        Institution institution = institutionService.getInstitution("1098678");
+        if(institution == null){
+            return "Wu";
+        }else {
+            return institution.toString();
+        }
+    }
+    @RequestMapping(value = "/getInstitution1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getInstitution1(){
+        Institution institution = institutionService.getInstitution("10986");
+        if(institution == null){
+            return "Wu";
+        }else {
+            return institution.toString();
+        }
+    }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getAll(){
+        List<Institution> institutions = institutionService.getAllInstitutions();
+        if(institutions == null){
+            return "WU";
+        }else {
+            for (Institution institution : institutions){
+                System.out.println(institution);
+            }
+        }
         return "Success!";
     }
 
-    @RequestMapping(value = "/vertify", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/delete", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String vertify(){
-        registerApplicationService.agree(1L);
+    public String delete(){
+        institutionService.deleteInstitution("1098678");
         return "Success!";
     }
 
-    @RequestMapping(value = "/reject", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/update1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String reject(){
-        registerApplicationService.reject(1L);
+    public String update1(){
+        institutionService.updateAddress("96eda85", "Nanjing");
         return "Success!";
     }
 
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/update2", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String findAll(){
-        List<RegisterApplication> applications = registerApplicationService.findAll();
-        if(applications == null || applications.size() == 0){
-            return "WU";
-        }else {
-            for (RegisterApplication application : applications){
-                System.out.println(application);
-            }
-        }
+    public String update2(){
+        institutionService.updatePhone("96eda85", "15896257359");
         return "Success!";
     }
-    @RequestMapping(value = "/findReserved", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+
+    @RequestMapping(value = "/update3", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String findReserved(){
-        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.RESERVED);
-        if(applications == null || applications.size() == 0){
-            return "WU";
-        }else {
-            for (RegisterApplication application : applications){
-                System.out.println(application);
-            }
-        }
+    public String update3(){
+        institutionService.updateDescription("96eda85", "The Best University in Jiangsu");
         return "Success!";
     }
-    @RequestMapping(value = "/findRejected", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+
+    @RequestMapping(value = "/update4", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String findRejected(){
-        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.REJECTED);
-        if(applications == null || applications.size() == 0){
-            return "WU";
-        }else {
-            for (RegisterApplication application : applications){
-                System.out.println(application);
-            }
-        }
-        return "Success!";
-    }
-    @RequestMapping(value = "/findAgreed", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String findAgreed(){
-        List<RegisterApplication> applications = registerApplicationService.findAll(ApplicationState.AGREED);
-        if(applications == null || applications.size() == 0){
-            return "WU";
-        }else {
-            for (RegisterApplication application : applications){
-                System.out.println(application);
-            }
-        }
+    public String update4(){
+        institutionService.updateName("96eda85", "DongNan");
         return "Success!";
     }
 

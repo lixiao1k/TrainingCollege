@@ -59,6 +59,14 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
+    public void updateName(String code, String name) {
+        Institution institution = getInstitution(code);
+        institution.setName(name);
+        institutionRepository.update(institution);
+        flush();
+    }
+
+    @Override
     public List<Institution> getAllInstitutions() {
         return institutionRepository.findAll();
     }
