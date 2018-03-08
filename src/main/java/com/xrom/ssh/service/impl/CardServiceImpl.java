@@ -2,6 +2,7 @@ package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.exceptions.CreateSameCardException;
+import com.xrom.ssh.exceptions.NoCardException;
 import com.xrom.ssh.repository.CardRepository;
 import com.xrom.ssh.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public void update(Long userId, int amount) {
+    public void update(Long userId, int amount) throws NoCardException {
         Card card= cardRepository.get(userId);
+        if(card == null){
+            throw new NoCardException();
+        }
         card.setBalance(card.getBalance() + amount);
         cardRepository.update(card);
         cardRepository.flush();

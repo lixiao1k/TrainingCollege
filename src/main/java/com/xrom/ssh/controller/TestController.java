@@ -3,10 +3,7 @@ package com.xrom.ssh.controller;
 import com.xrom.ssh.entity.*;
 import com.xrom.ssh.enums.ApplicationState;
 import com.xrom.ssh.enums.OrderState;
-import com.xrom.ssh.exceptions.NotValidatedUserException;
-import com.xrom.ssh.exceptions.RepeatInsertException;
-import com.xrom.ssh.exceptions.SignInFailedException;
-import com.xrom.ssh.exceptions.UsedMailException;
+import com.xrom.ssh.exceptions.*;
 import com.xrom.ssh.service.*;
 import net.sf.ehcache.search.expression.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,56 +49,66 @@ public class TestController {
     @Autowired(required = true)
     private ModifyApplicationService modifyApplicationService;
 
+    @Autowired(required = true)
+    private CardService cardService;
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "test";
     }
 
 
-    @RequestMapping(value = "/insertCard", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/getCard", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String insertCard(){
-        accountService.insertCard("123456789", 5L);
-        return "success!";
+    public String getCard(){
+        Card card = cardService.getCard(5L);
+        if (card == null){
+            return "无卡";
+        }else {
+            return card.toString();
+        }
     }
-
-
-    @RequestMapping(value = "/getConsumption", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/getCard1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getConsumption(){
-        try {
-            return Integer.toString(accountService.getConsumption(5L));
-        } catch (NotValidatedUserException e) {
-            return "未验证用户";
+    public String getCard1(){
+        Card card = cardService.getCard(4L);
+        if (card == null){
+            return "无卡";
+        }else {
+            return card.toString();
         }
     }
 
-    @RequestMapping(value = "/getConsumption1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/getCard2", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String getConsumption1(){
-        try {
-            return Integer.toString(accountService.getConsumption(4L));
-        } catch (NotValidatedUserException e) {
-            return "未验证用户";
+    public String getCard2(){
+        Card card = cardService.getCard("123456789");
+        if (card == null){
+            return "无卡";
+        }else {
+            return card.toString();
         }
     }
 
-    @RequestMapping(value = "/signIn1", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/getCard3", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String signIn1(){
+    public String getCard3(){
+        Card card = cardService.getCard("1234");
+        if (card == null){
+            return "无卡";
+        }else {
+            return card.toString();
+        }
+    }
+
+    @RequestMapping(value = "/changeBalance", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String changeBalance(){
         try {
-            Student student = studentService.signIn("lixiao1k@163.com", "passrd");
-            return student.toString();
-        } catch (SignInFailedException e) {
+            cardService.update(5L, 50);
+        } catch (NoCardException e) {
             return e.toString();
         }
-    }
-
-
-    @RequestMapping(value = "/deleteClass", method = RequestMethod.GET)
-    @ResponseBody
-    public String deleteClass() {
-        classroomService.deleteClass(1L);
         return "success!";
     }
+
 }
