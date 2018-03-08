@@ -3,6 +3,7 @@ package com.xrom.ssh.service.impl;
 import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.entity.ModifyApplication;
 import com.xrom.ssh.enums.ApplicationState;
+import com.xrom.ssh.exceptions.NoInstitutionException;
 import com.xrom.ssh.repository.InstitutionRepository;
 import com.xrom.ssh.repository.ModifyApplicationRepository;
 import com.xrom.ssh.service.ModifyApplicationService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -97,18 +99,24 @@ public class ModifyApplicationServiceImpl implements ModifyApplicationService{
         institution.setDescription(application.getDescription());
         institution.setAddress(application.getAddress());
         institution.setPhone(application.getPhone());
+        institution.setName(application.getName());
         institutionRepository.update(institution);
         flush();
     }
 
     @Override
-    public void modifyApplication(String code, String address, String description, String phone, String name) {
+    public void modifyApplication(String code, String address, String description, String phone, String name) throws NoInstitutionException {
+        Institution institution = institutionRepository.get(code);
+        if(institution == null){
+            throw new NoInstitutionException();
+        }
         ModifyApplication application = new ModifyApplication();
         application.setInstitutionCode(code);
         application.setAddress(address);
         application.setDescription(description);
         application.setPhone(phone);
         application.setName(name);
+        application.setCreateTime(new Date());
         saveApplication(application);
         flush();
     }

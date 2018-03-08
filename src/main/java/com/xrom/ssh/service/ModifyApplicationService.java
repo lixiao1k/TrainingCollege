@@ -2,6 +2,7 @@ package com.xrom.ssh.service;
 
 import com.xrom.ssh.entity.ModifyApplication;
 import com.xrom.ssh.enums.ApplicationState;
+import com.xrom.ssh.exceptions.NoInstitutionException;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface ModifyApplicationService {
     List<ModifyApplication> findAll(String institutionCode);
     void reject(Long id);
     void agree(Long id);
-    void modifyApplication(String code, String address, String description, String phone, String name);
+    void modifyApplication(String code, String address, String description, String phone, String name) throws NoInstitutionException;
 }
