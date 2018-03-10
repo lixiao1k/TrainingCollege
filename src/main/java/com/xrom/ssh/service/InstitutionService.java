@@ -7,6 +7,7 @@ import java.util.List;
 public interface InstitutionService {
     String createInstitution(Institution institution);
     Institution getInstitution(String code);
+    Institution getInstitution(String code, String password);
     void deleteInstitution(String code);
     void updateAddress(String code, String address);
     void updatePhone(String code, String phone);
@@ -14,5 +15,5 @@ public interface InstitutionService {
     void updateName(String code, String name);
     List<Institution> getAllInstitutions();
     void flush();
-    Boolean signIn(String code);
+    Boolean signIn(String code, String password);
 }

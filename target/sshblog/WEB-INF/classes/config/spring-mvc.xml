@@ -18,13 +18,13 @@
     <!-- 对模型视图名称的解析,在请求时模型视图名称添加前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="views/"/>      <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/views/"/>      <!-- 前缀 -->
         <property name="suffix" value=".jsp"/>   <!-- 后缀 -->
     </bean>
 
     <!--这里是对静态资源的映射-->
-    <mvc:resources mapping="/js/**" location="/resources/js/"/>
-    <mvc:resources mapping="/css/**" location="/resources/css/"/>
-    <mvc:resources mapping="/img/**" location="/resources/img/"/>
+    <mvc:resources mapping="/bootstrap/js/**" location="/bootstrap/js/"/>
+    <mvc:resources mapping="/bootstrap/css/**" location="/bootstrap/css/"/>
+    <mvc:resources mapping="/sources/img/**" location="/sources/img/"/>
 
 </beans>

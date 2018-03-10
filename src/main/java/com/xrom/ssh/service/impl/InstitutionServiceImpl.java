@@ -29,6 +29,11 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
+    public Institution getInstitution(String code, String password) {
+        return institutionRepository.get(code, password);
+    }
+
+    @Override
     public void deleteInstitution(String code) {
         institutionRepository.delete(code);
         flush();
@@ -77,8 +82,8 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
-    public Boolean signIn(String code) {
-        Institution institution = getInstitution(code);
+    public Boolean signIn(String code, String password) {
+        Institution institution = getInstitution(code, password);
         if(institution == null){
             return false;
         }else{

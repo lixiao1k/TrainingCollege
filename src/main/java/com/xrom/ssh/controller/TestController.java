@@ -64,8 +64,22 @@ public class TestController {
         return "test";
     }
 
+    @RequestMapping(value = "/iSignUp", method = RequestMethod.GET)
+    public String iSignUp(){
+        return "iSignUp";
+    }
 
-    @RequestMapping(value = "/createSign", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/iSignIn", method = RequestMethod.GET)
+    public String iSignIn(){
+        return "iSignIn";
+    }
+    @RequestMapping(value = "/mSignIn", method = RequestMethod.GET)
+    public String mSignIn(){
+        return "mSignIn";
+    }
+
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String createSign(){
         try {

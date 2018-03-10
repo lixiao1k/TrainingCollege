@@ -72,4 +72,28 @@ public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements Ins
     public void update(Institution entity) {
         getCurrentSession().update(entity);
     }
+
+    @Override
+    public Institution get(String code, String password) {
+        Session session = null;
+        Transaction tx = null;
+        List<Institution> list = null;
+        try {
+            session = getCurrentSession();
+            tx = session.beginTransaction();
+            SQLQuery sqlQuery = session.createSQLQuery("select * from institution where code=:CODE and password=:PW");
+            sqlQuery.setString("CODE", code);
+            sqlQuery.setString("PW", password);
+            sqlQuery.addEntity(Institution.class);
+            list = sqlQuery.list();
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+        }
+        if(list == null || list.size() == 0){
+            return null;
+        }else {
+            return list.get(0);
+        }
+    }
 }
