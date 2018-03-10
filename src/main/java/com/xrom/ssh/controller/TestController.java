@@ -64,10 +64,6 @@ public class TestController {
         return "test";
     }
 
-    @RequestMapping(value = "/mSignIn", method = RequestMethod.GET)
-    public String mSignIn(){
-        return "mSignIn";
-    }
 
 
     @RequestMapping(value = "/create", method = RequestMethod.GET, produces="text/html;charset=UTF-8")

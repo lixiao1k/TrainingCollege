@@ -57,9 +57,9 @@
         <!-- /.lockscreen-image -->
 
         <!-- lockscreen credentials (contains the form) -->
-        <form class="lockscreen-credentials">
+        <form class="lockscreen-credentials" action="/mSignIn", method="post">
             <div class="input-group">
-                <input type="password" class="form-control" placeholder="password">
+                <input type="password" class="form-control" placeholder="password" name="password">
 
                 <div class="input-group-btn">
                     <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
