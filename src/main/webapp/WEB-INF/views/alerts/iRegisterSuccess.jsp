@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: shelton
   Date: 2018/3/10
-  Time: 下午2:54
+  Time: 下午6:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -26,14 +26,15 @@
 </head>
 <body>
 <div class="lockscreen-wrapper">
-    <div class="alert alert-danger alert-dismissible">
-        <h4><i class="icon fa fa-ban"></i> 注意 Alert!</h4>
-        请正确完整填写所有信息，不可为空！<br>
-        Please fill in all information correctly and completely, it can't be empty！
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> 成功！Success</h4>
+        机构注册申请提交成功！等待经理审核通知！<br>
+        Agency registration application submitted successfully! Wait for the manager to review and notice!
     </div>
 </div>
 <!--引入jquery脚本-->
-<script src="<%=basePath%>bootstrap/js/jquery-3.1.1.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/jquery.min.js"></script>
 <!--引入bootstrap脚本-->
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 </body>

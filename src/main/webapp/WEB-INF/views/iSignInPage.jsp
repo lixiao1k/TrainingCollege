@@ -40,14 +40,14 @@
                 <h2 style="margin-top: -20pt; margin-left: -12pt" >
                     SignIn 机构
                 </h2>
-                <form class="form-horizontal" role="form" style="padding-top: 20pt">
+                <form class="form-horizontal" role="form" style="padding-top: 20pt" action="/iSignIn" method="post">
                     <div class="form-group">
                         <label for="code" class="control-label">编码</label>
-                        <input type="text" class="form-control" id="code" placeholder="请输入机构编码">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="请输入机构编码">
                     </div>
                     <div class="form-group">
                         <label for="password" class="control-label">密码</label>
-                        <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
                     </div>
                     <div class="form-group">
                         <div class="col-md-12" style="margin-top: 10pt">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </form>
-                <a href="/iSignUp" class="btn btn-sm" role="button" style="margin-left: 150pt">注册</a>
+                <a href="/iSignUpPage" class="btn btn-sm" role="button" style="margin-left: 150pt">注册</a>
             </div>
         </div>
     </div>

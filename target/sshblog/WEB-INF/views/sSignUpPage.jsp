@@ -38,7 +38,7 @@
         <div class="col-md-4">
             <div class="jumbotron">
                 <h2 style="margin-top: -20pt; margin-left: -12pt" >
-                    SignUp
+                    SignUp 学生
                 </h2>
                 <form class="form-horizontal" role="form" style="padding-top: 20pt" action="/sSignUp" method="post">
                     <div class="form-group">

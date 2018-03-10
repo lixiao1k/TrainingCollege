@@ -34,7 +34,7 @@
                     <a class="btn btn-primary btn-large" href="/sSignInPage">学生</a>
                 </div>
                 <div class="col-md-4">
-                    <a class="btn btn-primary btn-large" href="/iSignIn">机构</a>
+                    <a class="btn btn-primary btn-large" href="/iSignInPage">机构</a>
                 </div>
                 <div class="col-md-4">
                     <a class="btn btn-primary btn-large" href="/mSignIn">经理</a>

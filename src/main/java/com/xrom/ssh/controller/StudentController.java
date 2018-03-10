@@ -32,7 +32,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/sSignUp", method = RequestMethod.POST, produces="text/html;charset=UTF-8")
-    public String sSignUp(HttpServletRequest request, Model model){
+    public String sSignUp(HttpServletRequest request){
         String email = request.getParameter("email");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -48,7 +48,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/sSignIn", method = RequestMethod.POST)
-    public ModelAndView sSignIn(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView sSignIn(HttpServletRequest request){
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         System.out.println(email);

@@ -28,8 +28,8 @@
 <div class="lockscreen-wrapper">
     <div class="alert alert-danger alert-dismissible">
         <h4><i class="icon fa fa-ban"></i> 注意 Alert!</h4>
-        邮箱或者用户名或者密码不能为空！<br>
-        Email \ Username \Password can not be empty!
+        请正确完整填写所有信息，不可为空！<br>
+        Please fill in all information correctly and completely, it can't be empty！
     </div>
 </div>
 <!--引入jquery脚本-->
