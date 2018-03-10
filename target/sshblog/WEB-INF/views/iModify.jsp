@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/10
-  Time: 下午4:52
+  Date: 2018/3/11
+  Time: 上午12:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -15,11 +15,10 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>学生个人信息主页</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--页面标题-->
+    <title>机构信息修改</title>
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="<%=basePath%>bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -38,9 +37,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
@@ -57,18 +53,21 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/sHome">个人信息 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">课程</a></li>
+                        <li><a href="/iHome">机构信息</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">订单<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">师资<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">查看</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">添加</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">计划<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">查看</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="#">发布</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -87,24 +86,20 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">${student.userName}</span>
+                                <span class="hidden-xs">${institution.name}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <p>
-                                        ${student.userName}
-                                        <small>${student.email}</small>
-                                        <small>More Pain, More Gain</small>
+                                        ${institution.name}
+                                        <small>Best Education!</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Card</a>
-                                    </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="/" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -119,44 +114,38 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <i class="fa fa-text-width"></i>
-
-                        <h3 class="box-title">信息列表</h3>
+            <div class="jumbotron" style="margin-top: 100pt; margin-left: 100pt; margin-right: 100pt">
+                <h2 style="margin-top: 0pt; margin-left: 0pt" >
+                    SignUp 机构信息修改
+                </h2>
+                <form class="form-horizontal" role="form" style="padding-top: 20pt" action="/iModifyApplication" method="post">
+                    <div class="form-group col-md-6" style="padding-right: 20pt; padding-left: 40pt">
+                        <label for="name" class="control-label">名称</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="请输入注册机构名称" value=${institution.name}>
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <dl class="dl-horizontal">
-                            <dt>注册邮箱：</dt>
-                            <dd>${student.email}</dd>
-                            <dt>用户名：</dt>
-                            <dd>${student.userName}</dd>
-                            <dt>密码：</dt>
-                            <dd>不可见</dd>
-                            <dt>银行卡号：</dt>
-                            <dd>${card.cardNumber}</dd>
-                            <dt>银行卡余额：</dt>
-                            <dd>${card.balance}</dd>
-                            <dt>用户等级：</dt>
-                            <dd>${level}</dd>
-                            <dt>账户总消费：</dt>
-                            <dd>${account.totalConsumption}</dd>
-                            <dt>积分余额：</dt>
-                            <dd></dd>
-                        </dl>
+                    <div class="form-group col-md-6" style="padding-right: 20pt; padding-left: 40pt">
+                        <label for="address" class="control-label">地点</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="请输入机构所在地址" value=${institution.address}>
                     </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
+                    <div class="form-group col-md-6" style="padding-right: 20pt; padding-left: 40pt;">
+                        <label for="briefDescription" class="control-label">简单描述</label>
+                        <textarea class="form-control" rows="4" name="description" placeholder="机构简单描述" id="briefDescription">${institution.description}</textarea>
+                    </div>
+                    <div class="form-group col-md-6" style="padding-right: 20pt; padding-left: 40pt">
+                        <label for="phone" class="control-label">电话</label>
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="请输入电话" value=${institution.phone}>
+                    </div>
+                    <div class="form-group" style="padding-right: 80pt; padding-left: 110pt; padding-top: 20pt">
+                        <div style="margin-top: 150pt;margin-left: 350pt">
+                            <button type="submit" class="btn btn-primary btn-large">申请修改</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- /.container -->
     </div>
 </div>
-<!-- ./wrapper -->
-
 <!-- jQuery 3 -->
 <script src="<%=basePath%>bootstrap/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->

@@ -16,7 +16,6 @@ public class MasterController {
 
     @RequestMapping(value = "/mSignIn", method = RequestMethod.POST)
     public ModelAndView mSignIn(HttpServletRequest request){
-        System.out.println(request.getParameter("password"));
         return new ModelAndView("test");
     }
 }
