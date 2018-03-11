@@ -16,6 +16,17 @@ public class MasterController {
 
     @RequestMapping(value = "/mSignIn", method = RequestMethod.POST)
     public ModelAndView mSignIn(HttpServletRequest request){
-        return new ModelAndView("test");
+        String password = request.getParameter("password");
+        if(password.equals("root")){
+            return new ModelAndView("mHome");
+        }else {
+            return new ModelAndView("alerts/loginError");
+        }
+
+    }
+
+    @RequestMapping(value = "/mHome", method = RequestMethod.GET)
+    public ModelAndView mHome(HttpServletRequest request){
+        return new ModelAndView("mHome");
     }
 }

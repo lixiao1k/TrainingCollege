@@ -59,7 +59,7 @@ public class TestController {
     @Autowired(required = true)
     private GradeService gradeService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/test/hello", method = RequestMethod.GET)
     public String test() {
         return "test";
     }

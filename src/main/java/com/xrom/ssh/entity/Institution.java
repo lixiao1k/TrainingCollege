@@ -6,11 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "institution")
-public class Institution {
+public class Institution implements Serializable{
+    private static final long serialVersionUID = 748346728L;
+
     @Id
     @Column(name = "code", length = 7, nullable = false, unique = true)
     private String code;

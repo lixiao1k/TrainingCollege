@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/10
-  Time: 下午10:08
+  Date: 2018/3/11
+  Time: 上午11:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -17,7 +17,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>机构信息主页</title>
+    <title>经理主页</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -48,7 +48,7 @@
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand"><b>Training College</b>首页</a>
+                    <a href="/" class="navbar-brand"><b>Training</b>College</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -57,14 +57,23 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/iHome">机构信息<span class="sr-only">(current)</span></a></li>
-                        <li><a href="/iTeachers">师资</a></li>
+                        <li class="active"><a href="/mHome">结算<span class="sr-only">(current)</span></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">计划<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">申请<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">查看</a></li>
+                                <li><a href="#">机构注册申请</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">发布</a></li>
+                                <li><a href="#">机构信息修改申请</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">统计<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">机构信息</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">学员信息</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">财务情况</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -75,35 +84,6 @@
                     </form>
                 </div>
                 <!-- /.navbar-collapse -->
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- User Account Menu -->
-                        <li class="dropdown user user-menu">
-                            <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">${institution.name}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- The user image in the menu -->
-                                <li class="user-header">
-                                    <p>
-                                        ${institution.name}
-                                        <small>Best Education!</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a href="/" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-custom-menu -->
             </div>
             <!-- /.container-fluid -->
         </nav>
@@ -111,33 +91,6 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <i class="fa fa-text-width"></i>
-
-                        <h3 class="box-title">机构基本信息</h3>
-                        <div class="pull-right">
-                            <a href="/iModify">修改</a>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <dl class="dl-horizontal">
-                            <dt>机构名称</dt>
-                            <dd>${institution.name}</dd>
-                            <dt>机构电话</dt>
-                            <dd>${institution.phone}</dd>
-                            <dt>机构地点</dt>
-                            <dd>${institution.address}</dd>
-                            <dt>简单介绍</dt>
-                            <dd>${institution.description}</dd>
-                        </dl>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
         </div>
         <!-- /.container -->
     </div>
