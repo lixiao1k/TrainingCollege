@@ -125,6 +125,9 @@
                         <i class="fa fa-text-width"></i>
 
                         <h3 class="box-title">信息列表</h3>
+                        <div class="pull-right">
+                            <a href="/sModify">修改</a>
+                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

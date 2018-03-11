@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/10
-  Time: 下午4:52
+  Date: 2018/3/11
+  Time: 上午9:27
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -17,7 +17,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>学生个人信息主页</title>
+    <title>学生个人信息修改</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -57,7 +57,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/sHome">个人信息 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/sHome">个人信息</a></li>
                         <li><a href="#">课程</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">订单<span class="caret"></span></a>
@@ -119,44 +119,65 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <i class="fa fa-text-width"></i>
+            <div class="row clearfix" style="margin-top: 100pt">
+                <div class="col-md-6" style="margin-left: 200pt">
+                    <!-- Custom Tabs (Pulled to the right) -->
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="active"><a href="#tab_1-1" data-toggle="tab">账户名</a></li>
+                            <li><a href="#tab_2-2" data-toggle="tab">银行卡</a></li>
+                            <li class="pull-left header"><i class="fa fa-th"></i> 信息修改</li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1-1">
+                                <form class="form-horizontal" action="/sModifyName", method="post">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-2 control-label">账户名</label>
 
-                        <h3 class="box-title">信息列表</h3>
-                        <div class="pull-right">
-                            <a href="/sModify">修改</a>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputName" name="userName" placeholder="修改后的账户名" value=${student.userName}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-info pull-right">修改</button>
+                                    </div>
+                                    <!-- /.box-footer -->
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_2-2">
+                                <form class="form-horizontal" action="/sModifyCard"  method="post">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="inputCard" class="col-sm-2 control-label">添加/修改银行卡</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputCard" name="cardNumber" placeholder="银行卡号" value=${card.cardNumber}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-info pull-right">添加/修改</button>
+                                    </div>
+                                    <!-- /.box-footer -->
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
                         </div>
+                        <!-- /.tab-content -->
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <dl class="dl-horizontal">
-                            <dt>注册邮箱：</dt>
-                            <dd>${student.email}</dd>
-                            <dt>用户名：</dt>
-                            <dd>${student.userName}</dd>
-                            <dt>密码：</dt>
-                            <dd>不可见</dd>
-                            <dt>银行卡号：</dt>
-                            <dd>${card.cardNumber}</dd>
-                            <dt>银行卡余额：</dt>
-                            <dd>${card.balance}</dd>
-                            <dt>用户等级：</dt>
-                            <dd>${level}</dd>
-                            <dt>账户总消费：</dt>
-                            <dd>${account.totalConsumption}</dd>
-                            <dt>积分余额：</dt>
-                            <dd></dd>
-                        </dl>
-                    </div>
-                    <!-- /.box-body -->
+                    <!-- nav-tabs-custom -->
                 </div>
-                <!-- /.box -->
+                <!-- /.col -->
             </div>
         </div>
-        <!-- /.container -->
     </div>
+    <!-- /.container -->
+</div>
 </div>
 <!-- ./wrapper -->
 

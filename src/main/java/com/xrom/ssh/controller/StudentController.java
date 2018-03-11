@@ -4,6 +4,7 @@ package com.xrom.ssh.controller;
 import com.xrom.ssh.entity.Account;
 import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.exceptions.CreateSameCardException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
 import com.xrom.ssh.service.AccountService;
@@ -91,4 +92,56 @@ public class StudentController {
         modelMap.put("level", level);
         return new ModelAndView("/sHome");
     }
+
+    @RequestMapping(value = "/sModify", method = RequestMethod.GET)
+    public ModelAndView sModify(HttpSession httpSession, ModelMap modelMap){
+        Student student = (Student) httpSession.getAttribute("student");
+        Card card = cardService.getCard(student.getId());
+        modelMap.put("student", student);
+        modelMap.put("card", card);
+        return new ModelAndView("/sModify");
+    }
+
+    @RequestMapping(value = "/sModifyName", method = RequestMethod.POST)
+    public ModelAndView sModifyName(HttpServletRequest request, HttpSession httpSession, ModelMap modelMap){
+        Student student = (Student) httpSession.getAttribute("student");
+        String modifiedName = request.getParameter("userName");
+        if(modifiedName == ""){
+            return new ModelAndView("alerts/sRegisterEmptyAlert");
+        }
+        student.setUserName(modifiedName);
+        studentService.update(student);
+        return new ModelAndView("alerts/modifySuccess");
+    }
+
+    @RequestMapping(value = "/sModifyCard", method = RequestMethod.POST)
+    public ModelAndView sModifyCard(HttpServletRequest request, HttpSession httpSession, ModelMap modelMap){
+        Student student = (Student) httpSession.getAttribute("student");
+        String modifiedCard = request.getParameter("cardNumber");
+        Card card = cardService.getCard(student.getId());
+        if(modifiedCard == ""){
+            return new ModelAndView("alerts/sRegisterEmptyAlert");
+        }
+        if(card == null){
+            try {
+                cardService.createCard(student.getId(), modifiedCard);
+            } catch (CreateSameCardException e) {
+                return new ModelAndView("alerts/sameCardAlert");
+            }
+        }else {
+            Card card1 = cardService.getCard(modifiedCard);
+            if(card1 != null){
+                return new ModelAndView("alerts/sameCardAlert");
+            }
+            cardService.deleteCard(student.getId());
+            try {
+                cardService.createCard(student.getId(), modifiedCard);
+            } catch (CreateSameCardException e) {
+                return new ModelAndView("alerts/sameCardAlert");
+            }
+        }
+        return new ModelAndView("alerts/modifySuccess");
+    }
+
+
 }

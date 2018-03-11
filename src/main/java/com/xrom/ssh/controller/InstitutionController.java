@@ -1,7 +1,9 @@
 package com.xrom.ssh.controller;
 
 import com.xrom.ssh.entity.Institution;
+import com.xrom.ssh.exceptions.NoInstitutionException;
 import com.xrom.ssh.service.InstitutionService;
+import com.xrom.ssh.service.ModifyApplicationService;
 import com.xrom.ssh.service.RegisterApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class InstitutionController {
 
     @Autowired(required = true)
     private InstitutionService institutionService;
+
+    @Autowired(required = true)
+    private ModifyApplicationService modifyApplicationService;
 
     @RequestMapping(value = "/iSignUpPage", method = RequestMethod.GET)
     public String iSignUpPage(){
@@ -81,11 +86,14 @@ public class InstitutionController {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String description = request.getParameter("description");
-        System.out.println(institution);
-        System.out.println(name);
-        System.out.println(address);
-        System.out.println(phone);
-        System.out.println(description);
+        if(name == "" || address == "" || phone == "" || description == ""){
+            return new ModelAndView("alerts/sRegisterEmptyAlert");
+        }
+        try {
+            modifyApplicationService.modifyApplication(institution.getCode(), address, description, phone, name);
+        } catch (NoInstitutionException e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("alerts/iRegisterSuccess");
     }
 }
