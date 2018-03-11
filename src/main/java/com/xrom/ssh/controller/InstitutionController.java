@@ -1,5 +1,6 @@
 package com.xrom.ssh.controller;
 
+import com.xrom.ssh.entity.Classroom;
 import com.xrom.ssh.entity.Course;
 import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.entity.Teacher;
@@ -41,6 +42,9 @@ public class InstitutionController {
 
     @Autowired(required = true)
     private CourseService courseService;
+
+    @Autowired(required = true)
+    private ClassroomService classroomService;
 
     @RequestMapping(value = "/iSignUpPage", method = RequestMethod.GET)
     public String iSignUpPage(){
@@ -163,4 +167,53 @@ public class InstitutionController {
                 Integer.parseInt(weeks), institution.getCode(), Integer.parseInt(price));
         return new ModelAndView("alerts/courseCreateSuccess");
     }
+
+    @RequestMapping(value = "/iGetCourseDetail/{id}", method = RequestMethod.GET)
+    public ModelAndView iCourseDetail(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        Course course = courseService.getCourse(id);
+        httpSession.setAttribute("course",course);
+        return new ModelAndView(new RedirectView("/iCourseDetail"));
+    }
+
+    @RequestMapping(value = "/iCourses", method = RequestMethod.GET)
+    public ModelAndView iCourses(HttpSession httpSession, ModelMap modelMap){
+        Institution institution = (Institution) httpSession.getAttribute("institution");
+        List<Course> courses = courseService.findAll(institution.getCode());
+        modelMap.put("institution", institution);
+        modelMap.put("courses", courses);
+        return new ModelAndView("/iCourses");
+    }
+
+    @RequestMapping(value = "/iCourseDetail", method = RequestMethod.GET)
+    public ModelAndView iCourseDetail(HttpSession httpSession, ModelMap modelMap){
+        Course course = (Course) httpSession.getAttribute("course");
+        List<Classroom> classrooms = classroomService.findAll(course.getId());
+        modelMap.put("course", course);
+        modelMap.put("classrooms", classrooms);
+        return new ModelAndView("/iCourseDetail");
+    }
+
+    @RequestMapping(value = "/iAddClassStudentNow/{id}", method = RequestMethod.GET)
+    public ModelAndView iAddClassStudentNow(@PathVariable Long id){
+        Classroom classroom = classroomService.getClass(id);
+        int classStudentNow = classroom.getStudentNumNow();
+        int classStudentPlan = classroom.getStudentNumPlan();
+        if(classStudentNow >= classStudentPlan){
+            return new ModelAndView("alerts/addStudentAlert");
+        }
+        classroomService.updateNumNow(id, 1);
+        return new ModelAndView(new RedirectView("/iCourseDetail"));
+    }
+
+    @RequestMapping(value = "/iMinusClassStudentNow/{id}", method = RequestMethod.GET)
+    public ModelAndView iMinusClassStudentNow(@PathVariable Long id){
+        Classroom classroom = classroomService.getClass(id);
+        int classStudentPlan = classroom.getStudentNumPlan();
+        if(classStudentPlan <= 0){
+            return new ModelAndView("alerts/minusStudentAlert");
+        }
+        classroomService.updateNumNow(id, -1);
+        return new ModelAndView(new RedirectView("/iCourseDetail"));
+    }
+
 }

@@ -1,37 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: shelton
-  Date: 2018/3/11
-  Time: 下午1:41
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
-%>
+<!DOCTYPE html>
 <html>
 <head>
-    <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>部门师资查看</title>
+    <title>AdminLTE 2 | Top Navigation</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/font-awesome.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/mine/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/ionicons.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/mine/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/mine/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/_all-skins.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/mine/_all-skins.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,13 +28,14 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
     <header class="main-header">
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand"><b>Training College</b>首页</a>
+                    <a href="../../index2.html" class="navbar-brand"><b>Training College</b>首页</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -58,14 +44,21 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="/iHome">机构信息</a></li>
-                        <li class="active"><a href="/iTeachers">师资<span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">机构信息<span class="sr-only">(current)</span></a></li>
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">师资<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">查看</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">添加</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">计划<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/iCourses">查看</a></li>
+                                <li><a href="#">查看</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/iAddCoursePage">发布</a></li>
+                                <li><a href="#">发布</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -130,81 +123,61 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">机构教师信息列表</h3>
+                        <h3 class="box-title">机构课程信息列表</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>major</th>
-                                <th></th>
+                                <th>课程ID</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>学时/周</th>
+                                <th>周次</th>
+                                <th>科目</th>
+                                <th>价格</th>
                             </tr>
-                            <c:forEach items="${teachers}" var="teacher">
-                                <tr>
-                                    <td>${teacher.id}</td>
-                                    <td>${teacher.name}</td>
-                                    <td>${teacher.phone}</td>
-                                    <td><span class="label label-success">${teacher.teachingType}</span></td>
-                                    <td>
-                                        <div class="pull-right" style="margin-right: 10pt">
-                                            <a href="/teacher_delete/${teacher.id}">删除</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                            <tr>
+                                <td>183</td>
+                                <td>John Doe</td>
+                                <td>11-7-2014</td>
+                                <td>11-7-2014</td>
+                                <td>11-7-2014</td>
+                                <td><span class="label label-success">Math</span></td>
+                                <td>11-7-2014</td>
+                                <td>
+                                    <div class="pull-right" style="margin-right: 10pt">
+                                        <a href="/">详细信息</a>
+                                    </div>
+                                    <div class="pull-right" style="margin-right: 10pt">
+                                        <a href="/">删除</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>183</td>
+                                <td>John Doe</td>
+                                <td>11-7-2014</td>
+                                <td>11-7-2014</td>
+                                <td>11-7-2014</td>
+                                <td><span class="label label-success">Math</span></td>
+                                <td>11-7-2014</td>
+                                <td>
+                                    <div class="pull-right" style="margin-right: 10pt">
+                                        <a href="/">详细信息</a>
+                                    </div>
+                                    <div class="pull-right" style="margin-right: 10pt">
+                                        <a href="/">删除</a>
+                                    </div>
+                                </td>
+                            </tr>
+
                         </table>
                     </div>
                     <!-- /.box-body -->
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">添加教师</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    <form class="form-horizontal" action="/iAddTeacher" method="post">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">姓名</label>
-
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputName" placeholder="name" name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPhone" class="col-sm-3 control-label">电话</label>
-
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone" name="phone">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">科目</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" name="major">
-                                        <option>English</option>
-                                        <option>Chinese</option>
-                                        <option>Math</option>
-                                        <option>Physics</option>
-                                        <option>Chemistry</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-info" style="margin-left: 70pt">添加</button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
                 </div>
             </div>
         </div>
@@ -214,16 +187,16 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="<%=basePath%>bootstrap/js/jquery.min.js"></script>
+<script src="../../bootstrap/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="<%=basePath%>bootstrap/js/jquery.slimscroll.min.js"></script>
+<script src="../../bootstrap/js/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
+<script src="../../bootstrap/js/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src="../../bootstrap/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=basePath%>bootstrap/js/demo.js"></script>
+<script src="../../bootstrap/js/demo.js"></script>
 </body>
 </html>

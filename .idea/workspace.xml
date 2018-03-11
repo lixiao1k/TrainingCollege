@@ -7,34 +7,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9c2d483-b88a-464e-84b5-836ff83b35ac" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/Test.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iAddCourse.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/courseCreateSuccess.jsp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCoursePage.jsp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/mine/all.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/mine/bootstrap-colorpicker.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/mine/bootstrap-datepicker.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/mine/bootstrap-timepicker.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/mine/daterangepicker.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/mine/select2.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/_all-skins.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/bootstrap-colorpicker.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/bootstrap-datepicker.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/bootstrap-timepicker.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/daterangepicker.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/icheck.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/jquery.inputmask.date.extensions.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/jquery.inputmask.extensions.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/jquery.inputmask.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/moment.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/select2.full.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iCourseDetail.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iCourses.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/addStudentAlert.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/minusStudentAlert.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourseDetail.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourses.jsp" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Classroom.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Classroom.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Course.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Course.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCoursePage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCoursePage.jsp" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iHome.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iHome.jsp" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iModify.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iModify.jsp" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iTeachers.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iTeachers.jsp" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/InstitutionController.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/InstitutionController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/entity/Classroom.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/entity/Classroom.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/entity/Course.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/entity/Course.class" />
       <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/InstitutionController.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/InstitutionController.class" />
+      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/entity/Classroom.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/entity/Classroom.class" />
+      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/entity/Course.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/entity/Course.class" />
+      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iAddCoursePage.jsp" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iAddCoursePage.jsp" />
       <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iHome.jsp" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iHome.jsp" />
       <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iModify.jsp" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iModify.jsp" />
       <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iTeachers.jsp" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/iTeachers.jsp" />
@@ -81,6 +74,13 @@
         <item name="training_college@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="training_college: schema" type="c314c289:MysqlImplModel$Schema" />
+        <item name="class: table" type="98d5ac3d:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="training_college@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="training_college: schema" type="c314c289:MysqlImplModel$Schema" />
         <item name="course: table" type="98d5ac3d:MysqlImplModel$Table" />
       </path>
     </expand>
@@ -91,34 +91,64 @@
       <file leaf-file-name="InstitutionController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="163" column="62" lean-forward="true" selection-start-line="163" selection-start-column="62" selection-end-line="163" selection-end-column="62" />
+            <state relative-caret-position="268">
+              <caret line="207" column="56" lean-forward="false" selection-start-line="207" selection-start-column="29" selection-end-line="207" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3581#3582#0" expanded="true" />
-                <element signature="e#3632#3633#0" expanded="true" />
-                <element signature="e#5960#5961#0" expanded="true" />
-                <element signature="e#6018#6019#0" expanded="true" />
+                <element signature="e#3699#3700#0" expanded="true" />
+                <element signature="e#3750#3751#0" expanded="true" />
+                <element signature="e#6078#6079#0" expanded="true" />
+                <element signature="e#6136#6137#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="iHome.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iHome.jsp">
+      <file leaf-file-name="Classroom.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Classroom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="69" selection-end-column="25" />
+            <state relative-caret-position="345">
+              <caret line="26" column="38" lean-forward="false" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="iSignUpPage.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iSignUpPage.jsp">
+      <file leaf-file-name="Account.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Account.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-255">
-              <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="105">
+              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="iCourseDetail.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourseDetail.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="212" column="43" lean-forward="true" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="iCourses.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourses.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="67" column="57" lean-forward="true" selection-start-line="67" selection-start-column="57" selection-end-line="67" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Card.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Card.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="14" column="59" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -127,78 +157,19 @@
       <file leaf-file-name="iTeachers.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iTeachers.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="67" column="60" lean-forward="false" selection-start-line="67" selection-start-column="60" selection-end-line="67" selection-end-column="60" />
+            <state relative-caret-position="15">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <file leaf-file-name="emailRegisteredAlert.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/emailRegisteredAlert.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="52" column="7" lean-forward="true" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
+            <state relative-caret-position="105">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="course" pinned="false" current-in-tab="false">
-        <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.course">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="iModify.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iModify.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="62" column="60" lean-forward="false" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="iSignInPage.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iSignInPage.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1114">
-              <caret line="83" column="18" lean-forward="false" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="iAddCoursePage.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCoursePage.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1459">
-              <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -232,14 +203,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/index.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/config/spring-mvc.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/master.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mSignIn.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/sSignUp.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/emailRegisteredAlert.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/alert.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/sRegisterSuccessAlert.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/sLogInEmptyAlert.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/loginError.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Student.java" />
@@ -251,7 +214,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/sSignInPage.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/sSignUpPage.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/sHome.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Card.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Account.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iSignInPage.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iHome.html" />
@@ -267,7 +229,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/mHome.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mHome.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/MasterController.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/iTeachers.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Institution.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Teacher.java" />
@@ -277,12 +238,22 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iAddCourse.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCourse.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/courseCreateSuccess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iCourseDetail.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iCourses.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Course.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCoursePage.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iHome.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iModify.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iTeachers.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCoursePage.jsp" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Card.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Classroom.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourses.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/addStudentAlert.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/minusStudentAlert.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourseDetail.jsp" />
       </list>
     </option>
   </component>
@@ -425,15 +396,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="htmls" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
@@ -673,12 +635,12 @@
       <workItem from="1520335172457" duration="8264000" />
       <workItem from="1520387686870" duration="34979000" />
       <workItem from="1520521234484" duration="29173000" />
-      <workItem from="1520678899835" duration="35613000" />
+      <workItem from="1520678899835" duration="44089000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178370000" />
+    <option name="totallyTimeSpent" value="186846000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -700,7 +662,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15522175" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18383405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -712,12 +674,12 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" x="100" y="100" width="1240" height="700" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3458283" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3458283" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1789601" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23819743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22031474" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -784,173 +746,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/sameCardAlert.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="31" column="44" lean-forward="false" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/modifySuccess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="30" column="33" lean-forward="true" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/sHome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="138" column="38" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mSignInPage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="61" column="97" lean-forward="false" selection-start-line="61" selection-start-column="97" selection-end-line="61" selection-end-column="97" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/loginError.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="29" column="58" lean-forward="true" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="46" lean-forward="false" selection-start-line="38" selection-start-column="46" selection-end-line="38" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mHome.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-244">
-          <caret line="59" column="58" lean-forward="false" selection-start-line="59" selection-start-column="58" selection-end-line="59" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/mHome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="64" column="29" lean-forward="true" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="71" column="48" lean-forward="true" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Institution.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="14" column="56" lean-forward="false" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Teacher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="11" column="53" lean-forward="false" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/test.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/StudentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1231">
-          <caret line="142" column="53" lean-forward="false" selection-start-line="142" selection-start-column="53" selection-end-line="142" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1398#1399#0" expanded="true" />
-            <element signature="e#1434#1435#0" expanded="true" />
-            <element signature="e#1540#1541#0" expanded="true" />
-            <element signature="e#1576#1577#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iTeachers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="208" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#td#4;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#td#4;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#4;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#td#4;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/MasterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#984#985#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.teacher">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/bootstrap/css/mine/bootstrap-datepicker.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/bootstrap/js/mine/bootstrap-datepicker.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1071,14 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iHome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1965">
-          <caret line="131" column="46" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/Test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
@@ -1116,15 +903,15 @@
         <state relative-caret-position="210">
           <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="257" selection-end-column="10" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#select#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1133,28 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="163" column="62" lean-forward="true" selection-start-line="163" selection-start-column="62" selection-end-line="163" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3581#3582#0" expanded="true" />
-            <element signature="e#3632#3633#0" expanded="true" />
-            <element signature="e#5960#5961#0" expanded="true" />
-            <element signature="e#6018#6019#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iModify.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="62" column="60" lean-forward="false" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -1175,10 +940,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iSignUpPage.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" column="7" lean-forward="true" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
+        <state relative-caret-position="-255">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iHome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="45" column="47" lean-forward="true" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iCourseDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="253" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#4;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#td#4;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#2;n#td#4;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iTeachers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="213" column="30" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#4;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#td#4;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#4;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#td#4;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/iCourses.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="201" column="7" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="201" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#7;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#td#7;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#td#7;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#td#7;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Institution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="56" lean-forward="false" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iModify.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="60" column="54" lean-forward="false" selection-start-line="60" selection-start-column="54" selection-end-line="60" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7">
+          <caret line="12" column="56" lean-forward="false" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -1190,45 +1026,157 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iTeachers.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="67" column="60" lean-forward="false" selection-start-line="67" selection-start-column="60" selection-end-line="67" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iSignUpPage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
+    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.institution">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iHome.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="69" selection-end-column="25" />
+        <state relative-caret-position="577">
+          <caret line="144" column="18" lean-forward="true" selection-start-line="144" selection-start-column="18" selection-end-line="144" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.application_register">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.teacher">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="29" column="23" lean-forward="true" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iAddCoursePage.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1459">
-          <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
+        <state relative-caret-position="-727">
+          <caret line="78" column="54" lean-forward="false" selection-start-line="78" selection-start-column="54" selection-end-line="78" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Card.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="59" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iTeachers.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.class">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/Classroom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="26" column="38" lean-forward="false" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/TestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourses.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="67" column="57" lean-forward="true" selection-start-line="67" selection-start-column="57" selection-end-line="67" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/emailRegisteredAlert.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/addStudentAlert.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/alerts/minusStudentAlert.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="6" lean-forward="true" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="207" column="56" lean-forward="false" selection-start-line="207" selection-start-column="29" selection-end-line="207" selection-end-column="56" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3699#3700#0" expanded="true" />
+            <element signature="e#3750#3751#0" expanded="true" />
+            <element signature="e#6078#6079#0" expanded="true" />
+            <element signature="e#6136#6137#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/iCourseDetail.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="212" column="43" lean-forward="true" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
