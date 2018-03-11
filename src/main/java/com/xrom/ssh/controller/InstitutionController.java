@@ -1,12 +1,10 @@
 package com.xrom.ssh.controller;
 
+import com.xrom.ssh.entity.Course;
 import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.entity.Teacher;
 import com.xrom.ssh.exceptions.NoInstitutionException;
-import com.xrom.ssh.service.InstitutionService;
-import com.xrom.ssh.service.ModifyApplicationService;
-import com.xrom.ssh.service.RegisterApplicationService;
-import com.xrom.ssh.service.TeacherService;
+import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,6 +38,9 @@ public class InstitutionController {
 
     @Autowired(required = true)
     private TeacherService teacherService;
+
+    @Autowired(required = true)
+    private CourseService courseService;
 
     @RequestMapping(value = "/iSignUpPage", method = RequestMethod.GET)
     public String iSignUpPage(){
@@ -128,5 +133,34 @@ public class InstitutionController {
         String major = request.getParameter("major");
         teacherService.createTeacher(name,phone,major,institution.getCode());
         return new ModelAndView(new RedirectView("/iTeachers"));
+    }
+
+    @RequestMapping(value = "/iAddCoursePage", method = RequestMethod.GET)
+    public ModelAndView iAddCoursePage(){
+        return new ModelAndView("/iAddCoursePage");
+    }
+
+    @RequestMapping(value = "/iAddCourse", method = RequestMethod.POST)
+    public ModelAndView iAddCourse(HttpServletRequest request, HttpSession httpSession, Model model){
+        Institution institution = (Institution) httpSession.getAttribute("institution");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String beginDateStr = request.getParameter("beginDate");
+        String endDateStr = request.getParameter("endDate");
+        Date beginDate = null;
+        Date endDate = null;
+        try {
+            beginDate = simpleDateFormat.parse(beginDateStr);
+            endDate = simpleDateFormat.parse(endDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String description = request.getParameter("description");
+        String hourPerWeek = request.getParameter("hourPerWeek");
+        String weeks = request.getParameter("weeks");
+        String price = request.getParameter("price");
+        String major = request.getParameter("major");
+        Long courseid = courseService.createCourse(beginDate, endDate, major, description, Integer.parseInt(hourPerWeek),
+                Integer.parseInt(weeks), institution.getCode(), Integer.parseInt(price));
+        return new ModelAndView("alerts/courseCreateSuccess");
     }
 }

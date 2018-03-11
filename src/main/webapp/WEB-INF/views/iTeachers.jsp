@@ -65,7 +65,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">查看</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">发布</a></li>
+                                <li><a href="/iAddCoursePage">发布</a></li>
                             </ul>
                         </li>
                     </ul>
