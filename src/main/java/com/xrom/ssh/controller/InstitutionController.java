@@ -1,9 +1,6 @@
 package com.xrom.ssh.controller;
 
-import com.xrom.ssh.entity.Classroom;
-import com.xrom.ssh.entity.Course;
-import com.xrom.ssh.entity.Institution;
-import com.xrom.ssh.entity.Teacher;
+import com.xrom.ssh.entity.*;
 import com.xrom.ssh.exceptions.NoInstitutionException;
 import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +42,9 @@ public class InstitutionController {
 
     @Autowired(required = true)
     private ClassroomService classroomService;
+
+    @Autowired(required = true)
+    private LearnSignService learnSignService;
 
     @RequestMapping(value = "/iSignUpPage", method = RequestMethod.GET)
     public String iSignUpPage(){
@@ -230,4 +230,43 @@ public class InstitutionController {
         classroomService.deleteClass(id);
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
+
+    @RequestMapping(value = "/iClassSignPage", method = RequestMethod.GET)
+    public ModelAndView iClassSignPage(HttpSession httpSession, ModelMap modelMap){
+        Course course = (Course) httpSession.getAttribute("course");
+        Classroom classroom = (Classroom) httpSession.getAttribute("classroom");
+        List<LearnSign> learnSigns = learnSignService.findAll(classroom.getId());
+        modelMap.put("course", course);
+        modelMap.put("classroom", classroom);
+        modelMap.put("learnSigns", learnSigns);
+        return new ModelAndView("/iClassSign");
+    }
+
+    @RequestMapping(value = "/iClassSign/{id}", method = RequestMethod.GET)
+    public ModelAndView iClassSign(@PathVariable Long id, HttpSession httpSession){
+        Classroom classroom = classroomService.getClass(id);
+        httpSession.setAttribute("classroom", classroom);
+        return new ModelAndView(new RedirectView("/iClassSignPage"));
+    }
+
+    @RequestMapping(value = "/iAddSign", method = RequestMethod.POST)
+    public ModelAndView iAddSign(HttpSession httpSession, HttpServletRequest request){
+        Classroom classroom = (Classroom) httpSession.getAttribute("classroom");
+        Long studentId = Long.parseLong(request.getParameter("studentId"));
+        String dateStr = request.getParameter("date");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        LearnSign learnSign = new LearnSign();
+        learnSign.setClassId(classroom.getId());
+        learnSign.setStudentId(studentId);
+        learnSign.setDate(date);
+        learnSignService.createSign(learnSign);
+        return new ModelAndView(new RedirectView("/iClassSignPage"));
+    }
+
 }

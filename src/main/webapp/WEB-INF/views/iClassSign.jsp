@@ -1,11 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/11
-  Time: 下午5:10
+  Date: 2018/3/12
+  Time: 下午3:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -17,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>机构信息主页</title>
+    <title>课堂签到</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -43,6 +44,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/_all-skins.min.css">
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/dataTables.bootstrap.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,10 +52,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
@@ -142,127 +142,114 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="box box-default" style="margin-top: 100pt">
-                <div class="box-header with-border">
-                    <h3 class="box-title">编辑计划（课程）</h3>
-                </div>
-                <form class="form-horizontal" action="/iAddCourse" method="post">
+            <div class="col-md-9">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">课堂登记记录表</h3>
+                    </div>
+                    <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-4" style="margin-left: 100pt; margin-right: 40pt">
-                                <div class="form-group">
-                                    <label>小时/周</label>
-                                    <select class="form-control select2" style="width: 100%;" name="hourPerWeek">
-                                        <option selected="selected">1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                    </select>
-                                </div>
-                                <!-- /.form-group -->
-                                <div class="form-group">
-                                    <label>周数</label>
-                                    <select class="form-control select2" style="width: 100%;" name="weeks">
-                                        <option selected="selected">1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-                                        <option>14</option>
-                                        <option>15</option>
-                                        <option>16</option>
-                                        <option>17</option>
-                                        <option>19</option>
-                                        <option>20</option>
-                                        <option>21</option>
-                                        <option>22</option>
-                                        <option>23</option>
-                                    </select>
-                                </div>
-                                <!-- /.form-group -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-4" style="margin-left: 100pt; margin-right: 40pt">
-                                <div class="form-group">
-                                    <label>课程类型</label>
-                                    <select class="form-control select2" style="width: 100%;" name="major">
-                                        <option selected="selected">English</option>
-                                        <option>Chinese</option>
-                                        <option>Math</option>
-                                        <option>Physics</option>
-                                        <option>Chemistry</option>
-                                    </select>
-                                </div>
-                                <!-- /.form-group -->
-                                <div class="form-group">
-                                    <label>价格</label>
-                                    <div>
-                                        <input type="text" class="form-control" id="price" placeholder="price" name="price">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="margin-left: 100pt; margin-right: 40pt">
-                                <div class="form-group">
-                                    <label>开始时间:</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="begindatepicker" name="beginDate">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                                <div class="form-group">
-                                    <label>结束时间:</label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="enddatepicker" name="endDate">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="margin-left: 100pt; margin-right: 40pt">
-                                <!-- /.form-group -->
-                                <div class="form-group">
-                                    <label>机构简单描述</label>
-                                    <div>
-                                        <textarea class="form-control" rows="4" placeholder="机构简单描述" id="briefDescription" name="description"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>学生ID</th>
+                                <th>时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${learnSigns}" var="learnSign">
+                                <tr>
+                                    <td>${learnSign.studentId}</td>
+                                    <td>${learnSign.date}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>学生ID</th>
+                                <th>时间</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                     <!-- /.box-body -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">添加签到记录</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal" action="/iAddSign" method="post">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputID" class="col-sm-4 control-label">学生ID</label>
 
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right" style="margin-right: 40pt">发布</button>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="inputID" placeholder="name" name="studentId">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="datepicker" class="col-sm-4 control-label">日期</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control pull-right" id="datepicker" name="date">
+                                        </div>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-info" style="margin-left: 70pt">添加</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
                     </div>
-                </form>
-                <!-- /.box-header -->
+                </div>
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <i class="fa fa-text-width"></i>
 
+                            <h3 class="box-title">班级信息</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <dl>
+                                <dt>班级ID</dt>
+                                <dd>${classroom.id}</dd>
+                                <dt>课程ID</dt>
+                                <dd>${course.id}</dd>
+                                <dt>计划学生数</dt>
+                                <dd>${classroom.studentNumPlan}</dd>
+                                <dt>上课学生数</dt>
+                                <dd>${classroom.studentNumNow}</dd>
+                                <dt>教师ID</dt>
+                                <dd>${classroom.teacherId}</dd>
+                                <dt>课程类型</dt>
+                                <dd>${course.type}</dd>
+                                <dt>开课时间</dt>
+                                <dd>${course.beginDate}</dd>
+                                <dt>结束时间</dt>
+                                <dd>${course.endDate}</dd>
+                                <dt>课程描述</dt>
+                                <dd>${course.description}</dd>
+                            </dl>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /.container -->
     </div>
 </div>
 <!-- ./wrapper -->
-
-
+<script src="<%=basePath%>bootstrap/js/demo.js"></script>
 <!-- jQuery 3 -->
 <script src="<%=basePath%>bootstrap/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -292,6 +279,23 @@
 <script src="<%=basePath%>bootstrap/js/mine/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>bootstrap/js/mine/demo.js"></script>
+<!-- Page script -->
+<script src="<%=basePath%>bootstrap/js/mine/jquery.dataTables.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
+    })
+</script>
 <!-- Page script -->
 <script>
     $(function () {
@@ -329,13 +333,9 @@
         )
 
         //Date picker
-        $('#begindatepicker').datepicker({
+        $('#datepicker').datepicker({
             autoclose: true
         })
-        $('#enddatepicker').datepicker({
-            autoclose: true
-        })
-
 
         //iCheck for checkbox and radio inputs
         $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -366,4 +366,3 @@
 </script>
 </body>
 </html>
-
