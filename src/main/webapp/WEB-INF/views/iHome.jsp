@@ -149,12 +149,12 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="<%=basePath%>bootstrap/js/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src=".<%=basePath%>bootstrap/js/mine/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=basePath%>bootstrap/js/demo.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/demo.js"></script>
 </body>
 </html>

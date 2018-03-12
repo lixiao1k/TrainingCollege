@@ -142,7 +142,7 @@
                                                 <a href="/iMinusClassStudentNow/${classroom.id}">➖</a>
                                             </div>
                                             <div class="pull-right" style="margin-right: 10pt">
-                                                <a href="/">删除</a>
+                                                <a href="/iDeleteClass/${classroom.id}">删除</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -159,7 +159,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="/iAddClass", method="post">
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -167,7 +167,7 @@
                                             <label for="teacherID" class="col-sm-3 control-label">教师ID</label>
 
                                             <div class="col-sm-9" >
-                                                <input type="text" class="form-control" id="teacherID" placeholder="请输入教师ID">
+                                                <input type="text" class="form-control" id="teacherID" placeholder="请输入教师ID" name="teacherId">
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@
                                             <label for="studentsPlan" class="col-sm-3 control-label">预收学生数</label>
 
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="studentsPlan" placeholder="请输入预收学生数">
+                                                <input type="text" class="form-control" id="studentsPlan" placeholder="请输入预收学生数" name="studentsPlan">
                                             </div>
                                         </div>
                                         <!-- /.form-group -->

@@ -208,12 +208,26 @@ public class InstitutionController {
     @RequestMapping(value = "/iMinusClassStudentNow/{id}", method = RequestMethod.GET)
     public ModelAndView iMinusClassStudentNow(@PathVariable Long id){
         Classroom classroom = classroomService.getClass(id);
-        int classStudentPlan = classroom.getStudentNumPlan();
-        if(classStudentPlan <= 0){
+        int classStudentNow = classroom.getStudentNumNow();
+        if(classStudentNow <= 0){
             return new ModelAndView("alerts/minusStudentAlert");
         }
         classroomService.updateNumNow(id, -1);
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
 
+    @RequestMapping(value = "/iAddClass", method = RequestMethod.POST)
+    public ModelAndView iAddClass(HttpSession httpSession, HttpServletRequest request){
+        Course course = (Course) httpSession.getAttribute("course");
+        String teacherId = request.getParameter("teacherId");
+        String studentsPlan = request.getParameter("studentsPlan");
+        classroomService.createClass(course.getId(), Integer.parseInt(studentsPlan),0, Long.parseLong(teacherId));
+        return new ModelAndView(new RedirectView("/iCourseDetail"));
+    }
+
+    @RequestMapping(value = "/iDeleteClass/{id}", method = RequestMethod.GET)
+    public ModelAndView iDeleteClass(@PathVariable Long id){
+        classroomService.deleteClass(id);
+        return new ModelAndView(new RedirectView("/iCourseDetail"));
+    }
 }
