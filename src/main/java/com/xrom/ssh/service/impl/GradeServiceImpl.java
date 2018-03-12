@@ -7,6 +7,8 @@ import com.xrom.ssh.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GradeServiceImpl implements GradeService {
 
@@ -51,5 +53,10 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public void flush() {
         repository.flush();
+    }
+
+    @Override
+    public List<Grade> findAll(Long cid) {
+        return repository.findAll(cid);
     }
 }

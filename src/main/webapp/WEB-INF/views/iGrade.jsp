@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/11
-  Time: 下午1:41
+  Date: 2018/3/12
+  Time: 下午7:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>部门师资查看</title>
+    <title>学生成绩管理</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -27,11 +27,24 @@
     <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/ionicons.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/daterangepicker.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/bootstrap-datepicker.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/all.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/bootstrap-colorpicker.min.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/select2.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/_all-skins.min.css">
+    <link rel="stylesheet" href="<%=basePath%>bootstrap/css/mine/dataTables.bootstrap.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,10 +52,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
     <header class="main-header">
@@ -59,7 +72,7 @@
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/iHome">机构信息</a></li>
-                        <li class="active"><a href="/iTeachers">师资<span class="sr-only">(current)</span></a></li>
+                        <li><a href="/iTeachers">师资</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">计划<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -85,6 +98,7 @@
                     </form>
                 </div>
                 <!-- /.navbar-collapse -->
+                <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account Menu -->
@@ -123,78 +137,101 @@
             <div class="col-md-9">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">机构教师信息列表</h3>
+                        <h3 class="box-title">学生成绩表</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
+                    <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>major</th>
-                                <th></th>
+                                <th>学生ID</th>
+                                <th>成绩</th>
                             </tr>
-                            <c:forEach items="${teachers}" var="teacher">
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${grades}" var="grade">
                                 <tr>
-                                    <td>${teacher.id}</td>
-                                    <td>${teacher.name}</td>
-                                    <td>${teacher.phone}</td>
-                                    <td><span class="label label-success">${teacher.teachingType}</span></td>
-                                    <td>
-                                        <div class="pull-right" style="margin-right: 10pt">
-                                            <a href="/teacher_delete/${teacher.id}">删除</a>
-                                        </div>
-                                    </td>
+                                    <td>${grade.studentId}</td>
+                                    <td>${grade.grade}</td>
                                 </tr>
                             </c:forEach>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>学生ID</th>
+                                <th>成绩</th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <!-- /.box-body -->
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">添加教师</h3>
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">添加学生成绩</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal" action="/iAddGrade" method="post">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputID" class="col-sm-4 control-label">学生ID</label>
+
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="inputID" placeholder="name" name="studentId">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="grade" class="col-sm-4 control-label">成绩</label>
+
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="grade" placeholder="name" name="grade">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-info" style="margin-left: 70pt">添加</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
                     </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    <form class="form-horizontal" action="/iAddTeacher" method="post">
+                </div>
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <i class="fa fa-text-width"></i>
+
+                            <h3 class="box-title">班级信息</h3>
+                        </div>
+                        <!-- /.box-header -->
                         <div class="box-body">
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">姓名</label>
-
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputName" placeholder="name" name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPhone" class="col-sm-3 control-label">电话</label>
-
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone" name="phone">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">科目</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" name="major">
-                                        <option>English</option>
-                                        <option>Chinese</option>
-                                        <option>Math</option>
-                                        <option>Physics</option>
-                                        <option>Chemistry</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <dl>
+                                <dt>班级ID</dt>
+                                <dd>${classroom.id}</dd>
+                                <dt>课程ID</dt>
+                                <dd>${course.id}</dd>
+                                <dt>计划学生数</dt>
+                                <dd>${classroom.studentNumPlan}</dd>
+                                <dt>上课学生数</dt>
+                                <dd>${classroom.studentNumNow}</dd>
+                                <dt>教师ID</dt>
+                                <dd>${classroom.teacherId}</dd>
+                                <dt>课程类型</dt>
+                                <dd>${course.type}</dd>
+                                <dt>开课时间</dt>
+                                <dd>${course.beginDate}</dd>
+                                <dt>结束时间</dt>
+                                <dd>${course.endDate}</dd>
+                                <dt>课程描述</dt>
+                                <dd>${course.description}</dd>
+                            </dl>
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-info" style="margin-left: 70pt">添加</button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -202,18 +239,52 @@
     </div>
 </div>
 <!-- ./wrapper -->
-
+<script src="<%=basePath%>bootstrap/js/demo.js"></script>
 <!-- jQuery 3 -->
 <script src="<%=basePath%>bootstrap/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
+<!-- Select2 -->
+<script src="<%=basePath%>bootstrap/js/mine/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="<%=basePath%>bootstrap/js/mine/jquery.inputmask.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/jquery.inputmask.date.extensions.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/jquery.inputmask.extensions.js"></script>
+<!-- date-range-picker -->
+<script src="<%=basePath%>bootstrap/js/mine/moment.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<%=basePath%>bootstrap/js/mine/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="<%=basePath%>bootstrap/js/mine/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="<%=basePath%>bootstrap/js/mine/bootstrap-timepicker.min.js"></script>
 <!-- SlimScroll -->
-<script src="<%=basePath%>bootstrap/js/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/jquery.slimscroll.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="<%=basePath%>bootstrap/js/mine/icheck.min.js"></script>
 <!-- FastClick -->
-<script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=basePath%>bootstrap/js/demo.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/demo.js"></script>
+<!-- Page script -->
+<script src="<%=basePath%>bootstrap/js/mine/jquery.dataTables.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
+    })
+</script>
 </body>
 </html>

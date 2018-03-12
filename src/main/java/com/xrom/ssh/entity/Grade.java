@@ -3,11 +3,14 @@ package com.xrom.ssh.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "grade")
-public class Grade {
+public class Grade implements Serializable{
+    private static final long serialVersionUID = 748393678L;
+
     @Id
     @GeneratedValue
     private Long id;

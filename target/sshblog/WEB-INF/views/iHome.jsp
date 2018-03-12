@@ -76,14 +76,6 @@
                             </ul>
                         </li>
                         <li><a>财务</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">课堂<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">签到</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">成绩</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">

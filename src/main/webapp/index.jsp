@@ -41,7 +41,6 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <a class="btn btn-primary btn-large" href="/iClassSignPage">测试</a>
             </div>
         </div>
     </div>

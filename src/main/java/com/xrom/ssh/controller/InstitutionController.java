@@ -1,6 +1,8 @@
 package com.xrom.ssh.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.xrom.ssh.entity.*;
+import com.xrom.ssh.exceptions.GradeExistException;
 import com.xrom.ssh.exceptions.NoInstitutionException;
 import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,9 @@ public class InstitutionController {
 
     @Autowired(required = true)
     private LearnSignService learnSignService;
+
+    @Autowired(required = true)
+    private GradeService gradeService;
 
     @RequestMapping(value = "/iSignUpPage", method = RequestMethod.GET)
     public String iSignUpPage(){
@@ -269,4 +274,29 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iClassSignPage"));
     }
 
+    @RequestMapping(value = "/iGradePage/{id}")
+    public ModelAndView iGradePage(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        Course course = (Course) httpSession.getAttribute("course");
+        Classroom classroom = classroomService.getClass(id);
+        httpSession.setAttribute("classroom",classroom);
+        List<Grade> grades = gradeService.findAll(id);
+        modelMap.put("course", course);
+        modelMap.put("classroom", classroom);
+        modelMap.put("grades", grades);
+        return new ModelAndView("/iGrade");
+    }
+
+    @RequestMapping(value = "/iAddGrade")
+    public ModelAndView iAddGrade(HttpSession httpSession, HttpServletRequest request){
+        Classroom classroom = (Classroom) httpSession.getAttribute("classroom");
+        String gradeStr = request.getParameter("grade");
+        String studentIdStr = request.getParameter("studentId");
+        int grade = (int) Float.parseFloat(gradeStr);
+        try {
+            gradeService.createGrade(Long.parseLong(studentIdStr), classroom.getId(), grade);
+        } catch (GradeExistException e) {
+            return new ModelAndView("alerts/gradeRepeatAlert");
+        }
+        return new ModelAndView(new RedirectView("/iGradePage/"+Long.toString(classroom.getId())));
+    }
 }

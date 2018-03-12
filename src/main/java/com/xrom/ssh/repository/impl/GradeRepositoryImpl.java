@@ -37,6 +37,25 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
     }
 
     @Override
+    public List<Grade> findAll(Long cid) {
+        Session session = null;
+        Transaction tx = null;
+        List<Grade> grades= null;
+        try {
+            session = getCurrentSession();
+            tx = session.beginTransaction();
+            SQLQuery sqlQuery = session.createSQLQuery("select * from grade where class_id=:CID");
+            sqlQuery.setLong("CID", cid);
+            sqlQuery.addEntity(Grade.class);
+            grades = sqlQuery.list();
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+        }
+        return grades;
+    }
+
+    @Override
     public Grade load(Long id) {
         return (Grade) getCurrentSession().load(Grade.class, id);
     }
