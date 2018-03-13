@@ -4,11 +4,14 @@ package com.xrom.ssh.controller;
 import com.xrom.ssh.entity.Account;
 import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.entity.vo.OrderVO;
+import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.CreateSameCardException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
 import com.xrom.ssh.service.AccountService;
 import com.xrom.ssh.service.CardService;
+import com.xrom.ssh.service.OrderService;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -35,6 +39,8 @@ public class StudentController {
     @Autowired(required = true)
     AccountService accountService;
 
+    @Autowired(required = true)
+    OrderService orderService;
 
 
     @RequestMapping(value = "/sSignInPage", method = RequestMethod.GET)
@@ -143,5 +149,16 @@ public class StudentController {
         return new ModelAndView("alerts/modifySuccess");
     }
 
+    @RequestMapping(value = "/sOrder", method = RequestMethod.GET)
+    public ModelAndView sOrder(HttpSession httpSession, ModelMap modelMap){
+        Student student = (Student) httpSession.getAttribute("student");
+        List<OrderVO> orderReserved = orderService.getAllOfStudentByState(student.getId(), OrderState.RESERVED);
+        List<OrderVO> orderPayed = orderService.getAllOfStudentByState(student.getId(), OrderState.PAYED);
+        List<OrderVO> orderCancelled = orderService.getAllOfStudentByState(student.getId(), OrderState.CANCELLED);
+        modelMap.put("ordersReserved", orderReserved);
+        modelMap.put("ordersPayed", orderPayed);
+        modelMap.put("ordersCancelled", orderCancelled);
+        return new ModelAndView("/sOrder");
+    }
 
 }
