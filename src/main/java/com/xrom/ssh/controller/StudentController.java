@@ -5,14 +5,12 @@ import com.xrom.ssh.entity.Account;
 import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.entity.vo.OrderVO;
+import com.xrom.ssh.entity.vo.SCourseVO;
 import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.CreateSameCardException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
-import com.xrom.ssh.service.AccountService;
-import com.xrom.ssh.service.CardService;
-import com.xrom.ssh.service.OrderService;
-import com.xrom.ssh.service.StudentService;
+import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +40,8 @@ public class StudentController {
     @Autowired(required = true)
     OrderService orderService;
 
+    @Autowired(required = true)
+    CourseService courseService;
 
     @RequestMapping(value = "/sSignInPage", method = RequestMethod.GET)
     public String sSignInPage(){
@@ -160,5 +160,18 @@ public class StudentController {
         modelMap.put("ordersCancelled", orderCancelled);
         return new ModelAndView("/sOrder");
     }
+
+    @RequestMapping(value = "/sCourseMine", method = RequestMethod.GET)
+    public ModelAndView sCourseMine(HttpSession httpSession, ModelMap modelMap){
+        Student student = (Student) httpSession.getAttribute("student");
+        List<SCourseVO> underWayOrder =  courseService.findAllOfStudent(true, student.getId());
+        List<SCourseVO> outOfWayOrder = courseService.findAllOfStudent(false, student.getId());
+        System.out.println(underWayOrder);
+        System.out.println(outOfWayOrder);
+        modelMap.put("uOrders", underWayOrder);
+        modelMap.put("oOrders", outOfWayOrder);
+        return new ModelAndView("sCourseMine");
+    }
+
 
 }

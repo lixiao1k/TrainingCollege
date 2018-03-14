@@ -59,16 +59,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/sHome">个人信息 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/sHome">个人信息</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">我的</a></li>
+                                <li><a href="/sCourseMine">我的</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">全部</a></li>
                             </ul>
                         </li>
-                        <li><a href="/sOrder">订单查看</a></li>
+                        <li class="active"><a href="/sOrder">订单查看<span class="sr-only">(current)</span></a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">

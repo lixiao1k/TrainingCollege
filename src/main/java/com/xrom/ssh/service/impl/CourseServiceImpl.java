@@ -1,9 +1,14 @@
 package com.xrom.ssh.service.impl;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.xrom.ssh.entity.Course;
+import com.xrom.ssh.entity.Grade;
+import com.xrom.ssh.entity.vo.OrderVO;
+import com.xrom.ssh.entity.vo.SCourseVO;
+import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.repository.CourseRepository;
 import com.xrom.ssh.service.CourseService;
+import com.xrom.ssh.service.GradeService;
+import com.xrom.ssh.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +21,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired(required = true)
     private CourseRepository courseRepository;
+
+    @Autowired(required = true)
+    private OrderService orderService;
+
+    @Autowired(required = true)
+    private GradeService gradeService;
 
     @Override
     public Long saveCourse(Course course) {
@@ -100,5 +111,43 @@ public class CourseServiceImpl implements CourseService {
         Long id = saveCourse(course);
         flush();
         return id;
+    }
+
+    @Override
+    public List<SCourseVO> findAllOfStudent(Boolean isUnderWay, Long studentId) {
+        List<OrderVO> orderVOS = orderService.getAllOfStudentByState(studentId, OrderState.PAYED);
+        List<SCourseVO> uCourse = new ArrayList<>(); // 进行中的课程列表
+        List<SCourseVO> oCourse = new ArrayList<>(); // 已结课的课程列表
+        SCourseVO scourseVO = null;
+        Course course = null;
+        for (OrderVO orderVO : orderVOS){
+            System.out.println(orderVO);
+            scourseVO = new SCourseVO();
+            course = getCourse(orderVO.getCourseId());
+            scourseVO.setBeginDate(course.getBeginDate());
+            scourseVO.setCourseId(orderVO.getCourseId());
+            scourseVO.setDescription(orderVO.getDescription());
+            scourseVO.setEndDate(course.getEndDate());
+            scourseVO.setHourPerWeek(course.getHourPerWeek());
+            scourseVO.setPrice(course.getPrice());
+            scourseVO.setType(course.getType());
+            if(scourseVO.getEndDate().before(new Date())){
+                Grade grade = gradeService.get(studentId, orderVO.getClassId());
+                System.out.println(studentId);
+                System.out.println(orderVO.getClassId());
+                System.out.println();
+                if(grade != null){
+                    scourseVO.setGrade(grade.getGrade());
+                }
+                oCourse.add(scourseVO);
+            }else {
+                uCourse.add(scourseVO);
+            }
+        }
+        if(isUnderWay == true){
+            return uCourse;
+        }else {
+            return oCourse;
+        }
     }
 }

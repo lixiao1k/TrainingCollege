@@ -61,7 +61,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">我的</a></li>
+                                <li><a href="/sCourseMine">我的</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">全部</a></li>
                             </ul>

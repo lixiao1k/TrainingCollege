@@ -1,11 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/10
-  Time: 下午4:52
+  Date: 2018/3/14
+  Time: 下午6:09
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -17,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>学生个人信息主页</title>
+    <title>订单查看</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -42,6 +43,7 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
     <header class="main-header">
@@ -57,7 +59,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/sHome">个人信息 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/sHome">个人信息</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -115,44 +117,92 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <i class="fa fa-text-width"></i>
-
-                        <h3 class="box-title">信息列表</h3>
-                        <div class="pull-right">
-                            <a href="/sModify">修改</a>
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#running" data-toggle="tab">进行中</a></li>
+                        <li><a href="#outOfWay" data-toggle="tab">已结课</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="running">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>课程ID</th>
+                                    <th>简介</th>
+                                    <th>科目</th>
+                                    <th>开课时间</th>
+                                    <th>结课时间</th>
+                                    <th>价格</th>
+                                    <th>课时/周</th>
+                                    <th>周数</th>
+                                    <th>状态</th>
+                                </tr>
+                                <c:forEach items="${uOrders}" var="uOrder">
+                                    <tr>
+                                        <td>${uOrder.courseId}</td>
+                                        <td>${uOrder.description}</td>
+                                        <td><span class="label label-success">${uOrder.type}</span></td>
+                                        <td>${uOrder.beginDate}</td>
+                                        <td>${uOrder.endDate}</td>
+                                        <td>${uOrder.price}</td>
+                                        <td>${uOrder.hourPerWeek}</td>
+                                        <td>${uOrder.weeks}</td>
+                                        <td><span class="label label-success">进行中</span></td>
+                                        <td>
+                                            <div class="pull-right" style="margin-right: 10pt">
+                                                <a href="/">查看</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
                         </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="outOfWay">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>课程ID</th>
+                                    <th>简介</th>
+                                    <th>科目</th>
+                                    <th>开课时间</th>
+                                    <th>结课时间</th>
+                                    <th>价格</th>
+                                    <th>课时/周</th>
+                                    <th>周数</th>
+                                    <th>状态</th>
+                                    <th>得分</th>
+                                </tr>
+                                <c:forEach items="${oOrders}" var="oOrder">
+                                    <tr>
+                                        <td>${oOrder.courseId}</td>
+                                        <td>${oOrder.description}</td>
+                                        <td><span class="label label-success">${oOrder.type}</span></td>
+                                        <td>${oOrder.beginDate}</td>
+                                        <td>${oOrder.endDate}</td>
+                                        <td>${oOrder.price}</td>
+                                        <td>${oOrder.hourPerWeek}</td>
+                                        <td>${oOrder.weeks}</td>
+                                        <td><span class="label label-danger">已结课</span></td>
+                                        <td>${oOrder.grade}</td>
+                                        <td>
+                                            <div class="pull-right" style="margin-right: 10pt">
+                                                <a href="/">查看</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </div>
+                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <dl class="dl-horizontal">
-                            <dt>注册邮箱：</dt>
-                            <dd>${student.email}</dd>
-                            <dt>用户名：</dt>
-                            <dd>${student.userName}</dd>
-                            <dt>密码：</dt>
-                            <dd>不可见</dd>
-                            <dt>银行卡号：</dt>
-                            <dd>${card.cardNumber}</dd>
-                            <dt>银行卡余额：</dt>
-                            <dd>${card.balance}</dd>
-                            <dt>用户等级：</dt>
-                            <dd>${level}</dd>
-                            <dt>账户总消费：</dt>
-                            <dd>${account.totalConsumption}</dd>
-                            <dt>积分余额：</dt>
-                            <dd></dd>
-                        </dl>
-                    </div>
-                    <!-- /.box-body -->
+                    <!-- /.tab-content -->
                 </div>
-                <!-- /.box -->
+                <!-- /.nav-tabs-custom -->
             </div>
         </div>
-        <!-- /.container -->
     </div>
+    <!-- /.container -->
+</div>
 </div>
 <!-- ./wrapper -->
 
@@ -165,7 +215,7 @@
 <!-- FastClick -->
 <script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>bootstrap/js/demo.js"></script>
 </body>
