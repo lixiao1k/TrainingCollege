@@ -1,11 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/11
-  Time: 上午9:27
+  Date: 2018/3/14
+  Time: 下午7:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -17,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>学生个人信息修改</title>
+    <title>全站课程浏览</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -42,6 +43,7 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
     <header class="main-header">
@@ -115,60 +117,85 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="row clearfix" style="margin-top: 100pt">
-                <div class="col-md-6" style="margin-left: 200pt">
-                    <!-- Custom Tabs (Pulled to the right) -->
-                    <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs pull-right">
-                            <li class="active"><a href="#tab_1-1" data-toggle="tab">账户名</a></li>
-                            <li><a href="#tab_2-2" data-toggle="tab">银行卡</a></li>
-                            <li class="pull-left header"><i class="fa fa-th"></i> 信息修改</li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1-1">
-                                <form class="form-horizontal" action="/sModifyName", method="post">
-                                    <div class="box-body">
-                                        <div class="form-group">
-                                            <label for="inputName" class="col-sm-2 control-label">账户名</label>
-
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="inputName" name="userName" placeholder="修改后的账户名" value=${student.userName}>
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#running" data-toggle="tab">进行中</a></li>
+                        <li><a href="#outOfWay" data-toggle="tab">已结课</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="running">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>课程ID</th>
+                                    <th>简介</th>
+                                    <th>科目</th>
+                                    <th>开课时间</th>
+                                    <th>结课时间</th>
+                                    <th>价格</th>
+                                    <th>课时/周</th>
+                                    <th>周数</th>
+                                    <th>状态</th>
+                                </tr>
+                                <c:forEach items="${uCourses}" var="uCourse">
+                                    <tr>
+                                        <td>${uCourse.id}</td>
+                                        <td>${uCourse.description}</td>
+                                        <td><span class="label label-success">${uCourse.type}</span></td>
+                                        <td>${uCourse.beginDate}</td>
+                                        <td>${uCourse.endDate}</td>
+                                        <td>${uCourse.price}</td>
+                                        <td>${uCourse.hourPerWeek}</td>
+                                        <td>${uCourse.weeks}</td>
+                                        <td><span class="label label-success">进行中</span></td>
+                                        <td>
+                                            <div class="pull-right" style="margin-right: 10pt">
+                                                <a href="/sCourseDetail/${uCourse.id}">查看</a>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-body -->
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-info pull-right">修改</button>
-                                    </div>
-                                    <!-- /.box-footer -->
-                                </form>
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_2-2">
-                                <form class="form-horizontal" action="/sModifyCard"  method="post">
-                                    <div class="box-body">
-                                        <div class="form-group">
-                                            <label for="inputCard" class="col-sm-2 control-label">添加/修改银行卡</label>
-
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="inputCard" name="cardNumber" placeholder="银行卡号" value=${card.cardNumber}>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-body -->
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-info pull-right">添加/修改</button>
-                                    </div>
-                                    <!-- /.box-footer -->
-                                </form>
-                            </div>
-                            <!-- /.tab-pane -->
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
                         </div>
-                        <!-- /.tab-content -->
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="outOfWay">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>课程ID</th>
+                                    <th>简介</th>
+                                    <th>科目</th>
+                                    <th>开课时间</th>
+                                    <th>结课时间</th>
+                                    <th>价格</th>
+                                    <th>课时/周</th>
+                                    <th>周数</th>
+                                    <th>状态</th>
+                                </tr>
+                                <c:forEach items="${oCourses}" var="oCourse">
+                                    <tr>
+                                        <td>${oCourse.id}</td>
+                                        <td>${oCourse.description}</td>
+                                        <td><span class="label label-success">${oCourse.type}</span></td>
+                                        <td>${oCourse.beginDate}</td>
+                                        <td>${oCourse.endDate}</td>
+                                        <td>${oCourse.price}</td>
+                                        <td>${oCourse.hourPerWeek}</td>
+                                        <td>${oCourse.weeks}</td>
+                                        <td><span class="label label-danger">已结课</span></td>
+                                        <td>
+                                            <div class="pull-right" style="margin-right: 10pt">
+                                                <a href="/sCourseDetail/${oCourse.id}">查看</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </div>
+                        <!-- /.tab-pane -->
                     </div>
-                    <!-- nav-tabs-custom -->
+                    <!-- /.tab-content -->
                 </div>
-                <!-- /.col -->
+                <!-- /.nav-tabs-custom -->
             </div>
         </div>
     </div>
@@ -186,7 +213,7 @@
 <!-- FastClick -->
 <script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>bootstrap/js/demo.js"></script>
 </body>

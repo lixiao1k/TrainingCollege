@@ -1,10 +1,9 @@
 package com.xrom.ssh.controller;
 
 
-import com.xrom.ssh.entity.Account;
-import com.xrom.ssh.entity.Card;
-import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.entity.*;
 import com.xrom.ssh.entity.vo.OrderVO;
+import com.xrom.ssh.entity.vo.SClassroomVO;
 import com.xrom.ssh.entity.vo.SCourseVO;
 import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.CreateSameCardException;
@@ -15,33 +14,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class StudentController {
     @Autowired(required = true)
-    StudentService studentService;
+    private StudentService studentService;
 
     @Autowired(required = true)
-    CardService cardService;
+    private CardService cardService;
 
     @Autowired(required = true)
-    AccountService accountService;
+    private AccountService accountService;
 
     @Autowired(required = true)
-    OrderService orderService;
+    private OrderService orderService;
 
     @Autowired(required = true)
-    CourseService courseService;
+    private CourseService courseService;
+
+    @Autowired(required = true)
+    private ClassroomService classroomService;
+
+    @Autowired(required = true)
+    private LearnSignService learnSignService;
+
+    @Autowired(required = true)
+    private GradeService gradeService;
 
     @RequestMapping(value = "/sSignInPage", method = RequestMethod.GET)
     public String sSignInPage(){
@@ -173,5 +185,81 @@ public class StudentController {
         return new ModelAndView("sCourseMine");
     }
 
+    @RequestMapping(value = "/sAllCourse", method = RequestMethod.GET)
+    public ModelAndView sAllCourse(ModelMap modelMap){
+        List<Course> uCourses = courseService.findAll(true); //进行中的所有课程
+        List<Course> oCourses = courseService.findAll(false); //已结束的所有课程
+        modelMap.put("uCourses", uCourses);
+        modelMap.put("oCourses", oCourses);
+        return new ModelAndView("/sAllCourse");
+    }
 
+    @RequestMapping(value = "/sCourseDetailPage")
+    public ModelAndView sCourseDetailPage(HttpSession httpSession, ModelMap modelMap){
+        Course course = (Course) httpSession.getAttribute("course");
+        List<Classroom> classrooms = classroomService.findAll(course.getId());
+        List<SClassroomVO> sClassroomVOS = classroomService.toSClassroomVO(classrooms);
+        System.out.println(classrooms);
+        modelMap.put("course", course);
+        modelMap.put("classrooms", sClassroomVOS);
+        return new ModelAndView("/sCourseDetail");
+    }
+
+    @RequestMapping(value = "/sCourseDetail/{id}")
+    public ModelAndView sCourseDetail(@PathVariable Long id, HttpSession httpSession){
+        Course course = courseService.getCourse(id);
+        httpSession.setAttribute("course", course);
+        return new ModelAndView(new RedirectView("/sCourseDetailPage"));
+    }
+
+    @RequestMapping(value = "/sOrder/{id}")
+    public ModelAndView sOrder(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        Student student = (Student) httpSession.getAttribute("student");
+        Classroom classroom = classroomService.getClass(id);
+        Course course = courseService.getCourse(classroom.getCourseId());
+        List<Classroom> classrooms = new ArrayList<>();
+        classrooms.add(classroom);
+        SClassroomVO sClassroomVO = classroomService.toSClassroomVO(classrooms).get(0);
+        if(course.getBeginDate().before(new Date())){
+            modelMap.put("message", "课程已经在进行中，不可预订！");
+            return new ModelAndView("alerts/OrderAlert");
+        }
+        if(classroom.getStudentNumNow() == classroom.getStudentNumPlan()){
+            modelMap.put("message", "课程招收人数已满，不可预订！");
+            return new ModelAndView("alerts/OrderAlert");
+        }
+        Order order = new Order();
+        order.setPrice(sClassroomVO.getPriceTotal());
+        order.setStudentId(student.getId());
+        order.setClassId(classroom.getId());
+        order.setCreateTime(new Date());
+        order.setIsReserved(1);
+        orderService.save(order);
+        return new ModelAndView("alerts/OrderSuccess");
+    }
+
+    @RequestMapping(value = "/sOrderCancel/{id}")
+    public ModelAndView sOrderCancel(@PathVariable Long id, HttpSession httpSession){
+        orderService.cancel(id);
+        return new ModelAndView(new RedirectView("/sOrder"));
+    }
+
+    //传入的是课程id，先转为班级id
+    @RequestMapping(value = "/sMyCourseDetail/{id}")
+    public ModelAndView sMyCourseDetail(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        Student student = (Student) httpSession.getAttribute("student");
+        Classroom classroom = classroomService.getClassroom(student.getId(), id);
+        List<LearnSign> learnSigns = null;
+        Course course = courseService.getCourse(id);
+        int grade = 0;
+        if(classroom != null){
+            grade = gradeService.getGrade(student.getId(), classroom.getId());
+            learnSigns =learnSignService.findAll(student.getId(), classroom.getId());
+        }
+        modelMap.put("learnSigns", learnSigns);
+        modelMap.put("classroom", classroom);
+        modelMap.put("grade", grade);
+        modelMap.put("course", course);
+        return new ModelAndView("/sMyCourseDetail");
+    }
 }

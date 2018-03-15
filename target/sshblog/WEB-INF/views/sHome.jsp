@@ -63,7 +63,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/sCourseMine">我的</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">全部</a></li>
+                                <li><a href="/sAllCourse">全部</a></li>
                             </ul>
                         </li>
                         <li><a href="/sOrder">订单查看</a></li>

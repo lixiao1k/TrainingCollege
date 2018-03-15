@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>订单查看</title>
+    <title>我的课程</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -65,7 +65,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/sCourseMine">我的</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">全部</a></li>
+                                <li><a href="/sAllCourse">全部</a></li>
                             </ul>
                         </li>
                         <li><a href="/sOrder">订单查看</a></li>
@@ -150,7 +150,7 @@
                                         <td><span class="label label-success">进行中</span></td>
                                         <td>
                                             <div class="pull-right" style="margin-right: 10pt">
-                                                <a href="/">查看</a>
+                                                <a href="/sMyCourseDetail/${uOrder.courseId}">查看</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -186,7 +186,7 @@
                                         <td>${oOrder.grade}</td>
                                         <td>
                                             <div class="pull-right" style="margin-right: 10pt">
-                                                <a href="/">查看</a>
+                                                <a href="/sMyCourseDetail/${oOrder.courseId}">查看</a>
                                             </div>
                                         </td>
                                     </tr>

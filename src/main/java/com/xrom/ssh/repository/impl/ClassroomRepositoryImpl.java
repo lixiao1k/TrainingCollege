@@ -60,6 +60,27 @@ public class ClassroomRepositoryImpl extends BaseRepositoryImpl implements Class
         return list;
     }
 
+//    @Override
+//    public Classroom getClassroom(Long sid, Long courseId) {
+//        Session session = null;
+//        Transaction tx = null;
+//        List<Classroom> list = null;
+//        try {
+//            session = getCurrentSession();
+//            tx = session.beginTransaction();
+//            SQLQuery sqlQuery = session.createSQLQuery("select a.id from class a, course b, orders c where " +
+//                    "c.student_id=:SID and c.class_id=a.id and a.course_id=b.id and b.id=:CID");
+//            sqlQuery.setLong("SID", sid);
+//            sqlQuery.setLong("CID", courseId);
+//            sqlQuery.addEntity(Classroom.class);
+//            list = sqlQuery.list();
+//            tx.commit();
+//        }catch (Exception e){
+//            tx.rollback();
+//        }
+//        return list;
+//    }
+
 
     @Override
     public void persist(Classroom entity) {

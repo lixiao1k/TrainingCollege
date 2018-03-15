@@ -56,6 +56,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void cancel(Long orderId) {
+        Order order = repository.get(orderId);
+        order.setIsCancelled(1);
+        order.setIsPayed(0);
+        order.setIsReserved(0);
+        order.setIsPayedOffline(0);
+        repository.update(order);
+        flush();
+    }
+
+    @Override
     public void pay(Long studentId, Long classId) {
         Order order = get(studentId, classId);
         order.setIsCancelled(0);

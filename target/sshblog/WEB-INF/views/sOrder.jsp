@@ -65,7 +65,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/sCourseMine">我的</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">全部</a></li>
+                                <li><a href="/sAllCourse">全部</a></li>
                             </ul>
                         </li>
                         <li class="active"><a href="/sOrder">订单查看<span class="sr-only">(current)</span></a></li>
@@ -160,7 +160,7 @@
                                                 <a href="/">支付</a>
                                             </div>
                                             <div class="pull-right" style="margin-right: 10pt">
-                                                <a href="/">取消</a>
+                                                <a href="/sOrderCancel/${orderReserved.orderId}">取消</a>
                                             </div>
                                         </td>
                                     </tr>
