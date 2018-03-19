@@ -7,30 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9c2d483-b88a-464e-84b5-836ff83b35ac" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/mRegisterApplication.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mRegisterApplication.jsp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/htmls/mRegisterApplication.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/mModifyApplication.jsp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/mRegisterApplication.jsp" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/MasterController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/MasterController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/RegisterApplication.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/RegisterApplication.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/RegisterApplicationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/RegisterApplicationService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/RegisterApplicationServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/RegisterApplicationServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mHome.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mHome.jsp" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/InstitutionController.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/InstitutionController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/MasterController.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/controller/MasterController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/entity/RegisterApplication.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/entity/RegisterApplication.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/RegisterApplicationService.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/RegisterApplicationService.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/impl/RegisterApplicationServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/xrom/ssh/service/impl/RegisterApplicationServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/InstitutionController.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/InstitutionController.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/MasterController.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/controller/MasterController.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/entity/RegisterApplication.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/entity/RegisterApplication.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/RegisterApplicationService.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/RegisterApplicationService.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/impl/RegisterApplicationServiceImpl.class" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/classes/com/xrom/ssh/service/impl/RegisterApplicationServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/mHome.jsp" afterPath="$PROJECT_DIR$/target/sshblog/WEB-INF/views/mHome.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -74,28 +52,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mRegisterApplication.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mRegisterApplication.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="143" column="86" lean-forward="false" selection-start-line="143" selection-start-column="86" selection-end-line="143" selection-end-column="86" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/RegisterApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="36" column="29" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="InstitutionController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -129,8 +85,8 @@
       <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/MasterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="71" column="63" lean-forward="true" selection-start-line="71" selection-start-column="63" selection-end-line="71" selection-end-column="63" />
+            <state relative-caret-position="520">
+              <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,7 +94,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="institution" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mModifyApplication.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="145" column="84" lean-forward="false" selection-start-line="145" selection-start-column="84" selection-end-line="145" selection-end-column="84" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="institution" pinned="false" current-in-tab="true">
         <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.institution">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
@@ -229,13 +195,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/StudentController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/htmls/mRegisterApplication.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mHome.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/RegisterApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/RegisterApplicationService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/service/impl/RegisterApplicationServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mRegisterApplication.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/MasterController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp" />
       </list>
     </option>
   </component>
@@ -318,90 +284,6 @@
               <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="vo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="enums" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="exceptions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ssh" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -425,78 +307,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="mine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
-              <item name="fonts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="mine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -507,16 +317,6 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TrainingCollege" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TrainingCollege" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="alerts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -743,12 +543,12 @@
       <workItem from="1521006014777" duration="18077000" />
       <workItem from="1521163077775" duration="6000" />
       <workItem from="1521378578950" duration="116000" />
-      <workItem from="1521378909368" duration="4474000" />
+      <workItem from="1521378909368" duration="4821000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232769000" />
+    <option name="totallyTimeSpent" value="233116000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1118,28 +918,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="137" column="70" lean-forward="true" selection-start-line="137" selection-start-column="70" selection-end-line="137" selection-end-column="70" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#td#8;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/repository/RegisterApplicationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/RegisterApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="36" column="29" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1167,6 +949,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.application_register">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mRegisterApplication.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="142" column="58" lean-forward="false" selection-start-line="142" selection-start-column="58" selection-end-line="142" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/entity/RegisterApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="36" column="29" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/InstitutionController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2855">
@@ -1177,18 +984,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xrom/ssh/controller/MasterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="71" column="63" lean-forward="true" selection-start-line="71" selection-start-column="63" selection-end-line="71" selection-end-column="63" />
+        <state relative-caret-position="520">
+          <caret line="86" column="5" lean-forward="true" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.institution">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mModifyApplication.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="145" column="84" lean-forward="false" selection-start-line="145" selection-start-column="84" selection-end-line="145" selection-end-column="84" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1199,20 +1007,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.application_register">
+    <entry file="das://table:/5939ee86/e10bcaa2-1a73-4347-8efb-845e5b4cd5da/training_college.institution">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/mRegisterApplication.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="143" column="86" lean-forward="false" selection-start-line="143" selection-start-column="86" selection-end-line="143" selection-end-column="86" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

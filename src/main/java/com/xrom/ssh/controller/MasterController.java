@@ -74,5 +74,18 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/mRegisterApplication"));
     }
 
+    @RequestMapping(value = "/mModifyAgree/{id}")
+    public ModelAndView mModifyAgree(@PathVariable Long id){
+        modifyApplicationService.agree(id);
+        return new ModelAndView(new RedirectView("/mModifyApplication"));
+    }
+
+    @RequestMapping(value = "/mModifyReject/{id}")
+    public ModelAndView mModifyReject(@PathVariable Long id){
+        modifyApplicationService.reject(id);
+        return new ModelAndView(new RedirectView("/mModifyApplication"));
+    }
+
+
 
 }

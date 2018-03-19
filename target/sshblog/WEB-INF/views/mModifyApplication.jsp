@@ -138,12 +138,12 @@
                                     <td>${application.createTime}</td>
                                     <td>
                                         <div class="pull-left" style="margin-right: 10pt">
-                                            <a href="/"><span class="label label-success">同意</span></a>
+                                            <a href="/mModifyAgree/${application.id}"><span class="label label-success">同意</span></a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="pull-left" style="margin-right: 10pt">
-                                            <a href="/"><span class="label label-danger">拒绝</span></a>
+                                            <a href="/mModifyReject/${application.id}"><span class="label label-danger">拒绝</span></a>
                                         </div>
                                     </td>
                                 </tr>
