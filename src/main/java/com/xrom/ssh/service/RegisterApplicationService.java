@@ -14,5 +14,5 @@ public interface RegisterApplicationService {
     List<RegisterApplication> findAll(ApplicationState state);
     void reject(Long id);
     void agree(Long id);
-    void register(String name, String phone, String description, String address);
+    void register(String name, String phone, String description, String address, String password);
 }

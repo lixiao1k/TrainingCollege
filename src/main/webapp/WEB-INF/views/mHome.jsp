@@ -61,9 +61,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">申请<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">机构注册申请</a></li>
+                                <li><a href="/mRegisterApplication">机构注册申请</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">机构信息修改申请</a></li>
+                                <li><a href="/mModifyApplication">机构信息修改申请</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

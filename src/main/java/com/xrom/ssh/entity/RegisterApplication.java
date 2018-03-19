@@ -33,4 +33,7 @@ public class RegisterApplication {
 
     @Column(name = "description", length = 1000)
     private String description;
+
+    @Column(name = "password")
+    private String password;
 }

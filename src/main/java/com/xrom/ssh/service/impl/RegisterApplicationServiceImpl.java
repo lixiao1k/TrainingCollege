@@ -92,18 +92,20 @@ public class RegisterApplicationServiceImpl implements RegisterApplicationServic
         institution.setPhone(application.getPhone());
         institution.setAddress(application.getAddress());
         institution.setName(application.getName());
+        institution.setPassword(application.getPassword());
         institutionService.createInstitution(institution);
         institutionService.flush();
     }
 
     @Override
-    public void register(String name, String phone, String description, String address) {
+    public void register(String name, String phone, String description, String address, String password) {
         RegisterApplication application = new RegisterApplication();
         application.setName(name);
         application.setPhone(phone);
         application.setDescription(description);
         application.setAddress(address);
         application.setCreated_time(new Date());
+        application.setPassword(password);
         saveApplication(application);
         flush();
     }

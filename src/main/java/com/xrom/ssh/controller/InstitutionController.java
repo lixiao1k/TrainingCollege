@@ -71,7 +71,7 @@ public class InstitutionController {
         if(name == "" || address == "" || phone == "" || password == "" || briefDescription == ""){
             return "alerts/sRegisterEmptyAlert";
         }
-        registerApplicationService.register(name, phone, briefDescription, address);
+        registerApplicationService.register(name, phone, briefDescription, address, password);
         return "alerts/iRegisterSuccess";
     }
 
