@@ -24,6 +24,13 @@ public class Order {
     @Column(name = "create_time")
     private Date createTime;
 
+    @Column(name = "payed_time")
+    private Date payedTime;
+
+    //退课时间
+    @Column(name = "drop_time")
+    private Date dropTime;
+
     @Column(name = "price", columnDefinition = "INT default 0")
     private int price;
 
@@ -41,4 +48,12 @@ public class Order {
 
     @Column(name = "is_payed_offline", columnDefinition = "INT default 0")
     private int isPayedOffline;
+
+    @Column(name = "is_unSubscribed", columnDefinition = "INT default 0")
+    private int isUnSubscribed;
+
+    @Column(name = "amountReturned", columnDefinition = "INT default 0")
+    private int amountReturned;
+
+
 }

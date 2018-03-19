@@ -31,9 +31,15 @@ public class OrderVO implements Serializable{
 
     private Date createTime;
 
+    private Date payedTime;
+
+    private Date dropTime;
+
     private int price;
 
     private int payment;
+
+    private int amountReturned;
 
     private int isReserved;
 
@@ -42,5 +48,7 @@ public class OrderVO implements Serializable{
     private int isPayed;
 
     private int isPayedOffline;
+
+    private int isUnSubscribed;
 
 }

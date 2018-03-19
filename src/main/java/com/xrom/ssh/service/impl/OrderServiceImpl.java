@@ -51,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
         order.setIsPayed(0);
         order.setIsReserved(0);
         order.setIsPayedOffline(0);
+        order.setIsUnSubscribed(0);
         repository.update(order);
         flush();
     }
@@ -62,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
         order.setIsPayed(0);
         order.setIsReserved(0);
         order.setIsPayedOffline(0);
+        order.setIsUnSubscribed(0);
         repository.update(order);
         flush();
     }
@@ -73,6 +75,7 @@ public class OrderServiceImpl implements OrderService {
         order.setIsPayed(1);
         order.setIsReserved(0);
         order.setIsPayedOffline(0);
+        order.setIsUnSubscribed(0);
         repository.update(order);
         flush();
     }
@@ -84,6 +87,19 @@ public class OrderServiceImpl implements OrderService {
         order.setIsPayed(1);
         order.setIsReserved(0);
         order.setIsPayedOffline(1);
+        order.setIsUnSubscribed(0);
+        repository.update(order);
+        flush();
+    }
+
+    @Override
+    public void dropClass(Long orderId) {
+        Order order = repository.get(orderId);
+        order.setIsCancelled(0);
+        order.setIsPayed(0);
+        order.setIsReserved(0);
+        order.setIsPayedOffline(0);
+        order.setIsUnSubscribed(1);
         repository.update(order);
         flush();
     }
@@ -100,6 +116,32 @@ public class OrderServiceImpl implements OrderService {
         return getOrdersByState(orders, state);
     }
 
+    @Override
+    public List<OrderVO> getAllOfInstituteByState(String institutionCode, OrderState state) {
+        List<Classroom> classrooms = classroomService.findAll(institutionCode);
+        List<OrderVO> orderVOSPayed = new ArrayList<>();
+        List<OrderVO> orderVOSDroped = new ArrayList<>();
+        for(Classroom classroom : classrooms){
+            List<OrderVO> payed = getAllOfClassByState(classroom.getId(), OrderState.PAYED);
+            if(payed == null || payed.size() == 0){
+                continue;
+            }
+            orderVOSPayed.addAll(payed);
+            List<OrderVO> dropped = getAllOfClassByState(classroom.getId(), OrderState.DROPPED);
+            if(dropped == null || payed.size() == 0 ){
+                continue;
+            }
+            orderVOSDroped.addAll(dropped);
+        }
+        if(state == OrderState.PAYED){
+            return orderVOSPayed;
+        }else if(state == OrderState.DROPPED){
+            return orderVOSDroped;
+        }else {
+            return null;
+        }
+    }
+
 
     private List<OrderVO> getOrdersByState(List<OrderVO> orders, OrderState state){
         if(orders == null || orders.size() == 0){
@@ -109,6 +151,7 @@ public class OrderServiceImpl implements OrderService {
         List<OrderVO> cancelledOrders = new ArrayList<>();
         List<OrderVO> payedOrders = new ArrayList<>();
         List<OrderVO> payedOfflineOrders = new ArrayList<>();
+        List<OrderVO> dropedClassOrders = new ArrayList<>();
         for(OrderVO orderVO : orders){
             if(orderVO.getIsReserved() == 1){
                 reservedOrders.add(orderVO);
@@ -118,6 +161,8 @@ public class OrderServiceImpl implements OrderService {
                 payedOrders.add(orderVO);
             }else if(orderVO.getIsPayedOffline() == 1){
                 payedOfflineOrders.add(orderVO);
+            }else if(orderVO.getIsUnSubscribed() == 1){
+                dropedClassOrders.add(orderVO);
             }
         }
 
@@ -127,8 +172,10 @@ public class OrderServiceImpl implements OrderService {
             return cancelledOrders;
         }else if(state == OrderState.PAYED){
             return payedOrders;
-        }else {
+        }else if(state == OrderState.OFFLINE){
             return payedOfflineOrders;
+        }else {
+            return dropedClassOrders;
         }
     }
 
@@ -174,11 +221,16 @@ public class OrderServiceImpl implements OrderService {
             orderVO.setIsPayed(order.getIsPayed());
             orderVO.setIsPayedOffline(order.getIsPayedOffline());
             orderVO.setIsReserved(order.getIsReserved());
+            orderVO.setIsUnSubscribed(order.getIsUnSubscribed());
             orderVO.setOrderId(order.getId());
             orderVO.setPayment(order.getPayment());
+            orderVO.setAmountReturned(order.getAmountReturned());
             orderVO.setPrice(order.getPrice());
             orderVO.setStudentId(order.getStudentId());
             orderVO.setTeacherId(classroom.getTeacherId());
+            orderVO.setCreateTime(order.getCreateTime());
+            orderVO.setPayedTime(order.getPayedTime());
+            orderVO.setDropTime(order.getDropTime());
             if(teacher != null){
                 orderVO.setTeacherName(teacher.getName());
                 orderVO.setTeacherPhone(teacher.getPhone());

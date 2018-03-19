@@ -81,14 +81,7 @@
                                 <li><a href="/iAddCoursePage">发布</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">订单<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">预订</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">退订</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="/iOrders">订单</a></li>
                         <li><a>财务</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">

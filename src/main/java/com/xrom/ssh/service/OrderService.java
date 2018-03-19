@@ -14,8 +14,10 @@ public interface OrderService {
     void cancel(Long orderId);
     void pay(Long studentId, Long classId);
     void payOffline(Long studentId, Long classId);
+    void dropClass(Long orderId);
     List<OrderVO> getAllOfStudentByState(Long studentId, OrderState state);
     List<OrderVO> getAllOfClassByState(Long classId, OrderState state);
+    List<OrderVO> getAllOfInstituteByState(String institutionCode, OrderState state);
     void flush();
     Long save(Order order);
 }

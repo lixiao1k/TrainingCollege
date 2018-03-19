@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/12
-  Time: 下午3:53
+  Date: 2018/3/19
+  Time: 下午2:05
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>课堂签到</title>
+    <title>机构信息主页</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -52,10 +52,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
     <header class="main-header">
@@ -81,7 +81,7 @@
                                 <li><a href="/iAddCoursePage">发布</a></li>
                             </ul>
                         </li>
-                        <li><a href="/iOrders"订单</a></li>
+                        <li class="active"><a href="/iOrders">订单<span class="sr-only">(current)</span></a></li>
                         <li><a>财务</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
@@ -127,112 +127,128 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-9">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">课堂登记记录表</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>学生ID</th>
-                                <th>时间</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${learnSigns}" var="learnSign">
-                                <tr>
-                                    <td>${learnSign.studentId}</td>
-                                    <td>${learnSign.date}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>学生ID</th>
-                                <th>时间</th>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">添加签到记录</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal" action="/iAddSign" method="post">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputID" class="col-sm-4 control-label">学生ID</label>
-
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputID" placeholder="name" name="studentId">
-                                    </div>
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#payed" data-toggle="tab">支付订单</a></li>
+                        <li><a href="#unSubscrible" data-toggle="tab">退订订单</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="payed">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>课程ID</th>
+                                            <th>班级ID</th>
+                                            <th>学生ID</th>
+                                            <th>价格</th>
+                                            <th>支付金额</th>
+                                            <th>下单时间</th>
+                                            <th>支付时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${orderVOSPayed}" var="orderVOPayed">
+                                            <tr>
+                                                <td>${orderVOPayed.orderId}</td>
+                                                <td>${orderVOPayed.courseId}</td>
+                                                <td>${orderVOPayed.classId}</td>
+                                                <td>${orderVOPayed.studentId}</td>
+                                                <td>${orderVOPayed.price}</td>
+                                                <td>${orderVOPayed.payment}</td>
+                                                <td>${orderVOPayed.createTime}</td>
+                                                <td>${orderVOPayed.payedTime}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>课程ID</th>
+                                            <th>班级ID</th>
+                                            <th>学生ID</th>
+                                            <th>价格</th>
+                                            <th>支付金额</th>
+                                            <th>下单时间</th>
+                                            <th>支付时间</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
-                                <div class="form-group">
-                                    <label for="datepicker" class="col-sm-4 control-label">日期</label>
-                                    <div class="col-sm-8">
-                                        <div class="input-group date">
-                                            <input type="text" class="form-control pull-right" id="datepicker" name="date">
-                                        </div>
-                                    </div>
-                                    <!-- /.input group -->
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="unSubscrible">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>课程ID</th>
+                                            <th>班级ID</th>
+                                            <th>学生ID</th>
+                                            <th>价格</th>
+                                            <th>支付金额</th>
+                                            <th>返还金额</th>
+                                            <th>下单时间</th>
+                                            <th>支付时间</th>
+                                            <th>退课时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${orderVOSDropped}" var="orderVODropped">
+                                            <tr>
+                                                <td>${orderVODropped.orderId}</td>
+                                                <td>${orderVODropped.courseId}</td>
+                                                <td>${orderVODropped.classId}</td>
+                                                <td>${orderVODropped.studentId}</td>
+                                                <td>${orderVODropped.price}</td>
+                                                <td>${orderVODropped.payment}</td>
+                                                <td>${orderVODropped.amountReturned}</td>
+                                                <td>${orderVODropped.createTime}</td>
+                                                <td>${orderVODropped.payedTime}</td>
+                                                <td>${orderVODropped.dropTime}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>课程ID</th>
+                                            <th>班级ID</th>
+                                            <th>学生ID</th>
+                                            <th>价格</th>
+                                            <th>支付金额</th>
+                                            <th>返还金额</th>
+                                            <th>下单时间</th>
+                                            <th>支付时间</th>
+                                            <th>退课时间</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
+                                <!-- /.box-body -->
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-info" style="margin-left: 70pt">添加</button>
-                            </div>
-                            <!-- /.box-footer -->
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <i class="fa fa-text-width"></i>
-
-                            <h3 class="box-title">班级信息</h3>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <dl>
-                                <dt>班级ID</dt>
-                                <dd>${classroom.id}</dd>
-                                <dt>课程ID</dt>
-                                <dd>${course.id}</dd>
-                                <dt>计划学生数</dt>
-                                <dd>${classroom.studentNumPlan}</dd>
-                                <dt>上课学生数</dt>
-                                <dd>${classroom.studentNumNow}</dd>
-                                <dt>教师ID</dt>
-                                <dd>${classroom.teacherId}</dd>
-                                <dt>课程类型</dt>
-                                <dd>${course.type}</dd>
-                                <dt>开课时间</dt>
-                                <dd>${course.beginDate}</dd>
-                                <dt>结束时间</dt>
-                                <dd>${course.endDate}</dd>
-                                <dt>课程描述</dt>
-                                <dd>${course.description}</dd>
-                            </dl>
-                        </div>
-                        <!-- /.box-body -->
+                        <!-- /.tab-pane -->
                     </div>
+                    <!-- /.tab-content -->
                 </div>
+                <!-- /.nav-tabs-custom -->
             </div>
         </div>
         <!-- /.container -->
     </div>
 </div>
+<!-- ./wrapper -->
+
 <!-- ./wrapper -->
 <script src="<%=basePath%>bootstrap/js/demo.js"></script>
 <!-- jQuery 3 -->
@@ -270,8 +286,7 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
+        $('#example1').DataTable({
             'paging'      : true,
             'lengthChange': false,
             'searching'   : false,
@@ -279,73 +294,13 @@
             'info'        : true,
             'autoWidth'   : false
         })
-    })
-</script>
-<!-- Page script -->
-<script>
-    $(function () {
-        //Initialize Select2 Elements
-        $('.select2').select2()
-
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-        //Datemask2 mm/dd/yyyy
-        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-        //Money Euro
-        $('[data-mask]').inputmask()
-
-        //Date range picker
-        $('#reservation').daterangepicker()
-        //Date range picker with time picker
-        $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-        //Date range as a button
-        $('#daterange-btn').daterangepicker(
-            {
-                ranges   : {
-                    'Today'       : [moment(), moment()],
-                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate  : moment()
-            },
-            function (start, end) {
-                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-            }
-        )
-
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true
-        })
-
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass   : 'iradio_minimal-blue'
-        })
-        //Red color scheme for iCheck
-        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-            checkboxClass: 'icheckbox_minimal-red',
-            radioClass   : 'iradio_minimal-red'
-        })
-        //Flat red color scheme for iCheck
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-            checkboxClass: 'icheckbox_flat-green',
-            radioClass   : 'iradio_flat-green'
-        })
-
-        //Colorpicker
-        $('.my-colorpicker1').colorpicker()
-        //color picker with addon
-        $('.my-colorpicker2').colorpicker()
-
-        //Timepicker
-        $('.timepicker').timepicker({
-            showInputs: false
+        $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
         })
     })
 </script>

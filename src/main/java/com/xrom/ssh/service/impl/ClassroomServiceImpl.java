@@ -62,6 +62,17 @@ public class ClassroomServiceImpl implements ClassroomService {
     }
 
     @Override
+    public List<Classroom> findAll(String institutionCode) {
+        List<Course> courses = courseService.findAll(institutionCode);
+        List<Classroom> classrooms = new ArrayList<>();
+        for (Course course : courses){
+            List<Classroom> classrooms1 = classroomService.findAll(course.getId());
+            classrooms.addAll(classrooms1);
+        }
+        return classrooms;
+    }
+
+    @Override
     public void updateNumPlan(Long id, int change) {
         Classroom classroom = getClass(id);
         classroom.setStudentNumPlan(change);

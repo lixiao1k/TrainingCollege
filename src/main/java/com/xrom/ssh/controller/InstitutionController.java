@@ -2,6 +2,8 @@ package com.xrom.ssh.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.xrom.ssh.entity.*;
+import com.xrom.ssh.entity.vo.OrderVO;
+import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.GradeExistException;
 import com.xrom.ssh.exceptions.NoInstitutionException;
 import com.xrom.ssh.service.*;
@@ -50,6 +52,9 @@ public class InstitutionController {
 
     @Autowired(required = true)
     private GradeService gradeService;
+
+    @Autowired(required = true)
+    private OrderService orderService;
 
     @RequestMapping(value = "/iSignUpPage", method = RequestMethod.GET)
     public String iSignUpPage(){
@@ -298,5 +303,17 @@ public class InstitutionController {
             return new ModelAndView("alerts/gradeRepeatAlert");
         }
         return new ModelAndView(new RedirectView("/iGradePage/"+Long.toString(classroom.getId())));
+    }
+
+
+    @RequestMapping(value = "/iOrders")
+    public ModelAndView iOrders(HttpSession httpSession, ModelMap modelMap){
+        Institution institution = (Institution) httpSession.getAttribute("institution");
+        List<OrderVO> orderVOSPayed = orderService.getAllOfInstituteByState(institution.getCode(), OrderState.PAYED);
+        List<OrderVO> orderVOSDropped = orderService.getAllOfInstituteByState(institution.getCode(), OrderState.DROPPED);
+        System.out.println(orderVOSDropped);
+        modelMap.put("orderVOSPayed", orderVOSPayed);
+        modelMap.put("orderVOSDropped", orderVOSDropped);
+        return new ModelAndView("/iOrders");
     }
 }

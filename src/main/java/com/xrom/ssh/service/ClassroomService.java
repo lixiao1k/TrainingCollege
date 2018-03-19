@@ -12,6 +12,7 @@ public interface ClassroomService {
     void flush();
     List<Classroom> findAll();
     List<Classroom> findAll(Long courseId);
+    List<Classroom> findAll(String institutionCode);
     void updateNumPlan(Long id, int newValue);
     void updateNumNow(Long id, int change);
     Long createClass(Long courseId, int studentNumPlan, int studentNumNow, Long teacherId);
