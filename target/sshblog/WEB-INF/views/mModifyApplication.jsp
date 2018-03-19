@@ -83,9 +83,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">统计<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">机构信息</a></li>
+                                <li><a href="/mInstitutions">机构信息</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">学员信息</a></li>
+                                <li><a href="/mStudents">学员信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">财务情况</a></li>
                             </ul>

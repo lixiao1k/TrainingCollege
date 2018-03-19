@@ -1,10 +1,16 @@
 package com.xrom.ssh.controller;
 
+import com.sun.media.sound.ModelAbstractChannelMixer;
 import com.xrom.ssh.entity.ModifyApplication;
 import com.xrom.ssh.entity.RegisterApplication;
+import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.entity.vo.MInstitutionVO;
+import com.xrom.ssh.entity.vo.MStudentVO;
 import com.xrom.ssh.enums.ApplicationState;
+import com.xrom.ssh.service.InstitutionService;
 import com.xrom.ssh.service.ModifyApplicationService;
 import com.xrom.ssh.service.RegisterApplicationService;
+import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,16 +21,23 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.rmi.StubNotFoundException;
 import java.util.List;
 
 @Controller
 public class MasterController {
 
     @Autowired(required = true)
-    RegisterApplicationService registerApplicationService;
+    private RegisterApplicationService registerApplicationService;
 
     @Autowired(required = true)
-    ModifyApplicationService modifyApplicationService;
+    private ModifyApplicationService modifyApplicationService;
+
+    @Autowired(required = true)
+    private InstitutionService institutionService;
+
+    @Autowired(required = true)
+    private StudentService studentService;
 
     @RequestMapping(value = "/mSignInPage", method = RequestMethod.GET)
     public String mSignInPage(){
@@ -86,6 +99,28 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/mModifyApplication"));
     }
 
+    //查看机构统计信息
+    @RequestMapping(value = "/mInstitutions")
+    public ModelAndView mInstitutions(ModelMap modelMap){
+        List<MInstitutionVO> mInstitutionVOS = institutionService.getAllMInstitutionVOs();
+        modelMap.put("mInstitutionVOs", mInstitutionVOS);
+        return new ModelAndView("/mInstitutions");
+    }
 
+    @RequestMapping(value = "/mStudents")
+    public ModelAndView mStudents(ModelMap modelMap){
+        List<MStudentVO> mStudentVOSNonCancelled = studentService.getAllStudent(false);
+        List<MStudentVO> mStudentVOSCancelled = studentService.getAllStudent(true);
+        modelMap.put("studentsNonCancelled", mStudentVOSNonCancelled);
+        modelMap.put("studentsCancelled", mStudentVOSCancelled);
+        return new ModelAndView("/mStudents");
+    }
 
+    //会员取消资格
+    @RequestMapping(value = "/mStudentCancel/{id}")
+    public ModelAndView mStudentCancel(@PathVariable Long id){
+        Student student = studentService.getStudent(id);
+        studentService.cancel(student.getEmail());
+        return new ModelAndView(new RedirectView("/mStudents"));
+    }
 }

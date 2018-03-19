@@ -1,6 +1,7 @@
 package com.xrom.ssh.service;
 
 import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.entity.vo.MStudentVO;
 import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
@@ -21,4 +22,5 @@ public interface StudentService {
     void cancel(String mail);
     int getLevel(String mail);
     Student signIn(String mail, String password) throws SignInFailedException;
+    List<MStudentVO> getAllStudent(Boolean isCancelled);
 }

@@ -1,11 +1,15 @@
 package com.xrom.ssh.service.impl;
 
+import com.xrom.ssh.entity.Course;
 import com.xrom.ssh.entity.Institution;
+import com.xrom.ssh.entity.vo.MInstitutionVO;
 import com.xrom.ssh.repository.InstitutionRepository;
+import com.xrom.ssh.service.CourseService;
 import com.xrom.ssh.service.InstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +18,9 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Autowired(required = true)
     private InstitutionRepository institutionRepository;
+
+    @Autowired(required = true)
+    private CourseService courseService;
 
     @Override
     public String createInstitution(Institution institution) {
@@ -89,5 +96,33 @@ public class InstitutionServiceImpl implements InstitutionService {
         }else{
             return true;
         }
+    }
+
+    @Override
+    public List<MInstitutionVO> getAllMInstitutionVOs() {
+        List<Institution> institutions = getAllInstitutions();
+        List<MInstitutionVO> mInstitutionVOs = new ArrayList<>();
+        List<Course> courses = null;
+        List<Course> openedCourses = null;
+        MInstitutionVO mInstitutionVO = null;
+        for (Institution institution : institutions){
+            mInstitutionVO = new MInstitutionVO();
+            courses = courseService.findAll(institution.getCode());
+            openedCourses = courseService.findAll(institution.getCode(), true);
+            if(courses != null){
+                mInstitutionVO.setCoursesNum(courses.size());
+            }
+            if(openedCourses != null){
+                mInstitutionVO.setOpenedCoursesNum(openedCourses.size());
+            }
+            mInstitutionVO.setCode(institution.getCode());
+            mInstitutionVO.setAddress(institution.getAddress());
+            mInstitutionVO.setDescription(institution.getDescription());
+            mInstitutionVO.setName(institution.getName());
+            mInstitutionVO.setPassword(institution.getPassword());
+            mInstitutionVO.setPhone(institution.getPhone());
+            mInstitutionVOs.add(mInstitutionVO);
+        }
+        return mInstitutionVOs;
     }
 }

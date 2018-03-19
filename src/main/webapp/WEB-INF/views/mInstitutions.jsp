@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>机构注册申请信息查看</title>
+    <title>机构信息修改申请信息查看</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -108,40 +108,36 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">注册申请表</h3>
+                        <h3 class="box-title">机构统计信息表</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>申请ID</th>
+                                <th>机构代码</th>
                                 <th>机构名称</th>
                                 <th>机构电话</th>
                                 <th>机构地址</th>
                                 <th>简单描述</th>
-                                <th>创建时间</th>
-                                <th></th>
+                                <th>创建课程总数</th>
+                                <th>进行中课程总数</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${applications}" var="application">
+                            <c:forEach items="${mInstitutionVOs}" var="mInstitutionVO">
                                 <tr>
-                                    <td>${application.id}</td>
-                                    <td>${application.name}</td>
-                                    <td>${application.phone}</td>
-                                    <td>${application.address}</td>
-                                    <td>${application.description}</td>
-                                    <td>${application.created_time}</td>
+                                    <td>${mInstitutionVO.code}</td>
+                                    <td>${mInstitutionVO.name}</td>
+                                    <td>${mInstitutionVO.phone}</td>
+                                    <td>${mInstitutionVO.address}</td>
+                                    <td>${mInstitutionVO.description}</td>
+                                    <td>${mInstitutionVO.coursesNum}</td>
+                                    <td>${mInstitutionVO.openedCoursesNum}</td>
                                     <td>
                                         <div class="pull-left" style="margin-right: 10pt">
-                                            <a href="/mRegisterAgree/${application.id}"><span class="label label-success">同意</span></a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="pull-left" style="margin-right: 10pt">
-                                            <a href="/mRegisterReject/${application.id}"><span class="label label-danger">拒绝</span></a>
+                                            <a href="/">查看</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -149,13 +145,13 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>申请ID</th>
+                                <th>机构代码</th>
                                 <th>机构名称</th>
                                 <th>机构电话</th>
                                 <th>机构地址</th>
                                 <th>简单描述</th>
-                                <th>创建时间</th>
-                                <th></th>
+                                <th>创建课程总数</th>
+                                <th>进行中课程总数</th>
                                 <th></th>
                             </tr>
                             </tfoot>

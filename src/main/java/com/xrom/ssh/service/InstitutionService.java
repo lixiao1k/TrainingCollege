@@ -1,6 +1,7 @@
 package com.xrom.ssh.service;
 
 import com.xrom.ssh.entity.Institution;
+import com.xrom.ssh.entity.vo.MInstitutionVO;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface InstitutionService {
     List<Institution> getAllInstitutions();
     void flush();
     Boolean signIn(String code, String password);
+    List<MInstitutionVO> getAllMInstitutionVOs();
 }

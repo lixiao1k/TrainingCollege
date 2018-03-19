@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/18
-  Time: 下午9:42
+  Date: 2018/3/19
+  Time: 下午1:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>机构注册申请信息查看</title>
+    <title>学生统计信息查看</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -106,63 +106,109 @@
     <div class="content-wrapper">
         <div class="container">
             <div class="col-md-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">注册申请表</h3>
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#reserved" data-toggle="tab">会员</a></li>
+                        <li><a href="#payed" data-toggle="tab">资格取消</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="reserved">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>会员ID</th>
+                                            <th>邮箱</th>
+                                            <th>等级</th>
+                                            <th>卡号</th>
+                                            <th>总消费</th>
+                                            <th>积分余额</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${studentsNonCancelled}" var="studentNC">
+                                            <tr>
+                                                <td>${studentNC.id}</td>
+                                                <td>${studentNC.email}</td>
+                                                <td>${studentNC.level}</td>
+                                                <td>${studentNC.cardNumber}</td>
+                                                <td>${studentNC.totalConsumption}</td>
+                                                <td>${studentNC.bpBalance}</td>
+                                                <td>
+                                                    <div class="pull-right" style="margin-right: 10pt">
+                                                        <a href="/mStudentCancel/${studentNC.id}"><span class="label label-danger">取消资格</span></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>会员ID</th>
+                                            <th>邮箱</th>
+                                            <th>等级</th>
+                                            <th>卡号</th>
+                                            <th>总消费</th>
+                                            <th>积分余额</th>
+                                            <th></th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="payed">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>会员ID</th>
+                                            <th>邮箱</th>
+                                            <th>等级</th>
+                                            <th>卡号</th>
+                                            <th>总消费</th>
+                                            <th>积分余额</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${studentsCancelled}" var="studentC">
+                                            <tr>
+                                                <td>${studentC.id}</td>
+                                                <td>${studentC.email}</td>
+                                                <td>${studentC.level}</td>
+                                                <td>${studentC.cardNumber}</td>
+                                                <td>${studentC.totalConsumption}</td>
+                                                <td>${studentC.bpBalance}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>会员ID</th>
+                                            <th>邮箱</th>
+                                            <th>等级</th>
+                                            <th>卡号</th>
+                                            <th>总消费</th>
+                                            <th>积分余额</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>申请ID</th>
-                                <th>机构名称</th>
-                                <th>机构电话</th>
-                                <th>机构地址</th>
-                                <th>简单描述</th>
-                                <th>创建时间</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${applications}" var="application">
-                                <tr>
-                                    <td>${application.id}</td>
-                                    <td>${application.name}</td>
-                                    <td>${application.phone}</td>
-                                    <td>${application.address}</td>
-                                    <td>${application.description}</td>
-                                    <td>${application.created_time}</td>
-                                    <td>
-                                        <div class="pull-left" style="margin-right: 10pt">
-                                            <a href="/mRegisterAgree/${application.id}"><span class="label label-success">同意</span></a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="pull-left" style="margin-right: 10pt">
-                                            <a href="/mRegisterReject/${application.id}"><span class="label label-danger">拒绝</span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>申请ID</th>
-                                <th>机构名称</th>
-                                <th>机构电话</th>
-                                <th>机构地址</th>
-                                <th>简单描述</th>
-                                <th>创建时间</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
+                    <!-- /.tab-content -->
                 </div>
+                <!-- /.nav-tabs-custom -->
             </div>
         </div>
         <!-- /.container -->
@@ -205,7 +251,14 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable()
+        $('#example1').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
@@ -218,3 +271,4 @@
 </script>
 </body>
 </html>
+

@@ -1,17 +1,21 @@
 package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Account;
+import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.entity.vo.MStudentVO;
 import com.xrom.ssh.exceptions.NotValidatedUserException;
 import com.xrom.ssh.exceptions.RepeatInsertException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
 import com.xrom.ssh.repository.StudentRepository;
 import com.xrom.ssh.service.AccountService;
+import com.xrom.ssh.service.CardService;
 import com.xrom.ssh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +25,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired(required = true)
     private AccountService accountService;
+
+    @Autowired(required = true)
+    private CardService cardService;
 
     @Override
     public Long saveStudent(Student student) throws RepeatInsertException {
@@ -125,6 +132,43 @@ public class StudentServiceImpl implements StudentService {
             throw new SignInFailedException();
         }else {
             return student;
+        }
+    }
+
+    @Override
+    public List<MStudentVO> getAllStudent(Boolean isCancelled) {
+        List<Student> students = getAllStudents();
+        List<MStudentVO> mStudentVOSNotCancelled = new ArrayList<>();
+        List<MStudentVO> mStudentVOSCancelled = new ArrayList<>();
+        for(Student student : students){
+            Account account = null;
+            Card card = null;
+            MStudentVO mStudentVO = new MStudentVO();
+            account = accountService.getAccount(student.getId());
+            if(account != null){
+                mStudentVO.setBpBalance(account.getBpBalance());
+                mStudentVO.setTotalConsumption(account.getTotalConsumption());
+                mStudentVO.setLevel(getLevel(student.getEmail()));
+            }
+            card = cardService.getCard(student.getId());
+            if(card != null){
+                mStudentVO.setCardNumber(card.getCardNumber());
+            }
+            mStudentVO.setEmail(student.getEmail());
+            mStudentVO.setId(student.getId());
+            mStudentVO.setPassword(student.getPassword());
+            mStudentVO.setUserName(student.getUserName());
+            mStudentVO.setUserState(student.getUserState());
+            if(student.getUserState() == 1){
+                mStudentVOSNotCancelled.add(mStudentVO);
+            }else if(student.getUserState() == 2){
+                mStudentVOSCancelled.add(mStudentVO);
+            }
+        }
+        if(isCancelled){
+            return mStudentVOSCancelled;
+        }else {
+            return mStudentVOSNotCancelled;
         }
     }
 
