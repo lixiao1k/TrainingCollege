@@ -316,4 +316,34 @@ public class InstitutionController {
         modelMap.put("orderVOSDropped", orderVOSDropped);
         return new ModelAndView("/iOrders");
     }
+
+    //线下支付界面
+    @RequestMapping(value = "/iPayOfflinePage")
+    public ModelAndView iPayOfflinePage(){
+        return new ModelAndView("/iPayOffline");
+    }
+
+    @RequestMapping(value = "/iPayOffline", method = RequestMethod.POST)
+    public ModelAndView iPayOffline(HttpServletRequest request, ModelMap modelMap, HttpSession session){
+        Institution institution = (Institution) session.getAttribute("institution");
+        Long orderId = Long.parseLong(request.getParameter("orderId"));
+        Order order = orderService.get(orderId);
+        if(order == null){
+            modelMap.put("title", "错误");
+            modelMap.put("errorMessage", "没有此订单");
+            return new ModelAndView("alerts/sError");
+        }
+        Classroom classroom = classroomService.getClass(order.getClassId());
+        Course course = null;
+        if(classroom != null){
+            course = courseService.getCourse(classroom.getCourseId());
+        }
+        if(course != null && !course.getInstitutionCode().equals(institution.getCode())){
+            modelMap.put("title", "错误");
+            modelMap.put("errorMessage", "不是此机构订单，无权操作");
+            return new ModelAndView("/alerts/sError");
+        }
+        modelMap.put("Order", order);
+        return new ModelAndView("/iPayOfflineInfo");
+    }
 }

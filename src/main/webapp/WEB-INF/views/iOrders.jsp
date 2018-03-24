@@ -81,7 +81,14 @@
                                 <li><a href="/iAddCoursePage">发布</a></li>
                             </ul>
                         </li>
-                        <li class="active"><a href="/iOrders">订单<span class="sr-only">(current)</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">订单<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/iOrders">查看</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/iPayOfflinePage">线下支付</a></li>
+                            </ul>
+                        </li>
                         <li><a>财务</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">

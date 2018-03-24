@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/11
-  Time: 下午1:41
+  Date: 2018/3/24
+  Time: 下午11:19
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -18,7 +17,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>部门师资查看</title>
+    <title>线下支付</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -59,7 +58,7 @@
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/iHome">机构信息</a></li>
-                        <li class="active"><a href="/iTeachers">师资<span class="sr-only">(current)</span></a></li>
+                        <li><a href="/iTeachers">师资</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">计划<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -85,6 +84,7 @@
                     </form>
                 </div>
                 <!-- /.navbar-collapse -->
+                <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account Menu -->
@@ -120,82 +120,31 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-9">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">机构教师信息列表</h3>
+            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <i class="fa fa-text-width"></i>
+
+                        <h3 class="box-title">支付信息预览</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>major</th>
-                                <th></th>
-                            </tr>
-                            <c:forEach items="${teachers}" var="teacher">
-                                <tr>
-                                    <td>${teacher.id}</td>
-                                    <td>${teacher.name}</td>
-                                    <td>${teacher.phone}</td>
-                                    <td><span class="label label-success">${teacher.teachingType}</span></td>
-                                    <td>
-                                        <div class="pull-right" style="margin-right: 10pt">
-                                            <a href="/teacher_delete/${teacher.id}">删除</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </table>
+                    <div class="box-body">
+                        <dl class="dl-horizontal">
+                            <dt>订单号</dt>
+                            <dd>${Order.id}</dd>
+                            <dt>订单金额</dt>
+                            <dd>${Order.price}</dd>
+                            <dt>下单时间</dt>
+                            <dd>${Order.createTime}</dd>
+                        </dl>
+                        <div class="box-footer">
+                            <a href="/sPayCancel" class="btn btn-default">取消</a>
+                            <a href="/sPay/${Order.id}" class="btn btn-info pull-right">确定支付</a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">添加教师</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    <form class="form-horizontal" action="/iAddTeacher" method="post">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-3 control-label">姓名</label>
-
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputName" placeholder="name" name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPhone" class="col-sm-3 control-label">电话</label>
-
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone" name="phone">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">科目</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" name="major">
-                                        <option>English</option>
-                                        <option>Chinese</option>
-                                        <option>Math</option>
-                                        <option>Physics</option>
-                                        <option>Chemistry</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-info" style="margin-left: 70pt">添加</button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
-                </div>
+                <!-- /.box -->
             </div>
         </div>
         <!-- /.container -->
@@ -208,12 +157,12 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="<%=basePath%>bootstrap/js/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src=".<%=basePath%>bootstrap/js/mine/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=basePath%>bootstrap/js/demo.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/demo.js"></script>
 </body>
 </html>
