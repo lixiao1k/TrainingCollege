@@ -35,6 +35,8 @@ public class OrderVO implements Serializable{
 
     private Date dropTime;
 
+    private Date courseBeginTime;
+
     private int price;
 
     private int payment;

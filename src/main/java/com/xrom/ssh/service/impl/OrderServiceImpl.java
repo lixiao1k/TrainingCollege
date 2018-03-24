@@ -126,13 +126,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void dropClass(Long orderId) {
+    public void dropClass(Long orderId, int amountReturn) {
         Order order = repository.get(orderId);
         order.setIsCancelled(0);
         order.setIsPayed(0);
         order.setIsReserved(0);
         order.setIsPayedOffline(0);
         order.setIsUnSubscribed(1);
+        order.setDropTime(new Date());
+        order.setAmountReturned(amountReturn);
         repository.update(order);
         flush();
     }
@@ -156,16 +158,15 @@ public class OrderServiceImpl implements OrderService {
         List<OrderVO> orderVOSDroped = new ArrayList<>();
         for(Classroom classroom : classrooms){
             List<OrderVO> payed = getAllOfClassByState(classroom.getId(), OrderState.PAYED);
-            if(payed == null || payed.size() == 0){
-                continue;
+            if(payed != null && payed.size() != 0){
+                orderVOSPayed.addAll(payed);
             }
-            orderVOSPayed.addAll(payed);
             List<OrderVO> dropped = getAllOfClassByState(classroom.getId(), OrderState.DROPPED);
-            if(dropped == null || payed.size() == 0 ){
-                continue;
+            if(dropped != null && dropped.size() != 0 ){
+                orderVOSDroped.addAll(dropped);
             }
-            orderVOSDroped.addAll(dropped);
         }
+        System.out.println(orderVOSDroped);
         if(state == OrderState.PAYED){
             return orderVOSPayed;
         }else if(state == OrderState.DROPPED){
@@ -245,6 +246,33 @@ public class OrderServiceImpl implements OrderService {
         sPayInfoVO.setMoneyNeedPay(order.getPrice() - moneyFromBP);
         sPayInfoVO.setOrderRawMoney(order.getPrice());
         return sPayInfoVO;
+    }
+
+    @Override
+    public OrderVO getUnsubscribeInfo(Long orderId) {
+        Order order = get(orderId);
+        Classroom classroom = classroomService.getClass(order.getClassId());
+        Course course = courseService.getCourse(classroom.getCourseId());
+        OrderVO orderVO = new OrderVO();
+        orderVO.setClassId(order.getClassId());
+        orderVO.setCreateTime(order.getCreateTime());
+        orderVO.setPayedTime(order.getPayedTime());
+        orderVO.setPayment(order.getPayment());
+        orderVO.setOrderId(orderId);
+        int amountReturn = 0;
+        Date date = new Date();
+        long days = (course.getBeginDate().getTime()-date.getTime())/(1000l*60l*60l*24l);
+        if(days > 7){
+            amountReturn = order.getPayment();
+        }else if(days<=7 && days>=0){
+            amountReturn = order.getPayment()/2;
+        }else {
+            amountReturn = 0;
+        }
+        orderVO.setAmountReturned(amountReturn);
+        orderVO.setDropTime(date);
+        orderVO.setCourseBeginTime(course.getBeginDate());
+        return orderVO;
     }
 
 

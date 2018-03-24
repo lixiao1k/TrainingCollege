@@ -169,9 +169,11 @@ public class StudentController {
         List<OrderVO> orderReserved = orderService.getAllOfStudentByState(student.getId(), OrderState.RESERVED);
         List<OrderVO> orderPayed = orderService.getAllOfStudentByState(student.getId(), OrderState.PAYED);
         List<OrderVO> orderCancelled = orderService.getAllOfStudentByState(student.getId(), OrderState.CANCELLED);
+        List<OrderVO> orderDroped = orderService.getAllOfStudentByState(student.getId(), OrderState.DROPPED);
         modelMap.put("ordersReserved", orderReserved);
         modelMap.put("ordersPayed", orderPayed);
         modelMap.put("ordersCancelled", orderCancelled);
+        modelMap.put("ordersDropped", orderDroped);
         return new ModelAndView("/sOrder");
     }
 
@@ -307,23 +309,69 @@ public class StudentController {
         Order order = orderService.get(orderId);
         if(order.getIsPayed() == 1){
             modelMap.put("errorMessage", "此订单已支付！无需再次支付！");
-            return new ModelAndView("alerts/sPayError");
+            modelMap.put("title", "支付失败");
+            return new ModelAndView("alerts/sError");
         }
 
         Student student = (Student) session.getAttribute("student");
         SPayInfoVO sPayInfoVO = orderService.getPayInfoVO(orderId, student.getId());
         if(sPayInfoVO.getCardNumber() == null || sPayInfoVO.getCardNumber() == ""){
             modelMap.put("errorMessage", "没有绑定银行卡，请您先绑定银行卡！");
-            return new ModelAndView("alerts/sPayError");
+            modelMap.put("title", "支付失败");
+            return new ModelAndView("alerts/sError");
         }
         if(sPayInfoVO.getMoneyNeedPay() > sPayInfoVO.getCardBalance()){
             modelMap.put("errorMessage", "银行卡余额不足，请先前往充值！");
-            return new ModelAndView("alerts/sPayError");
+            modelMap.put("title", "支付失败");
+            return new ModelAndView("alerts/sError");
         }
         orderService.pay(orderId, student.getId(), sPayInfoVO.getMoneyNeedPay());
         accountService.updateAccount(student.getId(), -(sPayInfoVO.getMoneyFromBP()*10));
         accountService.updateBpBalance(student.getId(), sPayInfoVO.getMoneyNeedPay()-sPayInfoVO.getMoneyFromBP()*10);
         accountService.updateTotalConsumption(student.getId(), sPayInfoVO.getMoneyNeedPay());
-        return new ModelAndView("alerts/sPaySuccess");
+        modelMap.put("title", "支付成功！");
+        modelMap.put("successMessage", "订单支付成功");
+        return new ModelAndView("alerts/sSuccess");
+    }
+
+    @RequestMapping(value = "/sUnsubscribe/{orderId}")
+    public ModelAndView sUnsubscribe(@PathVariable Long orderId, ModelMap modelMap){
+        Order order = orderService.get(orderId);
+        Classroom classroom = classroomService.getClass(order.getClassId());
+        Course course = courseService.getCourse(classroom.getCourseId());
+        Long days = ((course.getBeginDate().getTime()-new Date().getTime())/(1000l*60l*60l*24l));
+        if(days < -7){
+            modelMap.put("title", "退课失败");
+            modelMap.put("errorMessage", "退课失败，课程已经开始超过1周");
+            return new ModelAndView("alerts/sError");
+        }else {
+            return new ModelAndView(new RedirectView("/sUnsubscribeInfo/"+order.getId()));
+        }
+    }
+
+    //退款时展示退款信息
+    @RequestMapping(value = "/sUnsubscribeInfo/{orderId}")
+    public ModelAndView sUnsubscribeInfo(@PathVariable Long orderId, ModelMap modelMap){
+        OrderVO orderVO = orderService.getUnsubscribeInfo(orderId);
+        modelMap.put("orderVO", orderVO);
+        return new ModelAndView("/sUnsubscribeInfo");
+    }
+
+    @RequestMapping(value = "/sUnscubscribeEnsure/{orderId}")
+    public ModelAndView sUnsubscribeEnsure(@PathVariable Long orderId, HttpSession session, ModelMap modelMap){
+        Student student = (Student) session.getAttribute("student");
+        OrderVO orderVO = orderService.getUnsubscribeInfo(orderId);
+        orderService.dropClass(orderId, orderVO.getAmountReturned());
+        try {
+            cardService.update(student.getId(), orderVO.getAmountReturned());
+        } catch (NoCardException e) {
+            modelMap.put("errorMessage", "没有绑定银行卡，请您先绑定银行卡！");
+            modelMap.put("title", "支付失败");
+            return new ModelAndView("alerts/sError");
+        }
+        accountService.updateTotalConsumption(student.getId(), -orderVO.getAmountReturned());
+        modelMap.put("title", "退课成功！");
+        modelMap.put("successMessage", "课程退订成功");
+        return new ModelAndView("alerts/sSuccess");
     }
 }

@@ -123,6 +123,7 @@
                         <li class="active"><a href="#reserved" data-toggle="tab">预订中</a></li>
                         <li><a href="#payed" data-toggle="tab">已付款</a></li>
                         <li><a href="#cancelled" data-toggle="tab">已取消</a></li>
+                        <li><a href="#dropped" data-toggle="tab">已退课</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="reserved">
@@ -200,7 +201,7 @@
                                         <td><span class="label label-success">已支付</span></td>
                                         <td>
                                             <div class="pull-right" style="margin-right: 10pt">
-                                                <a href="/">退课</a>
+                                                <a href="/sUnsubscribe/${orderPayed.orderId}">退课</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -244,6 +245,36 @@
                                     </tr>
                                 </c:forEach>
 
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="dropped">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>订单ID</th>
+                                    <th>课程ID</th>
+                                    <th>班级ID</th>
+                                    <th>科目</th>
+                                    <th>下单时间</th>
+                                    <th>支付时间</th>
+                                    <th>退课时间</th>
+                                    <th>支付金额</th>
+                                    <th>退还金额</th>
+                                    <th>状态</th>
+                                </tr>
+                                <c:forEach items="${ordersDropped}" var="orderDropped">
+                                    <tr>
+                                        <td>${orderDropped.orderId}</td>
+                                        <td>${orderDropped.courseId}</td>
+                                        <td>${orderDropped.classId}</td>
+                                        <td><span class="label label-success">${orderReserved.type}</span></td>
+                                        <td>${orderDropped.createTime}</td>
+                                        <td>${orderDropped.payedTime}</td>
+                                        <td>${orderDropped.dropTime}</td>
+                                        <td>${orderDropped.payment}</td>
+                                        <td>${orderDropped.amountReturned}</td>
+                                        <td><span class="label label-danger">已退课</span></td>
+                                    </tr>
+                                </c:forEach>
                             </table>
                         </div>
                         <!-- /.tab-pane -->

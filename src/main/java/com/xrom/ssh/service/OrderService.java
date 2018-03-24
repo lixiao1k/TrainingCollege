@@ -17,11 +17,13 @@ public interface OrderService {
     void pay(Long studentId, Long classId);
     void pay(Long orderId, Long userId, int payment);
     void payOffline(Long studentId, Long classId);
-    void dropClass(Long orderId);
+    void dropClass(Long orderId, int amountReturn);
     List<OrderVO> getAllOfStudentByState(Long studentId, OrderState state);
     List<OrderVO> getAllOfClassByState(Long classId, OrderState state);
     List<OrderVO> getAllOfInstituteByState(String institutionCode, OrderState state);
     void flush();
     Long save(Order order);
     SPayInfoVO getPayInfoVO(Long orderId, Long studentId);
+    //获得退款时展示信息的OrderVO对象，包含退款数量
+    OrderVO getUnsubscribeInfo(Long orderId);
 }
