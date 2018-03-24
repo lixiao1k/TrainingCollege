@@ -120,6 +120,9 @@ public class CourseServiceImpl implements CourseService {
         List<SCourseVO> oCourse = new ArrayList<>(); // 已结课的课程列表
         SCourseVO scourseVO = null;
         Course course = null;
+        if(orderVOS == null || orderVOS.size() == 0){
+            return null;
+        }
         for (OrderVO orderVO : orderVOS){
             System.out.println(orderVO);
             scourseVO = new SCourseVO();

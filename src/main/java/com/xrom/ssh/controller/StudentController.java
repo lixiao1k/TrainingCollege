@@ -7,6 +7,7 @@ import com.xrom.ssh.entity.vo.SClassroomVO;
 import com.xrom.ssh.entity.vo.SCourseVO;
 import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.CreateSameCardException;
+import com.xrom.ssh.exceptions.NoCardException;
 import com.xrom.ssh.exceptions.SignInFailedException;
 import com.xrom.ssh.exceptions.UsedMailException;
 import com.xrom.ssh.service.*;
@@ -261,5 +262,29 @@ public class StudentController {
         modelMap.put("grade", grade);
         modelMap.put("course", course);
         return new ModelAndView("/sMyCourseDetail");
+    }
+
+    @RequestMapping(value = "/sCardPage")
+    public ModelAndView sCardPage(HttpSession session, ModelMap modelMap){
+        Student student = (Student) session.getAttribute("student");
+        Card card = cardService.getCard(student.getId());
+        String hasCard = "no";
+        if(card!=null){
+            hasCard = "yes";
+        }
+        modelMap.put("card", card);
+        modelMap.put("hasCard", hasCard);
+        return new ModelAndView("/sCard");
+    }
+
+    @RequestMapping(value = "/sAddCardMoney")
+    public ModelAndView sAddCardMoney(HttpSession session){
+        Student student = (Student) session.getAttribute("student");
+        try {
+            cardService.update(student.getId(), 100);
+        } catch (NoCardException e) {
+            e.printStackTrace();//此处不会有无卡情况
+        }
+        return new ModelAndView(new RedirectView("/sCardPage"));
     }
 }

@@ -97,7 +97,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Card</a>
+                                        <a href="/sCardPage" class="btn btn-default btn-flat">Card</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -143,7 +143,7 @@
                             <dt>账户总消费：</dt>
                             <dd>${account.totalConsumption}</dd>
                             <dt>积分余额：</dt>
-                            <dd></dd>
+                            <dd>${account.bpBalance}</dd>
                         </dl>
                     </div>
                     <!-- /.box-body -->

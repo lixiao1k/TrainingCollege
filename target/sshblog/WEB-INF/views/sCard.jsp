@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/14
-  Time: 下午8:05
+  Date: 2018/3/24
+  Time: 下午1:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>课程详细信息</title>
+    <title>学生个人信息主页</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -43,7 +43,6 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
     <header class="main-header">
@@ -117,74 +116,55 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-9">
-                <div class="row clearfix">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">班级信息列表</h3>
+            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
+                <c:if test="${hasCard=='yes'}">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="box box-widget widget-user">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-aqua-active">
+                            <h3 class="widget-user-username">工商银行卡</h3>
+                            <h5 class="widget-user-desc">${student.userName}</h5>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>班级ID</th>
-                                    <th>教师ID</th>
-                                    <th>预收人数</th>
-                                    <th>已收人数</th>
-                                    <th>总价</th>
-                                </tr>
-                                <c:forEach items="${classrooms}" var="classroom">
-                                    <tr>
-                                        <td>${classroom.id}</td>
-                                        <td>${classroom.teacherId}</td>
-                                        <td>${classroom.studentNumPlan}</td>
-                                        <td>${classroom.studentNumNow}</td>
-                                        <td>${classroom.priceTotal}</td>
-                                        <td>
-                                            <div class="pull-right" style="margin-right: 10pt">
-                                                <a href="/sOrder/${classroom.id}">预订</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">${card.cardNumber}</h5>
+                                        <span class="description-text">卡号</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">${card.balance}</h5>
+                                        <span class="description-text">余额</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4">
+                                    <div class="description-block">
+                                        <h5 class="description-header">➕</h5>
+                                        <span class="description-text"><a href="/sAddCardMoney">充钱</a></span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="box box-info">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <i class="fa fa-text-width"></i>
-
-                            <h3 class="box-title">课程信息</h3>
+                    <!-- /.widget-user -->
+                </c:if>
+                <c:if test="${hasCard=='no'}">
+                    <div class="lockscreen-wrapper">
+                        <div class="alert alert-danger alert-dismissible">
+                            <h4><i class="icon fa fa-ban"></i>无卡</h4>
+                            您尚未绑定银行卡，请前往绑定<br>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <dl>
-                                <dt>课程ID</dt>
-                                <dd>${course.id}</dd>
-                                <dt>开始时间</dt>
-                                <dd>${course.beginDate}</dd>
-                                <dt>结束时间</dt>
-                                <dd>${course.endDate}</dd>
-                                <dt>小时/周</dt>
-                                <dd>${course.hourPerWeek}</dd>
-                                <dt>周次</dt>
-                                <dd>${course.weeks}</dd>
-                                <dt>价格</dt>
-                                <dd>${course.price}</dd>
-                                <dt>类型</dt>
-                                <dd>${course.type}</dd>
-                                <dt>概要描述</dt>
-                                <dd>${course.description}</dd>
-                            </dl>
-                        </div>
-                        <!-- /.box-body -->
                     </div>
-                </div>
+                </c:if>
             </div>
         </div>
         <!-- /.container -->
@@ -201,7 +181,7 @@
 <!-- FastClick -->
 <script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>bootstrap/js/demo.js"></script>
 </body>
