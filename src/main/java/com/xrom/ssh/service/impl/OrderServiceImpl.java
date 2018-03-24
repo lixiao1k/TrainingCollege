@@ -2,32 +2,41 @@ package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.*;
 import com.xrom.ssh.entity.vo.OrderVO;
+import com.xrom.ssh.entity.vo.SPayInfoVO;
 import com.xrom.ssh.enums.OrderState;
+import com.xrom.ssh.exceptions.NoCardException;
 import com.xrom.ssh.repository.OrderRepository;
 import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired(required = true)
-    OrderRepository repository;
+    private OrderRepository repository;
 
     @Autowired(required = true)
-    CourseService courseService;
+    private CourseService courseService;
 
     @Autowired(required = true)
-    TeacherService teacherService;
+    private TeacherService teacherService;
 
     @Autowired(required = true)
-    ClassroomService classroomService;
+    private ClassroomService classroomService;
 
     @Autowired(required = true)
-    InstitutionService institutionService;
+    private InstitutionService institutionService;
+
+    @Autowired(required = true)
+    private CardService cardService;
+
+    @Autowired(required = true)
+    private AccountService accountService;
 
     @Override
     public List<OrderVO> findAllOfStudent(Long studentId) {
@@ -42,6 +51,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order get(Long studentId, Long classId) {
         return repository.getOrder(classId, studentId);
+    }
+
+    @Override
+    public Order get(Long orderId) {
+        return repository.get(orderId);
     }
 
     @Override
@@ -77,6 +91,25 @@ public class OrderServiceImpl implements OrderService {
         order.setIsPayedOffline(0);
         order.setIsUnSubscribed(0);
         repository.update(order);
+        flush();
+    }
+
+    @Override
+    public void pay(Long orderId, Long userId, int payment) {
+        Order order = repository.get(orderId);
+        order.setIsCancelled(0);
+        order.setIsPayed(1);
+        order.setIsReserved(0);
+        order.setIsPayedOffline(0);
+        order.setIsUnSubscribed(0);
+        order.setPayment(payment);
+        order.setPayedTime(new Date());
+        repository.update(order);
+        try {
+            cardService.update(userId, -payment);
+        } catch (NoCardException e) {
+            e.printStackTrace();
+        }
         flush();
     }
 
@@ -188,6 +221,30 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Long save(Order order) {
         return repository.save(order);
+    }
+
+    @Override
+    public SPayInfoVO getPayInfoVO(Long orderId, Long studentId) {
+        Order order = repository.get(orderId);
+        SPayInfoVO sPayInfoVO = new SPayInfoVO();
+        Card card = cardService.getCard(studentId);
+        Account account = accountService.getAccount(studentId);
+        sPayInfoVO.setOrderId(orderId);
+        if(card != null){
+            sPayInfoVO.setCardNumber(card.getCardNumber());
+            sPayInfoVO.setCardBalance(card.getBalance());
+        }
+        if(account != null){
+            sPayInfoVO.setBpBalance(account.getBpBalance());
+        }
+        int moneyFromBP = sPayInfoVO.getBpBalance()/10;
+        if(moneyFromBP > order.getPrice()/4){
+            moneyFromBP = order.getPrice()/4;
+        }
+        sPayInfoVO.setMoneyFromBP(moneyFromBP);
+        sPayInfoVO.setMoneyNeedPay(order.getPrice() - moneyFromBP);
+        sPayInfoVO.setOrderRawMoney(order.getPrice());
+        return sPayInfoVO;
     }
 
 

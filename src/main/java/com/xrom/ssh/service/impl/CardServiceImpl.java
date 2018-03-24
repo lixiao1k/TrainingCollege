@@ -1,9 +1,11 @@
 package com.xrom.ssh.service.impl;
 
+import com.xrom.ssh.entity.Account;
 import com.xrom.ssh.entity.Card;
 import com.xrom.ssh.exceptions.CreateSameCardException;
 import com.xrom.ssh.exceptions.NoCardException;
 import com.xrom.ssh.repository.CardRepository;
+import com.xrom.ssh.service.AccountService;
 import com.xrom.ssh.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Service;
 public class CardServiceImpl implements CardService {
     @Autowired(required = true)
     private CardRepository cardRepository;
+
+    @Autowired(required = true)
+    private AccountService accountService;
 
     @Override
     public Long saveCard(Card card) {
@@ -61,6 +66,7 @@ public class CardServiceImpl implements CardService {
         card.setUserId(userId);
         card.setCardNumber(cardNumber);
         saveCard(card);
+        accountService.updateCardNumber(userId, cardNumber);
         flush();
     }
 }

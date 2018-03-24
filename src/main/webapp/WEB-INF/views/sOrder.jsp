@@ -157,7 +157,7 @@
                                         <td><span class="label label-warning">预订中</span></td>
                                         <td>
                                             <div class="pull-right" style="margin-right: 10pt">
-                                                <a href="/">支付</a>
+                                                <a href="/sPayInfoPage/${orderReserved.orderId}">支付</a>
                                             </div>
                                             <div class="pull-right" style="margin-right: 10pt">
                                                 <a href="/sOrderCancel/${orderReserved.orderId}">取消</a>

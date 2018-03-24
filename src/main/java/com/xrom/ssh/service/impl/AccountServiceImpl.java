@@ -43,9 +43,31 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updateAccount(Long userId, int amount) {
         Account account = getAccount(userId);
-        System.out.println(userId);
-        System.out.println(account);
         account.setTotalConsumption(account.getTotalConsumption() + amount);
+        accountRepository.update(account);
+        flush();
+    }
+
+    @Override
+    public void updateBpBalance(Long userId, int amount) {
+        Account account = getAccount(userId);
+        account.setBpBalance(account.getBpBalance() + amount);
+        accountRepository.update(account);
+        flush();
+    }
+
+    @Override
+    public void updateTotalConsumption(Long userId, int amount) {
+        Account account = getAccount(userId);
+        account.setTotalConsumption(account.getTotalConsumption() + amount);
+        accountRepository.update(account);
+        flush();
+    }
+
+    @Override
+    public void updateCardNumber(Long userId, String cardNumber) {
+        Account account = getAccount(userId);
+        account.setCardNumber(cardNumber);
         accountRepository.update(account);
         flush();
     }

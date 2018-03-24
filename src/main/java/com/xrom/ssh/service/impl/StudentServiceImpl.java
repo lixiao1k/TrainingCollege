@@ -50,7 +50,9 @@ public class StudentServiceImpl implements StudentService {
             student.setPassword(password);
             student.setUserName(username);
             student.setEmail(mail);
-            return studentRepository.save(student);
+            Long userId =  studentRepository.save(student);
+            validate(mail);//测试时使用
+            return userId;
         }
     }
 

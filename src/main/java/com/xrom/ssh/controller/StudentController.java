@@ -5,6 +5,7 @@ import com.xrom.ssh.entity.*;
 import com.xrom.ssh.entity.vo.OrderVO;
 import com.xrom.ssh.entity.vo.SClassroomVO;
 import com.xrom.ssh.entity.vo.SCourseVO;
+import com.xrom.ssh.entity.vo.SPayInfoVO;
 import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.CreateSameCardException;
 import com.xrom.ssh.exceptions.NoCardException;
@@ -286,5 +287,43 @@ public class StudentController {
             e.printStackTrace();//此处不会有无卡情况
         }
         return new ModelAndView(new RedirectView("/sCardPage"));
+    }
+
+    @RequestMapping(value = "/sPayInfoPage/{orderId}")
+    public ModelAndView sPayInfo(@PathVariable Long orderId, HttpSession session, ModelMap modelMap){
+        Student student = (Student) session.getAttribute("student");
+        SPayInfoVO sPayInfoVO = orderService.getPayInfoVO(orderId, student.getId());
+        modelMap.put("sPayInfoVO", sPayInfoVO);
+        return new ModelAndView("/sPayInfo");
+    }
+
+    @RequestMapping(value = "/sPayCancel")
+    public ModelAndView sPayCancel(){
+        return new ModelAndView(new RedirectView("/sOrder"));
+    }
+
+    @RequestMapping(value = "/sPay/{orderId}")
+    public ModelAndView sPay(@PathVariable Long orderId, HttpSession session, ModelMap modelMap){
+        Order order = orderService.get(orderId);
+        if(order.getIsPayed() == 1){
+            modelMap.put("errorMessage", "此订单已支付！无需再次支付！");
+            return new ModelAndView("alerts/sPayError");
+        }
+
+        Student student = (Student) session.getAttribute("student");
+        SPayInfoVO sPayInfoVO = orderService.getPayInfoVO(orderId, student.getId());
+        if(sPayInfoVO.getCardNumber() == null || sPayInfoVO.getCardNumber() == ""){
+            modelMap.put("errorMessage", "没有绑定银行卡，请您先绑定银行卡！");
+            return new ModelAndView("alerts/sPayError");
+        }
+        if(sPayInfoVO.getMoneyNeedPay() > sPayInfoVO.getCardBalance()){
+            modelMap.put("errorMessage", "银行卡余额不足，请先前往充值！");
+            return new ModelAndView("alerts/sPayError");
+        }
+        orderService.pay(orderId, student.getId(), sPayInfoVO.getMoneyNeedPay());
+        accountService.updateAccount(student.getId(), -(sPayInfoVO.getMoneyFromBP()*10));
+        accountService.updateBpBalance(student.getId(), sPayInfoVO.getMoneyNeedPay()-sPayInfoVO.getMoneyFromBP()*10);
+        accountService.updateTotalConsumption(student.getId(), sPayInfoVO.getMoneyNeedPay());
+        return new ModelAndView("alerts/sPaySuccess");
     }
 }

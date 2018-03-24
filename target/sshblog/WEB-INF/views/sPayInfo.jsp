@@ -2,11 +2,10 @@
   Created by IntelliJ IDEA.
   User: shelton
   Date: 2018/3/24
-  Time: 下午1:39
+  Time: 下午3:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -18,7 +17,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>银行卡管理</title>
+    <title>支付信息</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -58,7 +57,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="/sHome">个人信息</a></li>
+                        <li class="active"><a href="/sHome">个人信息 <span class="sr-only">(current)</span></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -117,54 +116,38 @@
     <div class="content-wrapper">
         <div class="container">
             <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
-                <c:if test="${hasCard=='yes'}">
-                    <!-- Widget: user widget style 1 -->
-                    <div class="box box-widget widget-user">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-aqua-active">
-                            <h3 class="widget-user-username">工商银行卡</h3>
-                            <h5 class="widget-user-desc">${student.userName}</h5>
-                        </div>
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <i class="fa fa-text-width"></i>
+
+                        <h3 class="box-title">支付信息预览</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <dl class="dl-horizontal">
+                            <dt>订单号</dt>
+                            <dd>${sPayInfoVO.orderId}</dd>
+                            <dt>订单金额</dt>
+                            <dd>${sPayInfoVO.orderRawMoney}</dd>
+                            <dt>银行卡号</dt>
+                            <dd>${sPayInfoVO.cardNumber}</dd>
+                            <dt>银行卡余额</dt>
+                            <dd>${sPayInfoVO.cardBalance}</dd>
+                            <dt>积分余额</dt>
+                            <dd>${sPayInfoVO.bpBalance}</dd>
+                            <dt>积分可兑换金额</dt>
+                            <dd>${sPayInfoVO.moneyFromBP}</dd>
+                            <dt>总付款金额</dt>
+                            <dd>${sPayInfoVO.moneyNeedPay}</dd>
+                        </dl>
                         <div class="box-footer">
-                            <div class="row">
-                                <div class="col-sm-4 border-right">
-                                    <div class="description-block">
-                                        <h5 class="description-header">${card.cardNumber}</h5>
-                                        <span class="description-text">卡号</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 border-right">
-                                    <div class="description-block">
-                                        <h5 class="description-header">${card.balance}</h5>
-                                        <span class="description-text">余额</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4">
-                                    <div class="description-block">
-                                        <h5 class="description-header">➕</h5>
-                                        <span class="description-text"><a href="/sAddCardMoney">充钱</a></span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
+                            <a href="/sPayCancel" class="btn btn-default">取消</a>
+                            <a href="/sPay/${sPayInfoVO.orderId}" class="btn btn-info pull-right">确定支付</a>
                         </div>
                     </div>
-                    <!-- /.widget-user -->
-                </c:if>
-                <c:if test="${hasCard=='no'}">
-                    <div class="lockscreen-wrapper">
-                        <div class="alert alert-danger alert-dismissible">
-                            <h4><i class="icon fa fa-ban"></i>无卡</h4>
-                            您尚未绑定银行卡，请前往绑定<br>
-                        </div>
-                    </div>
-                </c:if>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
             </div>
         </div>
         <!-- /.container -->

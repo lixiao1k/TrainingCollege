@@ -8,6 +8,9 @@ public interface AccountService {
     Account getAccount(Long userId);
     void deleteAccount(Long userId);
     void updateAccount(Long userId, int amount);
+    void updateBpBalance(Long userId, int amount);
+    void updateTotalConsumption(Long userId, int amount);
+    void updateCardNumber(Long userId, String cardNumber);
     void flush();
     void insertCard(String cardNumber, Long userId);
     int getConsumption(Long userId) throws NotValidatedUserException;
