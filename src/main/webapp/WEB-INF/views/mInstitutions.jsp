@@ -71,7 +71,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">结算</a></li>
+                        <li><a href="/mInstitutionFinancial">结算</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">申请<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -87,7 +87,7 @@
                                 <li class="divider"></li>
                                 <li><a href="/mStudents">学员信息</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">财务情况</a></li>
+                                <li><a href="/mBillsPage">财务情况</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -122,7 +122,6 @@
                                 <th>简单描述</th>
                                 <th>创建课程总数</th>
                                 <th>进行中课程总数</th>
-                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -135,11 +134,6 @@
                                     <td>${mInstitutionVO.description}</td>
                                     <td>${mInstitutionVO.coursesNum}</td>
                                     <td>${mInstitutionVO.openedCoursesNum}</td>
-                                    <td>
-                                        <div class="pull-left" style="margin-right: 10pt">
-                                            <a href="/">查看</a>
-                                        </div>
-                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -152,7 +146,6 @@
                                 <th>简单描述</th>
                                 <th>创建课程总数</th>
                                 <th>进行中课程总数</th>
-                                <th></th>
                             </tr>
                             </tfoot>
                         </table>

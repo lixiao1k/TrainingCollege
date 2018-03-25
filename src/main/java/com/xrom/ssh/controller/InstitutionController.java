@@ -100,18 +100,27 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iHome", method = RequestMethod.GET)
     public ModelAndView iHome(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) httpSession.getAttribute("institution");
         modelMap.put("institution", institution);
         return new ModelAndView("/iHome");
     }
 
     @RequestMapping(value = "iModify", method = RequestMethod.GET)
-    public ModelAndView iModify(){
+    public ModelAndView iModify(HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         return new ModelAndView("/iModify");
     }
 
     @RequestMapping(value = "iModifyApplication", method = RequestMethod.POST)
     public ModelAndView iModifyApplication(HttpServletRequest request, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) httpSession.getAttribute("institution");
         String name = request.getParameter("name");
         String address = request.getParameter("address");
@@ -130,6 +139,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "iTeachers", method = RequestMethod.GET)
     public ModelAndView iTeachers(HttpSession httpSession, Model model){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) httpSession.getAttribute("institution");
         String code = institution.getCode();
         List<Teacher> teachers = teacherService.findTeachersOfInstitution(code);
@@ -138,13 +150,19 @@ public class InstitutionController {
     }
 
     @RequestMapping(value = "/teacher_delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteTeacher(@PathVariable Long id){
+    public ModelAndView deleteTeacher(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         teacherService.deleteTeacher(id);
         return new ModelAndView(new RedirectView("/iTeachers"));
     }
 
     @RequestMapping(value = "/iAddTeacher", method = RequestMethod.POST)
     public ModelAndView iAddTeacher(HttpServletRequest request, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) httpSession.getAttribute("institution");
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
@@ -154,12 +172,18 @@ public class InstitutionController {
     }
 
     @RequestMapping(value = "/iAddCoursePage", method = RequestMethod.GET)
-    public ModelAndView iAddCoursePage(){
+    public ModelAndView iAddCoursePage(HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         return new ModelAndView("/iAddCoursePage");
     }
 
     @RequestMapping(value = "/iAddCourse", method = RequestMethod.POST)
     public ModelAndView iAddCourse(HttpServletRequest request, HttpSession httpSession, Model model){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) httpSession.getAttribute("institution");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String beginDateStr = request.getParameter("beginDate");
@@ -184,6 +208,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iGetCourseDetail/{id}", method = RequestMethod.GET)
     public ModelAndView iCourseDetail(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Course course = courseService.getCourse(id);
         httpSession.setAttribute("course",course);
         return new ModelAndView(new RedirectView("/iCourseDetail"));
@@ -191,6 +218,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iCourses", method = RequestMethod.GET)
     public ModelAndView iCourses(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) httpSession.getAttribute("institution");
         List<Course> courses = courseService.findAll(institution.getCode());
         modelMap.put("institution", institution);
@@ -200,6 +230,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iCourseDetail", method = RequestMethod.GET)
     public ModelAndView iCourseDetail(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Course course = (Course) httpSession.getAttribute("course");
         List<Classroom> classrooms = classroomService.findAll(course.getId());
         modelMap.put("course", course);
@@ -208,7 +241,10 @@ public class InstitutionController {
     }
 
     @RequestMapping(value = "/iAddClassStudentNow/{id}", method = RequestMethod.GET)
-    public ModelAndView iAddClassStudentNow(@PathVariable Long id){
+    public ModelAndView iAddClassStudentNow(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Classroom classroom = classroomService.getClass(id);
         int classStudentNow = classroom.getStudentNumNow();
         int classStudentPlan = classroom.getStudentNumPlan();
@@ -220,7 +256,10 @@ public class InstitutionController {
     }
 
     @RequestMapping(value = "/iMinusClassStudentNow/{id}", method = RequestMethod.GET)
-    public ModelAndView iMinusClassStudentNow(@PathVariable Long id){
+    public ModelAndView iMinusClassStudentNow(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Classroom classroom = classroomService.getClass(id);
         int classStudentNow = classroom.getStudentNumNow();
         if(classStudentNow <= 0){
@@ -232,6 +271,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iAddClass", method = RequestMethod.POST)
     public ModelAndView iAddClass(HttpSession httpSession, HttpServletRequest request){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Course course = (Course) httpSession.getAttribute("course");
         String teacherId = request.getParameter("teacherId");
         String studentsPlan = request.getParameter("studentsPlan");
@@ -240,13 +282,19 @@ public class InstitutionController {
     }
 
     @RequestMapping(value = "/iDeleteClass/{id}", method = RequestMethod.GET)
-    public ModelAndView iDeleteClass(@PathVariable Long id){
+    public ModelAndView iDeleteClass(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         classroomService.deleteClass(id);
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
 
     @RequestMapping(value = "/iClassSignPage", method = RequestMethod.GET)
     public ModelAndView iClassSignPage(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Course course = (Course) httpSession.getAttribute("course");
         Classroom classroom = (Classroom) httpSession.getAttribute("classroom");
         List<LearnSign> learnSigns = learnSignService.findAll(classroom.getId());
@@ -258,6 +306,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iClassSign/{id}", method = RequestMethod.GET)
     public ModelAndView iClassSign(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Classroom classroom = classroomService.getClass(id);
         httpSession.setAttribute("classroom", classroom);
         return new ModelAndView(new RedirectView("/iClassSignPage"));
@@ -265,6 +316,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iAddSign", method = RequestMethod.POST)
     public ModelAndView iAddSign(HttpSession httpSession, HttpServletRequest request){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Classroom classroom = (Classroom) httpSession.getAttribute("classroom");
         Long studentId = Long.parseLong(request.getParameter("studentId"));
         String dateStr = request.getParameter("date");
@@ -285,6 +339,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iGradePage/{id}")
     public ModelAndView iGradePage(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Course course = (Course) httpSession.getAttribute("course");
         Classroom classroom = classroomService.getClass(id);
         httpSession.setAttribute("classroom",classroom);
@@ -297,6 +354,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iAddGrade")
     public ModelAndView iAddGrade(HttpSession httpSession, HttpServletRequest request){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Classroom classroom = (Classroom) httpSession.getAttribute("classroom");
         String gradeStr = request.getParameter("grade");
         String studentIdStr = request.getParameter("studentId");
@@ -312,6 +372,9 @@ public class InstitutionController {
 
     @RequestMapping(value = "/iOrders")
     public ModelAndView iOrders(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) httpSession.getAttribute("institution");
         List<OrderVO> orderVOSPayed = orderService.getAllOfInstituteByState(institution.getCode(), OrderState.PAYED);
         List<OrderVO> orderVOSDropped = orderService.getAllOfInstituteByState(institution.getCode(), OrderState.DROPPED);
@@ -323,12 +386,18 @@ public class InstitutionController {
 
     //线下支付界面
     @RequestMapping(value = "/iPayOfflinePage")
-    public ModelAndView iPayOfflinePage(){
+    public ModelAndView iPayOfflinePage(HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         return new ModelAndView("/iPayOffline");
     }
 
     @RequestMapping(value = "/iPayOffline", method = RequestMethod.POST)
     public ModelAndView iPayOffline(HttpServletRequest request, ModelMap modelMap, HttpSession session){
+        if(session.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) session.getAttribute("institution");
         Long orderId = Long.parseLong(request.getParameter("orderId"));
         Order order = orderService.get(orderId);
@@ -353,12 +422,18 @@ public class InstitutionController {
 
     //支付信息中的取消支付action
     @RequestMapping(value = "/iPayOfflineCancel")
-    public ModelAndView iPayOfflineCancel(){
+    public ModelAndView iPayOfflineCancel(HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         return new ModelAndView(new RedirectView("/iPayOfflinePage"));
     }
 
     @RequestMapping(value = "/iPayOfflineEnsure/{orderId}")
-    public ModelAndView iPayOfflineEnsure(@PathVariable Long orderId, ModelMap modelMap){
+    public ModelAndView iPayOfflineEnsure(@PathVariable Long orderId, ModelMap modelMap, HttpSession httpSession){
+        if(httpSession.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Order order = orderService.get(orderId);
         orderService.payOffline(orderId, order.getPrice());
         Account account = accountService.getAccount(order.getStudentId());
@@ -373,6 +448,9 @@ public class InstitutionController {
     //查看机构账目
     @RequestMapping(value = "/iBillsPage")
     public ModelAndView iBillsPage(HttpSession session, ModelMap modelMap){
+        if(session.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Institution institution = (Institution) session.getAttribute("institution");
         List<BillsVO> payedBills = orderService.getAllPayedBillsOfInstitute(institution.getCode());
         int payedSum = orderService.getBillsSum(payedBills);
@@ -390,5 +468,9 @@ public class InstitutionController {
         return new ModelAndView("/iBills");
     }
 
-
+    @RequestMapping(value = "/iLogOut")
+    public ModelAndView iLogOut(HttpSession session){
+        session.invalidate();
+        return new ModelAndView(new RedirectView("/"));
+    }
 }

@@ -18,4 +18,6 @@ public interface InstitutionService {
     void flush();
     Boolean signIn(String code, String password);
     List<MInstitutionVO> getAllMInstitutionVOs();
+    //获得所有机构的财务汇总
+    List<MInstitutionVO> getAllInstitutionFinancial();
 }

@@ -2,10 +2,12 @@ package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Course;
 import com.xrom.ssh.entity.Institution;
+import com.xrom.ssh.entity.vo.BillsVO;
 import com.xrom.ssh.entity.vo.MInstitutionVO;
 import com.xrom.ssh.repository.InstitutionRepository;
 import com.xrom.ssh.service.CourseService;
 import com.xrom.ssh.service.InstitutionService;
+import com.xrom.ssh.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Autowired(required = true)
     private CourseService courseService;
+
+    @Autowired(required = true)
+    private OrderService orderService;
 
     @Override
     public String createInstitution(Institution institution) {
@@ -124,5 +129,27 @@ public class InstitutionServiceImpl implements InstitutionService {
             mInstitutionVOs.add(mInstitutionVO);
         }
         return mInstitutionVOs;
+    }
+
+    @Override
+    public List<MInstitutionVO> getAllInstitutionFinancial() {
+        List<MInstitutionVO> mInstitutionVOS = getAllMInstitutionVOs();
+        for(MInstitutionVO mInstitutionVO : mInstitutionVOS){
+            List<BillsVO> payedBills = orderService.getAllPayedBillsOfInstitute(mInstitutionVO.getCode());
+            if(payedBills != null && payedBills.size() != 0){
+                mInstitutionVO.setPayedSum(orderService.getBillsSum(payedBills));
+            }
+            List<BillsVO> droppedBills = orderService.getAllDropedBillsOfInstitute(mInstitutionVO.getCode());
+            if(droppedBills != null && droppedBills.size() != 0){
+                mInstitutionVO.setDroppedSum(orderService.getBillsSum(droppedBills));
+            }
+            List<BillsVO> payedOfflineBills = orderService.getAllOfflineBillsOfInstitute(mInstitutionVO.getCode());
+            if(payedOfflineBills != null && payedOfflineBills.size() != 0){
+                mInstitutionVO.setPayedOffline(orderService.getBillsSum(payedOfflineBills));
+            }
+            mInstitutionVO.setPayForInstitution
+                            ((mInstitutionVO.getPayedSum()+mInstitutionVO.getDroppedSum())*7/10 - mInstitutionVO.getPayedOffline()*3/10);
+        }
+        return mInstitutionVOS;
     }
 }

@@ -57,7 +57,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/mHome">结算<span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="/mInstitutionFinancial">结算<span class="sr-only">(current)</span></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">申请<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -73,7 +73,7 @@
                                 <li class="divider"></li>
                                 <li><a href="/mStudents">学员信息</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">财务情况</a></li>
+                                <li><a href="/mBillsPage">财务情况</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -84,6 +84,12 @@
                     </form>
                 </div>
                 <!-- /.navbar-collapse -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li><a href="/mLogOut">登出</a></li>
+                    </ul>
+                </div>
             </div>
             <!-- /.container-fluid -->
         </nav>

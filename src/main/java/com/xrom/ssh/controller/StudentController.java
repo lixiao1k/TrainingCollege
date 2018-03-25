@@ -84,7 +84,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/sSignIn", method = RequestMethod.POST)
-    public ModelAndView sSignIn(HttpServletRequest request, HttpSession httpSession){
+    public ModelAndView sSignIn(HttpServletRequest request, HttpSession httpSession, ModelMap modelMap){
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if(email == null || password == null){
@@ -92,6 +92,11 @@ public class StudentController {
         }
         try {
             Student student = studentService.signIn(email, password);
+            if(student.getUserState() == 2){
+                modelMap.put("errorMessage", "被取消资格用户无法登陆！");
+                modelMap.put("title", "登陆失败");
+                return new ModelAndView("alerts/sError");
+            }
             httpSession.setAttribute("student", student);
             return new ModelAndView(new RedirectView("/sHome"));
         } catch (SignInFailedException e) {
@@ -101,6 +106,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sHome", method = RequestMethod.GET)
     public ModelAndView sHome(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         Long sid = student.getId();
         Account account = accountService.getAccount(sid);
@@ -115,6 +123,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sModify", method = RequestMethod.GET)
     public ModelAndView sModify(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         Card card = cardService.getCard(student.getId());
         modelMap.put("student", student);
@@ -124,6 +135,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sModifyName", method = RequestMethod.POST)
     public ModelAndView sModifyName(HttpServletRequest request, HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         String modifiedName = request.getParameter("userName");
         if(modifiedName == ""){
@@ -136,6 +150,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sModifyCard", method = RequestMethod.POST)
     public ModelAndView sModifyCard(HttpServletRequest request, HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         String modifiedCard = request.getParameter("cardNumber");
         Card card = cardService.getCard(student.getId());
@@ -165,6 +182,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sOrder", method = RequestMethod.GET)
     public ModelAndView sOrder(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         List<OrderVO> orderReserved = orderService.getAllOfStudentByState(student.getId(), OrderState.RESERVED);
         List<OrderVO> orderPayed = orderService.getAllOfStudentByState(student.getId(), OrderState.PAYED);
@@ -179,6 +199,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sCourseMine", method = RequestMethod.GET)
     public ModelAndView sCourseMine(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         List<SCourseVO> underWayOrder =  courseService.findAllOfStudent(true, student.getId());
         List<SCourseVO> outOfWayOrder = courseService.findAllOfStudent(false, student.getId());
@@ -190,7 +213,10 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/sAllCourse", method = RequestMethod.GET)
-    public ModelAndView sAllCourse(ModelMap modelMap){
+    public ModelAndView sAllCourse(ModelMap modelMap, HttpSession httpSession){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         List<Course> uCourses = courseService.findAll(true); //进行中的所有课程
         List<Course> oCourses = courseService.findAll(false); //已结束的所有课程
         modelMap.put("uCourses", uCourses);
@@ -200,6 +226,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sCourseDetailPage")
     public ModelAndView sCourseDetailPage(HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Course course = (Course) httpSession.getAttribute("course");
         List<Classroom> classrooms = classroomService.findAll(course.getId());
         List<SClassroomVO> sClassroomVOS = classroomService.toSClassroomVO(classrooms);
@@ -211,6 +240,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sCourseDetail/{id}")
     public ModelAndView sCourseDetail(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Course course = courseService.getCourse(id);
         httpSession.setAttribute("course", course);
         return new ModelAndView(new RedirectView("/sCourseDetailPage"));
@@ -218,6 +250,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sOrder/{id}")
     public ModelAndView sOrder(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         Classroom classroom = classroomService.getClass(id);
         Course course = courseService.getCourse(classroom.getCourseId());
@@ -244,6 +279,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sOrderCancel/{id}")
     public ModelAndView sOrderCancel(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         orderService.cancel(id);
         return new ModelAndView(new RedirectView("/sOrder"));
     }
@@ -251,6 +289,9 @@ public class StudentController {
     //传入的是课程id，先转为班级id
     @RequestMapping(value = "/sMyCourseDetail/{id}")
     public ModelAndView sMyCourseDetail(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) httpSession.getAttribute("student");
         Classroom classroom = classroomService.getClassroom(student.getId(), id);
         List<LearnSign> learnSigns = null;
@@ -269,6 +310,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sCardPage")
     public ModelAndView sCardPage(HttpSession session, ModelMap modelMap){
+        if(session.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) session.getAttribute("student");
         Card card = cardService.getCard(student.getId());
         String hasCard = "no";
@@ -282,6 +326,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sAddCardMoney")
     public ModelAndView sAddCardMoney(HttpSession session){
+        if(session.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) session.getAttribute("student");
         try {
             cardService.update(student.getId(), 100);
@@ -293,6 +340,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sPayInfoPage/{orderId}")
     public ModelAndView sPayInfo(@PathVariable Long orderId, HttpSession session, ModelMap modelMap){
+        if(session.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) session.getAttribute("student");
         SPayInfoVO sPayInfoVO = orderService.getPayInfoVO(orderId, student.getId());
         modelMap.put("sPayInfoVO", sPayInfoVO);
@@ -300,12 +350,18 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/sPayCancel")
-    public ModelAndView sPayCancel(){
+    public ModelAndView sPayCancel(HttpSession session){
+        if(session.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         return new ModelAndView(new RedirectView("/sOrder"));
     }
 
     @RequestMapping(value = "/sPay/{orderId}")
     public ModelAndView sPay(@PathVariable Long orderId, HttpSession session, ModelMap modelMap){
+        if(session.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Order order = orderService.get(orderId);
         if(order.getIsPayed() == 1){
             modelMap.put("errorMessage", "此订单已支付！无需再次支付！");
@@ -335,7 +391,10 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/sUnsubscribe/{orderId}")
-    public ModelAndView sUnsubscribe(@PathVariable Long orderId, ModelMap modelMap){
+    public ModelAndView sUnsubscribe(@PathVariable Long orderId, ModelMap modelMap, HttpSession session){
+        if(session.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Order order = orderService.get(orderId);
         Classroom classroom = classroomService.getClass(order.getClassId());
         Course course = courseService.getCourse(classroom.getCourseId());
@@ -351,7 +410,10 @@ public class StudentController {
 
     //退款时展示退款信息
     @RequestMapping(value = "/sUnsubscribeInfo/{orderId}")
-    public ModelAndView sUnsubscribeInfo(@PathVariable Long orderId, ModelMap modelMap){
+    public ModelAndView sUnsubscribeInfo(@PathVariable Long orderId, ModelMap modelMap, HttpSession httpSession){
+        if(httpSession.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         OrderVO orderVO = orderService.getUnsubscribeInfo(orderId);
         modelMap.put("orderVO", orderVO);
         return new ModelAndView("/sUnsubscribeInfo");
@@ -359,6 +421,9 @@ public class StudentController {
 
     @RequestMapping(value = "/sUnscubscribeEnsure/{orderId}")
     public ModelAndView sUnsubscribeEnsure(@PathVariable Long orderId, HttpSession session, ModelMap modelMap){
+        if(session.getAttribute("student") == null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         Student student = (Student) session.getAttribute("student");
         OrderVO orderVO = orderService.getUnsubscribeInfo(orderId);
         orderService.dropClass(orderId, orderVO.getAmountReturned());
@@ -373,5 +438,11 @@ public class StudentController {
         modelMap.put("title", "退课成功！");
         modelMap.put("successMessage", "课程退订成功");
         return new ModelAndView("alerts/sSuccess");
+    }
+
+    @RequestMapping(value = "/sLogOut")
+    public ModelAndView sLogOut(HttpSession httpSession){
+        httpSession.invalidate();
+        return new ModelAndView(new RedirectView("/"));
     }
 }

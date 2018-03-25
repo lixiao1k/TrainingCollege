@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/15
-  Time: 上午10:28
+  Date: 2018/3/11
+  Time: 上午11:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>课程记录信息</title>
+    <title>机构信息修改申请信息查看</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -62,7 +62,7 @@
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand"><b>Training College</b>首页</a>
+                    <a href="/" class="navbar-brand"><b>Training</b>College</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -71,16 +71,25 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="/sHome">个人信息</a></li>
+                        <li><a href="/mInstitutionFinancial">结算</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">申请<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/sCourseMine">我的</a></li>
+                                <li><a href="/mRegisterApplication">机构注册申请</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/sAllCourse">全部</a></li>
+                                <li><a href="/mModifyApplication">机构信息修改申请</a></li>
                             </ul>
                         </li>
-                        <li><a href="/sOrder">订单查看</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">统计<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/mInstitutions">机构信息</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/mStudents">学员信息</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/mBillsPage">财务情况</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -89,39 +98,6 @@
                     </form>
                 </div>
                 <!-- /.navbar-collapse -->
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- User Account Menu -->
-                        <li class="dropdown user user-menu">
-                            <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">${student.userName}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- The user image in the menu -->
-                                <li class="user-header">
-                                    <p>
-                                        ${student.userName}
-                                        <small>${student.email}</small>
-                                        <small>More Pain, More Gain</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="/sCardPage" class="btn btn-default btn-flat">Card</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="/sLogOut" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-custom-menu -->
             </div>
             <!-- /.container-fluid -->
         </nav>
@@ -129,74 +105,52 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">课堂登记记录表</h3>
+                        <h3 class="box-title">机构统计信息表</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>课程ID</th>
-                                <th>时间</th>
+                                <th>机构代码</th>
+                                <th>机构名称</th>
+                                <th>机构电话</th>
+                                <th>线上支付总额</th>
+                                <th>线上退课款总额</th>
+                                <th>线下支付总额</th>
+                                <th>需支付机构总额</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${learnSigns}" var="learnSign">
+                            <c:forEach items="${mInstitutionVOs}" var="mInstitutionVO">
                                 <tr>
-                                    <td>${learnSign.classId}</td>
-                                    <td>${learnSign.date}</td>
+                                    <td>${mInstitutionVO.code}</td>
+                                    <td>${mInstitutionVO.name}</td>
+                                    <td>${mInstitutionVO.phone}</td>
+                                    <td>${mInstitutionVO.payedSum}</td>
+                                    <td>${mInstitutionVO.droppedSum}</td>
+                                    <td>${mInstitutionVO.payedOffline}</td>
+                                    <td>${mInstitutionVO.payForInstitution}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>学生ID</th>
-                                <th>时间</th>
+                                <th>机构代码</th>
+                                <th>机构名称</th>
+                                <th>机构电话</th>
+                                <th>线上支付总额</th>
+                                <th>线上退课款总额</th>
+                                <th>线下支付总额</th>
+                                <th>需支付机构总额</th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
                     <!-- /.box-body -->
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <i class="fa fa-text-width"></i>
-
-                            <h3 class="box-title">班级信息</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <dl>
-                                <dt>成绩</dt>
-                                <dd>${grade}</dd>
-                                <dt>班级ID</dt>
-                                <dd>${classroom.id}</dd>
-                                <dt>课程ID</dt>
-                                <dd>${course.id}</dd>
-                                <dt>开始时间</dt>
-                                <dd>${course.beginDate}</dd>
-                                <dt>结束时间</dt>
-                                <dd>${course.endDate}</dd>
-                                <dt>小时/周</dt>
-                                <dd>${course.hourPerWeek}</dd>
-                                <dt>周次</dt>
-                                <dd>${course.weeks}</dd>
-                                <dt>价格</dt>
-                                <dd>${course.price}</dd>
-                                <dt>类型</dt>
-                                <dd>${course.type}</dd>
-                                <dt>概要描述</dt>
-                                <dd>${course.description}</dd>
-                            </dl>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
                 </div>
             </div>
         </div>
@@ -252,4 +206,5 @@
     })
 </script>
 </body>
+</html>
 </html>

@@ -290,8 +290,6 @@ public class OrderServiceImpl implements OrderService {
     public List<BillsVO> getAllOfflineBillsOfInstitute(String institutionCode) {
         List<BillsVO> billsVOS = new ArrayList<>();
         List<OrderVO> offlineOrders = getAllOfInstituteByState(institutionCode, OrderState.OFFLINE);
-        System.out.println("---------------------------------");
-        System.out.println(offlineOrders);
         if(offlineOrders != null){
             for(OrderVO orderVO : offlineOrders){
                 BillsVO billsVO = new BillsVO();
@@ -338,6 +336,45 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return billsVOS;
+    }
+
+    @Override
+    public List<BillsVO> getAllOfflineBills() {
+        List<Institution> institutions = institutionService.getAllInstitutions();
+        List<BillsVO> offlineBills = new ArrayList<>();
+        for(Institution institution : institutions){
+            List<BillsVO> billsOfInstitute = getAllOfflineBillsOfInstitute(institution.getCode());
+            if(billsOfInstitute != null && billsOfInstitute.size() != 0){
+                offlineBills.addAll(billsOfInstitute);
+            }
+        }
+        return offlineBills;
+    }
+
+    @Override
+    public List<BillsVO> getAllPayedBills() {
+        List<Institution> institutions = institutionService.getAllInstitutions();
+        List<BillsVO> payedBills = new ArrayList<>();
+        for(Institution institution : institutions){
+            List<BillsVO> billsOfInstitute = getAllPayedBillsOfInstitute(institution.getCode());
+            if(billsOfInstitute != null && billsOfInstitute.size() != 0){
+                payedBills.addAll(billsOfInstitute);
+            }
+        }
+        return payedBills;
+    }
+
+    @Override
+    public List<BillsVO> getAllDropedBills() {
+        List<Institution> institutions = institutionService.getAllInstitutions();
+        List<BillsVO> droppedBills = new ArrayList<>();
+        for(Institution institution : institutions){
+            List<BillsVO> billsOfInstitute = getAllDropedBillsOfInstitute(institution.getCode());
+            if(billsOfInstitute != null && billsOfInstitute.size() != 0){
+                droppedBills.addAll(billsOfInstitute);
+            }
+        }
+        return droppedBills;
     }
 
     @Override

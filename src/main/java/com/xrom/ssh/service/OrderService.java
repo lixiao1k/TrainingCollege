@@ -28,14 +28,23 @@ public interface OrderService {
     SPayInfoVO getPayInfoVO(Long orderId, Long studentId);
     //获得退款时展示信息的OrderVO对象，包含退款数量
     OrderVO getUnsubscribeInfo(Long orderId);
-    //获得所有线下支付账目
+    //获得机构所有线下支付账目
     List<BillsVO> getAllOfflineBillsOfInstitute(String institutionCode);
 
-    //获得所有支付账目
+    //获得机构所有支付账目
     List<BillsVO> getAllPayedBillsOfInstitute(String institutionCode);
 
-    //获得所有退款账目
+    //获得机构所有退款账目
     List<BillsVO> getAllDropedBillsOfInstitute(String institutionCode);
+
+    //获得平台所有线下支付账目
+    List<BillsVO> getAllOfflineBills();
+
+    //获得平台所有支付账目
+    List<BillsVO> getAllPayedBills();
+
+    //获得平台所有退款账目
+    List<BillsVO> getAllDropedBills();
 
     //求账目总金额
     int getBillsSum(List<BillsVO> list);
