@@ -138,8 +138,8 @@
                             <dd>${Order.createTime}</dd>
                         </dl>
                         <div class="box-footer">
-                            <a href="/sPayCancel" class="btn btn-default">取消</a>
-                            <a href="/sPay/${Order.id}" class="btn btn-info pull-right">确定支付</a>
+                            <a href="/iPayOfflineCancel" class="btn btn-default">取消</a>
+                            <a href="/iPayOfflineEnsure/${Order.id}" class="btn btn-info pull-right">确定支付</a>
                         </div>
                     </div>
                     <!-- /.box-body -->

@@ -16,7 +16,7 @@ public interface OrderService {
     void cancel(Long orderId);
     void pay(Long studentId, Long classId);
     void pay(Long orderId, Long userId, int payment);
-    void payOffline(Long studentId, Long classId);
+    void payOffline(Long orderId, int payment);
     void dropClass(Long orderId, int amountReturn);
     List<OrderVO> getAllOfStudentByState(Long studentId, OrderState state);
     List<OrderVO> getAllOfClassByState(Long classId, OrderState state);

@@ -114,13 +114,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void payOffline(Long studentId, Long classId) {
-        Order order = get(studentId, classId);
+    public void payOffline(Long orderId, int payment) {
+        Order order = get(orderId);
         order.setIsCancelled(0);
         order.setIsPayed(1);
         order.setIsReserved(0);
         order.setIsPayedOffline(1);
         order.setIsUnSubscribed(0);
+        order.setPayment(payment);
+        order.setPayedTime(new Date());
         repository.update(order);
         flush();
     }

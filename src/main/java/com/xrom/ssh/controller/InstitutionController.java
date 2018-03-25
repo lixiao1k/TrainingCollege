@@ -56,6 +56,9 @@ public class InstitutionController {
     @Autowired(required = true)
     private OrderService orderService;
 
+    @Autowired(required = true)
+    private AccountService accountService;
+
     @RequestMapping(value = "/iSignUpPage", method = RequestMethod.GET)
     public String iSignUpPage(){
         return "iSignUpPage";
@@ -346,4 +349,25 @@ public class InstitutionController {
         modelMap.put("Order", order);
         return new ModelAndView("/iPayOfflineInfo");
     }
+
+    //支付信息中的取消支付action
+    @RequestMapping(value = "/iPayOfflineCancel")
+    public ModelAndView iPayOfflineCancel(){
+        return new ModelAndView(new RedirectView("/iPayOfflinePage"));
+    }
+
+    @RequestMapping(value = "/iPayOfflineEnsure/{orderId}")
+    public ModelAndView iPayOfflineEnsure(@PathVariable Long orderId, ModelMap modelMap){
+        Order order = orderService.get(orderId);
+        orderService.payOffline(orderId, order.getPrice());
+        Account account = accountService.getAccount(order.getStudentId());
+        if(account != null){
+            accountService.updateTotalConsumption(order.getStudentId(), order.getPrice());
+        }
+        modelMap.put("title", "支付成功！");
+        modelMap.put("successMessage", "订单支付成功");
+        return new ModelAndView("alerts/sSuccess");
+    }
+
+
 }
