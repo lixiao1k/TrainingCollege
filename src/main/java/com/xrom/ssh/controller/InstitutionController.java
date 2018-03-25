@@ -2,6 +2,7 @@ package com.xrom.ssh.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.xrom.ssh.entity.*;
+import com.xrom.ssh.entity.vo.BillsVO;
 import com.xrom.ssh.entity.vo.OrderVO;
 import com.xrom.ssh.enums.OrderState;
 import com.xrom.ssh.exceptions.GradeExistException;
@@ -367,6 +368,26 @@ public class InstitutionController {
         modelMap.put("title", "支付成功！");
         modelMap.put("successMessage", "订单支付成功");
         return new ModelAndView("alerts/sSuccess");
+    }
+
+    //查看机构账目
+    @RequestMapping(value = "/iBillsPage")
+    public ModelAndView iBillsPage(HttpSession session, ModelMap modelMap){
+        Institution institution = (Institution) session.getAttribute("institution");
+        List<BillsVO> payedBills = orderService.getAllPayedBillsOfInstitute(institution.getCode());
+        int payedSum = orderService.getBillsSum(payedBills);
+        List<BillsVO> droppedBills = orderService.getAllDropedBillsOfInstitute(institution.getCode());
+        int droppedSum = orderService.getBillsSum(droppedBills);
+        List<BillsVO> payedOfflineBills = orderService.getAllOfflineBillsOfInstitute(institution.getCode());
+        int payedOfflineSum = orderService.getBillsSum(payedOfflineBills);
+        modelMap.put("payedBills", payedBills);
+        modelMap.put("payedSum", payedSum);
+        modelMap.put("droppedBills", droppedBills);
+        modelMap.put("droppedSum", droppedSum);
+        modelMap.put("payedOfflineBills", payedOfflineBills);
+        modelMap.put("payedOfflineSum", payedOfflineSum);
+        System.out.println(payedOfflineBills);
+        return new ModelAndView("/iBills");
     }
 
 

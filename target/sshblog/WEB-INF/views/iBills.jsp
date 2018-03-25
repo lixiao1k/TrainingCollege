@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/12
-  Time: 下午7:59
+  Date: 2018/3/19
+  Time: 下午2:05
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -18,7 +18,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>学生成绩管理</title>
+    <title>机构账目</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -52,10 +52,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
     <header class="main-header">
@@ -134,110 +134,144 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-9">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">学生成绩表</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>学生ID</th>
-                                <th>成绩</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${grades}" var="grade">
-                                <tr>
-                                    <td>${grade.studentId}</td>
-                                    <td>${grade.grade}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>学生ID</th>
-                                <th>成绩</th>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">添加学生成绩</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal" action="/iAddGrade" method="post">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputID" class="col-sm-4 control-label">学生ID</label>
-
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputID" placeholder="name" name="studentId">
-                                    </div>
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#payed" data-toggle="tab">支付账目</a></li>
+                        <li><a href="#droped" data-toggle="tab">退款账目</a></li>
+                        <li><a href="#payedOffline" data-toggle="tab">线下支付账目</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="payed">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-header">
+                                    <h3 class="box-title"><span class="label label-success">汇总订单支付共${payedSum}元</span></h3>
                                 </div>
-                                <div class="form-group">
-                                    <label for="grade" class="col-sm-4 control-label">成绩</label>
-
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="grade" placeholder="name" name="grade">
-                                    </div>
+                                <div class="box-body">
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>操作</th>
+                                            <th>时间</th>
+                                            <th>金额</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${payedBills}" var="payedBill">
+                                            <tr>
+                                                <td>${payedBill.orderId}</td>
+                                                <td>${payedBill.action}</td>
+                                                <td>${payedBill.time}</td>
+                                                <td><span class="label label-success">${payedBill.moneyChange}</span></td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>操作</th>
+                                            <th>时间</th>
+                                            <th>金额</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
+                                <!-- /.box-body -->
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-info" style="margin-left: 70pt">添加</button>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="droped">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-header">
+                                    <h3 class="box-title"><span class="label label-danger">汇总退课出款支付共${droppedSum}元</span></h3>
+                                </div>
+                                <div class="box-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>操作</th>
+                                            <th>时间</th>
+                                            <th>金额</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${droppedBills}" var="droppedBill">
+                                            <tr>
+                                                <td>${droppedBill.orderId}</td>
+                                                <td>${droppedBill.action}</td>
+                                                <td>${droppedBill.time}</td>
+                                                <td><span class="label label-danger">${droppedBill.moneyChange}</span></td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>操作</th>
+                                            <th>时间</th>
+                                            <th>金额</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
                             </div>
-                            <!-- /.box-footer -->
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <i class="fa fa-text-width"></i>
-
-                            <h3 class="box-title">班级信息</h3>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <dl>
-                                <dt>班级ID</dt>
-                                <dd>${classroom.id}</dd>
-                                <dt>课程ID</dt>
-                                <dd>${course.id}</dd>
-                                <dt>计划学生数</dt>
-                                <dd>${classroom.studentNumPlan}</dd>
-                                <dt>上课学生数</dt>
-                                <dd>${classroom.studentNumNow}</dd>
-                                <dt>教师ID</dt>
-                                <dd>${classroom.teacherId}</dd>
-                                <dt>课程类型</dt>
-                                <dd>${course.type}</dd>
-                                <dt>开课时间</dt>
-                                <dd>${course.beginDate}</dd>
-                                <dt>结束时间</dt>
-                                <dd>${course.endDate}</dd>
-                                <dt>课程描述</dt>
-                                <dd>${course.description}</dd>
-                            </dl>
+                        <!-- /.tab-pane -->
+                        <div class="active tab-pane" id="payedOffline">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-header">
+                                    <h3 class="box-title"><span class="label label-info">汇总线下支付共${payedOfflineSum}元</span></h3>
+                                </div>
+                                <div class="box-body">
+                                    <table id="example3" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>操作</th>
+                                            <th>时间</th>
+                                            <th>金额</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${payedOfflineBills}" var="payedOfflineBill">
+                                            <tr>
+                                                <td>${payedOfflineBill.orderId}</td>
+                                                <td>${payedOfflineBill.action}</td>
+                                                <td>${payedOfflineBill.time}</td>
+                                                <td><span class="label label-info">${payedOfflineBill.moneyChange}</span></td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>订单ID</th>
+                                            <th>操作</th>
+                                            <th>时间</th>
+                                            <th>金额</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
                         </div>
-                        <!-- /.box-body -->
                     </div>
+                    <!-- /.tab-content -->
                 </div>
+                <!-- /.nav-tabs-custom -->
             </div>
         </div>
         <!-- /.container -->
     </div>
 </div>
+<!-- ./wrapper -->
+
 <!-- ./wrapper -->
 <script src="<%=basePath%>bootstrap/js/demo.js"></script>
 <!-- jQuery 3 -->
@@ -275,8 +309,23 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable()
+        $('#example1').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
         $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
+        $('#example3').DataTable({
             'paging'      : true,
             'lengthChange': false,
             'searching'   : false,
@@ -288,3 +337,4 @@
 </script>
 </body>
 </html>
+

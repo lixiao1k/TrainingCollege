@@ -1,6 +1,7 @@
 package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.*;
+import com.xrom.ssh.entity.vo.BillsVO;
 import com.xrom.ssh.entity.vo.OrderVO;
 import com.xrom.ssh.entity.vo.SPayInfoVO;
 import com.xrom.ssh.enums.OrderState;
@@ -158,6 +159,7 @@ public class OrderServiceImpl implements OrderService {
         List<Classroom> classrooms = classroomService.findAll(institutionCode);
         List<OrderVO> orderVOSPayed = new ArrayList<>();
         List<OrderVO> orderVOSDroped = new ArrayList<>();
+        List<OrderVO> orderVOSOffline = new ArrayList<>();
         for(Classroom classroom : classrooms){
             List<OrderVO> payed = getAllOfClassByState(classroom.getId(), OrderState.PAYED);
             if(payed != null && payed.size() != 0){
@@ -167,13 +169,19 @@ public class OrderServiceImpl implements OrderService {
             if(dropped != null && dropped.size() != 0 ){
                 orderVOSDroped.addAll(dropped);
             }
+            List<OrderVO> payedOffline = getAllOfClassByState(classroom.getId(), OrderState.OFFLINE);
+            if(payedOffline != null && payedOffline.size() != 0){
+                orderVOSOffline.addAll(payedOffline);
+            }
         }
-        System.out.println(orderVOSDroped);
         if(state == OrderState.PAYED){
             return orderVOSPayed;
         }else if(state == OrderState.DROPPED){
             return orderVOSDroped;
-        }else {
+        }else if(state == OrderState.OFFLINE){
+            return orderVOSOffline;
+        }
+        else {
             return null;
         }
     }
@@ -195,8 +203,9 @@ public class OrderServiceImpl implements OrderService {
                 cancelledOrders.add(orderVO);
             }else if(orderVO.getIsPayed() == 1){
                 payedOrders.add(orderVO);
-            }else if(orderVO.getIsPayedOffline() == 1){
-                payedOfflineOrders.add(orderVO);
+                if(orderVO.getIsPayedOffline() == 1){
+                    payedOfflineOrders.add(orderVO);
+                }
             }else if(orderVO.getIsUnSubscribed() == 1){
                 dropedClassOrders.add(orderVO);
             }
@@ -275,6 +284,71 @@ public class OrderServiceImpl implements OrderService {
         orderVO.setDropTime(date);
         orderVO.setCourseBeginTime(course.getBeginDate());
         return orderVO;
+    }
+
+    @Override
+    public List<BillsVO> getAllOfflineBillsOfInstitute(String institutionCode) {
+        List<BillsVO> billsVOS = new ArrayList<>();
+        List<OrderVO> offlineOrders = getAllOfInstituteByState(institutionCode, OrderState.OFFLINE);
+        System.out.println("---------------------------------");
+        System.out.println(offlineOrders);
+        if(offlineOrders != null){
+            for(OrderVO orderVO : offlineOrders){
+                BillsVO billsVO = new BillsVO();
+                billsVO.setOrderId(orderVO.getOrderId());
+                billsVO.setTime(orderVO.getPayedTime());
+                billsVO.setAction("线下支付");
+                billsVO.setMoneyChange(orderVO.getPayment());
+                billsVOS.add(billsVO);
+            }
+        }
+        return billsVOS;
+    }
+
+    @Override
+    public List<BillsVO> getAllPayedBillsOfInstitute(String institutionCode) {
+        List<BillsVO> billsVOS = new ArrayList<>();
+        List<OrderVO> payedOrders = getAllOfInstituteByState(institutionCode, OrderState.PAYED);
+        if(payedOrders != null){
+            for(OrderVO orderVO : payedOrders){
+                BillsVO billsVO = new BillsVO();
+                billsVO.setOrderId(orderVO.getOrderId());
+                billsVO.setTime(orderVO.getPayedTime());
+                billsVO.setAction("进账");
+                billsVO.setMoneyChange(orderVO.getPayment());
+                billsVOS.add(billsVO);
+            }
+        }
+        return billsVOS;
+    }
+
+    @Override
+    public List<BillsVO> getAllDropedBillsOfInstitute(String institutionCode) {
+        List<BillsVO> billsVOS = new ArrayList<>();
+        List<OrderVO> dropedOrders = getAllOfInstituteByState(institutionCode, OrderState.DROPPED);
+
+        if(dropedOrders != null){
+            for(OrderVO orderVO : dropedOrders){
+                BillsVO billsVO = new BillsVO();
+                billsVO.setOrderId(orderVO.getOrderId());
+                billsVO.setTime(orderVO.getDropTime());
+                billsVO.setAction("出账");
+                billsVO.setMoneyChange(-orderVO.getAmountReturned());
+                billsVOS.add(billsVO);
+            }
+        }
+        return billsVOS;
+    }
+
+    @Override
+    public int getBillsSum(List<BillsVO> list) {
+        int sum = 0;
+        if(list != null){
+            for(BillsVO billsVO : list){
+                sum = sum + billsVO.getMoneyChange();
+            }
+        }
+        return sum;
     }
 
 

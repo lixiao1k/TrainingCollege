@@ -89,7 +89,7 @@
                                 <li><a href="/iPayOfflinePage">线下支付</a></li>
                             </ul>
                         </li>
-                        <li><a>财务</a></li>
+                        <li><a href="/iBillsPage">财务</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
