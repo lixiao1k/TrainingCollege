@@ -77,6 +77,7 @@ public class InstitutionController {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String briefDescription = request.getParameter("briefDescription");
+        //注册时的注册信息不能有空
         if(name == "" || address == "" || phone == "" || password == "" || briefDescription == ""){
             return "alerts/sRegisterEmptyAlert";
         }
@@ -98,6 +99,7 @@ public class InstitutionController {
         }
     }
 
+    //访问机构主页
     @RequestMapping(value = "/iHome", method = RequestMethod.GET)
     public ModelAndView iHome(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("institution")==null){
@@ -108,6 +110,7 @@ public class InstitutionController {
         return new ModelAndView("/iHome");
     }
 
+    //访问修改信息页面
     @RequestMapping(value = "iModify", method = RequestMethod.GET)
     public ModelAndView iModify(HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -116,6 +119,7 @@ public class InstitutionController {
         return new ModelAndView("/iModify");
     }
 
+    //生成修改申请
     @RequestMapping(value = "iModifyApplication", method = RequestMethod.POST)
     public ModelAndView iModifyApplication(HttpServletRequest request, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -126,7 +130,9 @@ public class InstitutionController {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String description = request.getParameter("description");
+        //修改的信息都得写，不管改不改，就是这么任性
         if(name == "" || address == "" || phone == "" || description == ""){
+            //错误信息提示页面
             return new ModelAndView("alerts/sRegisterEmptyAlert");
         }
         try {
@@ -137,6 +143,7 @@ public class InstitutionController {
         return new ModelAndView("alerts/iRegisterSuccess");
     }
 
+    //访问机构的教师管理页面
     @RequestMapping(value = "iTeachers", method = RequestMethod.GET)
     public ModelAndView iTeachers(HttpSession httpSession, Model model){
         if(httpSession.getAttribute("institution")==null){
@@ -149,6 +156,7 @@ public class InstitutionController {
         return new ModelAndView("/iTeachers");
     }
 
+    //删除教师操作
     @RequestMapping(value = "/teacher_delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteTeacher(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -158,6 +166,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iTeachers"));
     }
 
+    //添加教师操作
     @RequestMapping(value = "/iAddTeacher", method = RequestMethod.POST)
     public ModelAndView iAddTeacher(HttpServletRequest request, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -171,6 +180,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iTeachers"));
     }
 
+    //访问发布计划的页面
     @RequestMapping(value = "/iAddCoursePage", method = RequestMethod.GET)
     public ModelAndView iAddCoursePage(HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -179,6 +189,7 @@ public class InstitutionController {
         return new ModelAndView("/iAddCoursePage");
     }
 
+    //发布计划，发布课程
     @RequestMapping(value = "/iAddCourse", method = RequestMethod.POST)
     public ModelAndView iAddCourse(HttpServletRequest request, HttpSession httpSession, Model model){
         if(httpSession.getAttribute("institution")==null){
@@ -206,6 +217,7 @@ public class InstitutionController {
         return new ModelAndView("alerts/courseCreateSuccess");
     }
 
+    //访问课程的详细信息，展示班级等信息
     @RequestMapping(value = "/iGetCourseDetail/{id}", method = RequestMethod.GET)
     public ModelAndView iCourseDetail(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("institution")==null){
@@ -216,6 +228,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
 
+    //展示机构所有课程
     @RequestMapping(value = "/iCourses", method = RequestMethod.GET)
     public ModelAndView iCourses(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("institution")==null){
@@ -227,7 +240,7 @@ public class InstitutionController {
         modelMap.put("courses", courses);
         return new ModelAndView("/iCourses");
     }
-
+    //访问课程的详细信息，展示班级等信息
     @RequestMapping(value = "/iCourseDetail", method = RequestMethod.GET)
     public ModelAndView iCourseDetail(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("institution")==null){
@@ -240,6 +253,7 @@ public class InstitutionController {
         return new ModelAndView("/iCourseDetail");
     }
 
+    //增加班级目前的学生数
     @RequestMapping(value = "/iAddClassStudentNow/{id}", method = RequestMethod.GET)
     public ModelAndView iAddClassStudentNow(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -249,12 +263,15 @@ public class InstitutionController {
         int classStudentNow = classroom.getStudentNumNow();
         int classStudentPlan = classroom.getStudentNumPlan();
         if(classStudentNow >= classStudentPlan){
+            //如果目前学生数大于计划学生数，提示错误
             return new ModelAndView("alerts/addStudentAlert");
         }
+        //每次加一人
         classroomService.updateNumNow(id, 1);
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
 
+    //减少班级目前的学生数
     @RequestMapping(value = "/iMinusClassStudentNow/{id}", method = RequestMethod.GET)
     public ModelAndView iMinusClassStudentNow(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -263,12 +280,14 @@ public class InstitutionController {
         Classroom classroom = classroomService.getClass(id);
         int classStudentNow = classroom.getStudentNumNow();
         if(classStudentNow <= 0){
+            //如果人数小于0，提示错误
             return new ModelAndView("alerts/minusStudentAlert");
         }
         classroomService.updateNumNow(id, -1);
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
 
+    //为课程添加班级
     @RequestMapping(value = "/iAddClass", method = RequestMethod.POST)
     public ModelAndView iAddClass(HttpSession httpSession, HttpServletRequest request){
         if(httpSession.getAttribute("institution")==null){
@@ -281,6 +300,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
 
+    //删除班级
     @RequestMapping(value = "/iDeleteClass/{id}", method = RequestMethod.GET)
     public ModelAndView iDeleteClass(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -290,6 +310,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iCourseDetail"));
     }
 
+    //展示班级的先到页面
     @RequestMapping(value = "/iClassSignPage", method = RequestMethod.GET)
     public ModelAndView iClassSignPage(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("institution")==null){
@@ -300,10 +321,11 @@ public class InstitutionController {
         List<LearnSign> learnSigns = learnSignService.findAll(classroom.getId());
         modelMap.put("course", course);
         modelMap.put("classroom", classroom);
-        modelMap.put("learnSigns", learnSigns);
+        modelMap.put("learnSigns", learnSigns);//签到记录
         return new ModelAndView("/iClassSign");
     }
 
+    //访问班级的签到记录
     @RequestMapping(value = "/iClassSign/{id}", method = RequestMethod.GET)
     public ModelAndView iClassSign(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){
@@ -314,6 +336,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iClassSignPage"));
     }
 
+    //添加签到记录
     @RequestMapping(value = "/iAddSign", method = RequestMethod.POST)
     public ModelAndView iAddSign(HttpSession httpSession, HttpServletRequest request){
         if(httpSession.getAttribute("institution")==null){
@@ -337,6 +360,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iClassSignPage"));
     }
 
+    //访问班级成绩管理界面
     @RequestMapping(value = "/iGradePage/{id}")
     public ModelAndView iGradePage(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("institution")==null){
@@ -352,6 +376,7 @@ public class InstitutionController {
         return new ModelAndView("/iGrade");
     }
 
+    //添加成绩
     @RequestMapping(value = "/iAddGrade")
     public ModelAndView iAddGrade(HttpSession httpSession, HttpServletRequest request){
         if(httpSession.getAttribute("institution")==null){
@@ -370,6 +395,7 @@ public class InstitutionController {
     }
 
 
+    //展示机构所有的订单
     @RequestMapping(value = "/iOrders")
     public ModelAndView iOrders(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("institution")==null){
@@ -393,6 +419,7 @@ public class InstitutionController {
         return new ModelAndView("/iPayOffline");
     }
 
+    //支持线下支付
     @RequestMapping(value = "/iPayOffline", method = RequestMethod.POST)
     public ModelAndView iPayOffline(HttpServletRequest request, ModelMap modelMap, HttpSession session){
         if(session.getAttribute("institution")==null){
@@ -429,6 +456,7 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/iPayOfflinePage"));
     }
 
+    //确定支付
     @RequestMapping(value = "/iPayOfflineEnsure/{orderId}")
     public ModelAndView iPayOfflineEnsure(@PathVariable Long orderId, ModelMap modelMap, HttpSession httpSession){
         if(httpSession.getAttribute("institution")==null){

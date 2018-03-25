@@ -111,6 +111,7 @@ public class OrderServiceImpl implements OrderService {
         } catch (NoCardException e) {
             e.printStackTrace();
         }
+        classroomService.updateNumNow(order.getClassId(), 1);
         flush();
     }
 
@@ -125,6 +126,7 @@ public class OrderServiceImpl implements OrderService {
         order.setPayment(payment);
         order.setPayedTime(new Date());
         repository.update(order);
+        classroomService.updateNumNow(order.getClassId(), 1);
         flush();
     }
 
@@ -139,6 +141,7 @@ public class OrderServiceImpl implements OrderService {
         order.setDropTime(new Date());
         order.setAmountReturned(amountReturn);
         repository.update(order);
+        classroomService.updateNumNow(order.getClassId(), -1);
         flush();
     }
 
@@ -386,6 +389,21 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return sum;
+    }
+
+    @Override
+    public void checkOrder() {
+        List<Order> orders = repository.findAll();
+        System.out.println(orders);
+        for(Order order : orders){
+            if(order.getIsReserved() == 1){
+                Date createTime = order.getCreateTime();
+                System.out.println("----------------------------");
+                if((new Date().getTime() - createTime.getTime()) > 1000*60*15){
+                    cancel(order.getId());
+                }
+            }
+        }
     }
 
 

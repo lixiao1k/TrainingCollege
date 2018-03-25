@@ -87,6 +87,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
     @Override
     public List<Order> findAll() {
+        System.out.println("Task");
         Session session = null;
         Transaction tx = null;
         List<Order> orders= null;
@@ -100,6 +101,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         }catch (Exception e){
             tx.rollback();
         }
+        System.out.println("Task1");
         return orders;
     }
 

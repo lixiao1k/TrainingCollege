@@ -363,6 +363,7 @@ public class StudentController {
             return new ModelAndView(new RedirectView("/"));
         }
         Order order = orderService.get(orderId);
+        //如果订单已经支付，无需再次支付
         if(order.getIsPayed() == 1){
             modelMap.put("errorMessage", "此订单已支付！无需再次支付！");
             modelMap.put("title", "支付失败");

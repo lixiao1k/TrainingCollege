@@ -48,4 +48,6 @@ public interface OrderService {
 
     //求账目总金额
     int getBillsSum(List<BillsVO> list);
+
+    void checkOrder();
 }

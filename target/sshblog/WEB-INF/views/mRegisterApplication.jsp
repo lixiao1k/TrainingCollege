@@ -97,6 +97,12 @@
                         </div>
                     </form>
                 </div>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li><a href="/mLogOut">登出</a></li>
+                    </ul>
+                </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->

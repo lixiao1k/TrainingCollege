@@ -43,11 +43,13 @@ public class MasterController {
     @Autowired(required = true)
     private OrderService orderService;
 
+    //访问Master登陆界面
     @RequestMapping(value = "/mSignInPage", method = RequestMethod.GET)
     public String mSignInPage(){
         return "mSignInPage";
     }
 
+    //Master登陆，Master密码统一为root
     @RequestMapping(value = "/mSignIn", method = RequestMethod.POST)
     public ModelAndView mSignIn(HttpServletRequest request, HttpSession session){
         String password = request.getParameter("password");
@@ -60,6 +62,7 @@ public class MasterController {
 
     }
 
+    //Master主页
     @RequestMapping(value = "/mHome", method = RequestMethod.GET)
     public ModelAndView mHome(HttpServletRequest request, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -69,6 +72,7 @@ public class MasterController {
     }
 
 
+    //展示机构注册申请页面
     @RequestMapping(value = "/mRegisterApplication", method = RequestMethod.GET)
     public ModelAndView mRegisterApplication(ModelMap modelMap, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -79,6 +83,7 @@ public class MasterController {
         return new ModelAndView("/mRegisterApplication");
     }
 
+    //展示机构信息修改页面
     @RequestMapping(value = "/mModifyApplication", method = RequestMethod.GET)
     public ModelAndView mModifyApplication(ModelMap modelMap, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -89,6 +94,7 @@ public class MasterController {
         return new ModelAndView("/mModifyApplication");
     }
 
+    //同意机构注册
     @RequestMapping(value = "/mRegisterAgree/{id}")
     public ModelAndView mRegisterAgree(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -98,6 +104,7 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/mRegisterApplication"));
     }
 
+    //拒绝机构注册
     @RequestMapping(value = "/mRegisterReject/{id}")
     public ModelAndView mRegisterReject(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -107,6 +114,7 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/mRegisterApplication"));
     }
 
+    //同意机构信息修改申请
     @RequestMapping(value = "/mModifyAgree/{id}")
     public ModelAndView mModifyAgree(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -116,6 +124,7 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/mModifyApplication"));
     }
 
+    //拒绝机构信息修改申请
     @RequestMapping(value = "/mModifyReject/{id}")
     public ModelAndView mModifyReject(@PathVariable Long id, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -136,6 +145,7 @@ public class MasterController {
         return new ModelAndView("/mInstitutions");
     }
 
+    //查看所有学生用户
     @RequestMapping(value = "/mStudents")
     public ModelAndView mStudents(ModelMap modelMap, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -143,6 +153,7 @@ public class MasterController {
         }
         List<MStudentVO> mStudentVOSNonCancelled = studentService.getAllStudent(false);
         List<MStudentVO> mStudentVOSCancelled = studentService.getAllStudent(true);
+        //分开展示有资格和没有资格学生
         modelMap.put("studentsNonCancelled", mStudentVOSNonCancelled);
         modelMap.put("studentsCancelled", mStudentVOSCancelled);
         return new ModelAndView("/mStudents");
@@ -159,6 +170,7 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/mStudents"));
     }
 
+    //访问账目页面
     @RequestMapping(value = "/mBillsPage")
     public ModelAndView mBillsPage(ModelMap modelMap, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
@@ -170,7 +182,9 @@ public class MasterController {
         int droppedSum = orderService.getBillsSum(droppedBills);
         List<BillsVO> payedOfflineBills = orderService.getAllOfflineBills();
         int payedOfflineSum = orderService.getBillsSum(payedOfflineBills);
+        //支付账目
         modelMap.put("payedBills", payedBills);
+        //支付账目总额
         modelMap.put("payedSum", payedSum);
         modelMap.put("droppedBills", droppedBills);
         modelMap.put("droppedSum", droppedSum);
@@ -179,6 +193,7 @@ public class MasterController {
         return new ModelAndView("/mBills");
     }
 
+    //查看各机构的财务情况
     @RequestMapping(value = "/mInstitutionFinancial")
     public ModelAndView mInstitutionFinancial(ModelMap modelMap, HttpSession httpSession){
         if(httpSession.getAttribute("master")==null){
