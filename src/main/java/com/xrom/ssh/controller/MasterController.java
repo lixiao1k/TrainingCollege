@@ -170,6 +170,17 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/mStudents"));
     }
 
+    //恢复会员资格
+    @RequestMapping(value = "/mStudentreinstatement/{id}")
+    public ModelAndView mStudentreinstatement(@PathVariable Long id, HttpSession httpSession){
+        if(httpSession.getAttribute("master")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
+        Student student = studentService.getStudent(id);
+        studentService.studentreinstatement(student.getEmail());
+        return new ModelAndView(new RedirectView("/mStudents"));
+    }
+
     //访问账目页面
     @RequestMapping(value = "/mBillsPage")
     public ModelAndView mBillsPage(ModelMap modelMap, HttpSession httpSession){
@@ -204,11 +215,15 @@ public class MasterController {
         return new ModelAndView("/mInstitutionFinancial");
     }
 
+
+
     @RequestMapping(value = "/mLogOut")
     public ModelAndView mLogOut(HttpSession session){
         session.invalidate();
         return new ModelAndView(new RedirectView("/"));
     }
+
+
 
 
 }

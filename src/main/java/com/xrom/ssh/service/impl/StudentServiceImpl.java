@@ -110,6 +110,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void studentreinstatement(String mail) {
+        Student student = getStudent(mail);
+        student.setUserState(1);
+        update(student);
+        flush();
+    }
+
+    @Override
     public int getLevel(String mail) {
         int[] levelValue = new int[]{1, 1000, 3000, 10000, 20000, 50000, 100000, 200000, Integer.MAX_VALUE};
         Student student = getStudent(mail);

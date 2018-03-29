@@ -20,6 +20,7 @@ public interface StudentService {
     void flush();
     void validate(String mail);
     void cancel(String mail);
+    void studentreinstatement(String mail);
     int getLevel(String mail);
     Student signIn(String mail, String password) throws SignInFailedException;
     List<MStudentVO> getAllStudent(Boolean isCancelled);

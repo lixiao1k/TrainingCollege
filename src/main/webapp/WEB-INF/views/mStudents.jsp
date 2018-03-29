@@ -181,6 +181,7 @@
                                             <th>卡号</th>
                                             <th>总消费</th>
                                             <th>积分余额</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -192,6 +193,11 @@
                                                 <td>${studentC.cardNumber}</td>
                                                 <td>${studentC.totalConsumption}</td>
                                                 <td>${studentC.bpBalance}</td>
+                                                <td>
+                                                    <div class="pull-right" style="margin-right: 10pt">
+                                                        <a href="/mStudentreinstatement/${studentC.id}"><span class="label label-success">恢复资格</span></a>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -203,6 +209,7 @@
                                             <th>卡号</th>
                                             <th>总消费</th>
                                             <th>积分余额</th>
+                                            <th></th>
                                         </tr>
                                         </tfoot>
                                     </table>

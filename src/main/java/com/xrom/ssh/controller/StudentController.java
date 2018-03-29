@@ -92,6 +92,7 @@ public class StudentController {
         }
         try {
             Student student = studentService.signIn(email, password);
+            //用户状态为2，说明资格被取消，无法登陆
             if(student.getUserState() == 2){
                 modelMap.put("errorMessage", "被取消资格用户无法登陆！");
                 modelMap.put("title", "登陆失败");
@@ -104,6 +105,7 @@ public class StudentController {
         }
     }
 
+    //请求学生主页
     @RequestMapping(value = "/sHome", method = RequestMethod.GET)
     public ModelAndView sHome(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
@@ -121,6 +123,7 @@ public class StudentController {
         return new ModelAndView("/sHome");
     }
 
+    //展示学生信息修改页面
     @RequestMapping(value = "/sModify", method = RequestMethod.GET)
     public ModelAndView sModify(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
@@ -133,6 +136,7 @@ public class StudentController {
         return new ModelAndView("/sModify");
     }
 
+    //修改用户名
     @RequestMapping(value = "/sModifyName", method = RequestMethod.POST)
     public ModelAndView sModifyName(HttpServletRequest request, HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
@@ -148,6 +152,7 @@ public class StudentController {
         return new ModelAndView("alerts/modifySuccess");
     }
 
+    //修改银行卡，如果字段为空，则删除银行卡
     @RequestMapping(value = "/sModifyCard", method = RequestMethod.POST)
     public ModelAndView sModifyCard(HttpServletRequest request, HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
@@ -180,6 +185,7 @@ public class StudentController {
         return new ModelAndView("alerts/modifySuccess");
     }
 
+    //展示用户的订单页面
     @RequestMapping(value = "/sOrder", method = RequestMethod.GET)
     public ModelAndView sOrder(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
@@ -197,6 +203,7 @@ public class StudentController {
         return new ModelAndView("/sOrder");
     }
 
+    //查看用户自己的课程
     @RequestMapping(value = "/sCourseMine", method = RequestMethod.GET)
     public ModelAndView sCourseMine(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
@@ -212,6 +219,7 @@ public class StudentController {
         return new ModelAndView("sCourseMine");
     }
 
+    //查看平台所有的课程
     @RequestMapping(value = "/sAllCourse", method = RequestMethod.GET)
     public ModelAndView sAllCourse(ModelMap modelMap, HttpSession httpSession){
         if(httpSession.getAttribute("student") == null){
@@ -224,6 +232,7 @@ public class StudentController {
         return new ModelAndView("/sAllCourse");
     }
 
+    //查看课程的详细页面，包含班级信息
     @RequestMapping(value = "/sCourseDetailPage")
     public ModelAndView sCourseDetailPage(HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
@@ -248,6 +257,7 @@ public class StudentController {
         return new ModelAndView(new RedirectView("/sCourseDetailPage"));
     }
 
+    //下订单， id为班级ID
     @RequestMapping(value = "/sOrder/{id}")
     public ModelAndView sOrder(@PathVariable Long id, HttpSession httpSession, ModelMap modelMap){
         if(httpSession.getAttribute("student") == null){
