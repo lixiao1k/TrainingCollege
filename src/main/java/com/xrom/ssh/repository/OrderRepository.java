@@ -8,4 +8,5 @@ public interface OrderRepository extends DomainRepository<Order,Long> {
     List<Order> findAll(Long studentId);
     List<Order> findClassOrders(Long classId);
     Order getOrder(Long classId, Long studentId);
+    void payOrder(Order order);
 }

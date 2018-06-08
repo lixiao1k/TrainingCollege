@@ -188,11 +188,11 @@
                                 <div class="form-group">
                                     <label>课程类型</label>
                                     <select class="form-control select2" style="width: 100%;" name="major">
-                                        <option selected="selected">English</option>
-                                        <option>Chinese</option>
-                                        <option>Math</option>
-                                        <option>Physics</option>
-                                        <option>Chemistry</option>
+                                        <option selected="selected">文</option>
+                                        <option>理</option>
+                                        <option>工</option>
+                                        <option>商</option>
+                                        <option>医</option>
                                     </select>
                                 </div>
                                 <!-- /.form-group -->
@@ -229,7 +229,7 @@
                             <div class="col-md-4" style="margin-left: 100pt; margin-right: 40pt">
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label>机构简单描述</label>
+                                    <label>课程简单描述</label>
                                     <div>
                                         <textarea class="form-control" rows="4" placeholder="机构简单描述" id="briefDescription" name="description"></textarea>
                                     </div>

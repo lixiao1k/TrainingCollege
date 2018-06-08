@@ -2,6 +2,7 @@ package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.*;
 import com.xrom.ssh.entity.vo.BillsVO;
+import com.xrom.ssh.entity.vo.OrderStatistics;
 import com.xrom.ssh.entity.vo.OrderVO;
 import com.xrom.ssh.entity.vo.SPayInfoVO;
 import com.xrom.ssh.enums.OrderState;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -113,6 +115,8 @@ public class OrderServiceImpl implements OrderService {
         }
         classroomService.updateNumNow(order.getClassId(), 1);
         flush();
+        //@管理信息系统
+        repository.payOrder(order);
     }
 
     @Override
@@ -457,4 +461,16 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderVOS;
     }
+
+
+//    //信息系统内容，获取学员的订单总数、总额、平均订单单价（年、季度、月）;
+//    public OrderStatistics getOrderStatistics(Long studentID) {
+//        List<OrderVO> list = getAllOfStudentByState(studentID, OrderState.PAYED);
+//        OrderStatistics orderStatistics = new OrderStatistics();
+//        for (OrderVO orderVO : list) {
+//            orderStatistics.addOrder(orderVO);
+//        }
+//        return orderStatistics;
+//    }
+
 }

@@ -180,11 +180,11 @@
                                 <label class="col-sm-3 control-label">科目</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" name="major">
-                                        <option>English</option>
-                                        <option>Chinese</option>
-                                        <option>Math</option>
-                                        <option>Physics</option>
-                                        <option>Chemistry</option>
+                                        <option>文</option>
+                                        <option>理</option>
+                                        <option>工</option>
+                                        <option>商</option>
+                                        <option>医</option>
                                     </select>
                                 </div>
                             </div>

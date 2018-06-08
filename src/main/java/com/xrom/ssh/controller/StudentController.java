@@ -269,8 +269,8 @@ public class StudentController {
         List<Classroom> classrooms = new ArrayList<>();
         classrooms.add(classroom);
         SClassroomVO sClassroomVO = classroomService.toSClassroomVO(classrooms).get(0);
-        if(course.getBeginDate().before(new Date())){
-            modelMap.put("message", "课程已经在进行中，不可预订！");
+        if(course.getEndDate().before(new Date())){
+            modelMap.put("message", "课程已经结束中，不可预订！");
             return new ModelAndView("alerts/OrderAlert");
         }
         if(classroom.getStudentNumNow() == classroom.getStudentNumPlan()){
