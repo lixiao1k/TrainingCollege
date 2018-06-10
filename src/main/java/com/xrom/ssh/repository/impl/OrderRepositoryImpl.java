@@ -332,6 +332,15 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         return list;
     }
 
+    @Override
+    public List<SOrderMonthA> getSOrderMonthA(Long studentId){
+        Session session = getCurrentSession();
+        List<SOrderMonthA> list =  session.createQuery("from SOrderMonthA monthA where monthA.sid = :SID")
+                .setParameter("SID", studentId)
+                .list();
+        return list;
+    }
+
 }
 
 

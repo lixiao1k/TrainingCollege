@@ -483,4 +483,13 @@ public class StudentController {
         List<SOrderSeasonA> list = orderService.getSOrderSeasonA(student.getId());
         return list;
     }
+
+    //个人月份订单统计图表数据请求
+    @RequestMapping(value = "/sOrderMonthA", method = RequestMethod.GET)
+    @ResponseBody
+    public List<SOrderMonthA> sOrderMonthA(HttpSession session){
+        Student student = (Student) session.getAttribute("student");
+        List<SOrderMonthA> list = orderService.getSOrderMonthA(student.getId());
+        return list;
+    }
 }

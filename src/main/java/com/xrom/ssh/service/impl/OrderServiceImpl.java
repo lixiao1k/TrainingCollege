@@ -509,6 +509,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
     public List<SOrderSeasonA> getSOrderSeasonA(Long studentId){
         List<SOrderSeasonA> list = repository.getSOrderSeasonA(studentId);
         if(list == null){
@@ -537,6 +538,42 @@ public class OrderServiceImpl implements OrderService {
                     sOrderSeasonA.setSid(studentId);
                     sOrderSeasonA.setSeason(i);
                     list1.add(sOrderSeasonA);
+                }
+            }
+            return list1;
+        }
+    }
+
+    @Override
+    public List<SOrderMonthA> getSOrderMonthA(Long studentId){
+        List<SOrderMonthA> list = repository.getSOrderMonthA(studentId);
+        if(list == null){
+            return null;
+        }else {
+            List<SOrderMonthA> list1 = new ArrayList<>();
+            Collections.sort(list, new Comparator<SOrderMonthA>() {
+                @Override
+                public int compare(SOrderMonthA o1, SOrderMonthA o2) {
+                    return o1.getMonth() - o2.getMonth();
+                }
+            });
+            SOrderMonthA oldest = list.get(0);
+            SOrderMonthA newest = list.get(list.size() - 1);
+
+            int index = 0;
+            for(int i = oldest.getMonth(); i <= newest.getMonth(); i++){
+                if(index == list.size()){
+                    break;
+
+                }
+                if(list.get(index).getMonth() == i){
+                    list1.add(list.get(index));
+                    index++;
+                } else {
+                    SOrderMonthA sOrderMonthA = new SOrderMonthA();
+                    sOrderMonthA.setSid(studentId);
+                    sOrderMonthA.setMonth(i);
+                    list1.add(sOrderMonthA);
                 }
             }
             return list1;

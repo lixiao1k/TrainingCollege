@@ -1,6 +1,7 @@
 package com.xrom.ssh.repository;
 
 import com.xrom.ssh.entity.Order;
+import com.xrom.ssh.entity.SOrderMonthA;
 import com.xrom.ssh.entity.SOrderSeasonA;
 import com.xrom.ssh.entity.SOrderYearA;
 
@@ -13,4 +14,5 @@ public interface OrderRepository extends DomainRepository<Order,Long> {
     void payOrBreakOrder(Order order, boolean pay);
     List<SOrderYearA> getSOrderYearA(Long studentId);
     List<SOrderSeasonA> getSOrderSeasonA(Long studentId);
+    List<SOrderMonthA> getSOrderMonthA(Long studentId);
 }
