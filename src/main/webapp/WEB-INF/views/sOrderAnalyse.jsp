@@ -1,8 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/24
-  Time: 下午3:13
+  Date: 2018/6/10
+  Time: 上午10:40
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: shelton
+  Date: 2018/3/10
+  Time: 下午4:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -17,7 +24,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>支付信息</title>
+    <title>学生个人信息主页</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -57,7 +64,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/sHome">个人信息 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/sHome">个人信息 <span class="sr-only">(current)</span></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -67,7 +74,7 @@
                             </ul>
                         </li>
                         <li><a href="/sOrder">订单查看</a></li>
-                        <li><a href="/sOrderAnalyse">分析数据</a></li>
+                        <li class="active"><a href="/sOrderAnalyse">分析数据</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -116,42 +123,16 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">
-            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <i class="fa fa-text-width"></i>
-
-                        <h3 class="box-title">支付信息预览</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <dl class="dl-horizontal">
-                            <dt>订单号</dt>
-                            <dd>${sPayInfoVO.orderId}</dd>
-                            <dt>订单金额</dt>
-                            <dd>${sPayInfoVO.orderRawMoney}</dd>
-                            <dt>银行卡号</dt>
-                            <dd>${sPayInfoVO.cardNumber}</dd>
-                            <dt>银行卡余额</dt>
-                            <dd>${sPayInfoVO.cardBalance}</dd>
-                            <dt>积分余额</dt>
-                            <dd>${sPayInfoVO.bpBalance}</dd>
-                            <dt>积分可兑换金额</dt>
-                            <dd>${sPayInfoVO.moneyFromBP}</dd>
-                            <dt>总付款金额</dt>
-                            <dd>${sPayInfoVO.moneyNeedPay}</dd>
-                        </dl>
-                        <div class="box-footer">
-                            <a href="/sPayCancel" class="btn btn-default">取消</a>
-                            <a href="/sPay/${sPayInfoVO.orderId}" class="btn btn-info pull-right">确定支付</a>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
+            <div class="col-md-12" style="margin-top: 100px; margin-left: 300px">
+                    <div id="year" style="width: 600px; height: 300px"></div>
             </div>
+            <div class="col-md-12" style="margin-top: 100px; margin-left: 300px">
+                    <div id="season" style="width: 600px; height: 300px"></div>
+            </div>
+            <%--<div class="col-md-3"><button id="base_index" type="button"></button></div>--%>
+
+            <!-- /.container -->
         </div>
-        <!-- /.container -->
     </div>
 </div>
 <!-- ./wrapper -->
@@ -161,12 +142,16 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="<%=basePath%>bootstrap/js/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="<%=basePath%>bootstrap/js/fastclick.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=basePath%>bootstrap/js/demo.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/demo.js"></script>
+<script src="<%=basePath%>bootstrap/js/echarts.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/jquery-3.1.1.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/mine/sOrderAnalyse.js"></script>
 </body>
 </html>
+

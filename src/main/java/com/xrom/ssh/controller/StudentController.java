@@ -456,4 +456,31 @@ public class StudentController {
         httpSession.invalidate();
         return new ModelAndView(new RedirectView("/"));
     }
+
+    //@管理信息系统
+
+
+
+    @RequestMapping(value = "/sOrderAnalyse", method = RequestMethod.GET)
+    public String sOrderAnalyse(){
+        return "sOrderAnalyse";
+    }
+
+    //个人年订单统计图表数据请求
+    @RequestMapping(value = "/sOrderYearA", method = RequestMethod.GET)
+    @ResponseBody
+    public List<SOrderYearA> sOrderYearA(HttpSession session){
+        Student student = (Student) session.getAttribute("student");
+        List<SOrderYearA> list = orderService.getSOrderYearA(student.getId());
+        return list;
+    }
+
+    //个人季度订单统计图表数据请求
+    @RequestMapping(value = "/sOrderSeasonA", method = RequestMethod.GET)
+    @ResponseBody
+    public List<SOrderSeasonA> sOrderSeasonA(HttpSession session){
+        Student student = (Student) session.getAttribute("student");
+        List<SOrderSeasonA> list = orderService.getSOrderSeasonA(student.getId());
+        return list;
+    }
 }

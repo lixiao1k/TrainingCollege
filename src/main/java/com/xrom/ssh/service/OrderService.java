@@ -1,6 +1,8 @@
 package com.xrom.ssh.service;
 
 import com.xrom.ssh.entity.Order;
+import com.xrom.ssh.entity.SOrderSeasonA;
+import com.xrom.ssh.entity.SOrderYearA;
 import com.xrom.ssh.entity.vo.BillsVO;
 import com.xrom.ssh.entity.vo.OrderVO;
 import com.xrom.ssh.entity.vo.SPayInfoVO;
@@ -50,4 +52,7 @@ public interface OrderService {
     int getBillsSum(List<BillsVO> list);
 
     void checkOrder();
+
+    List<SOrderYearA> getSOrderYearA(Long studentId);
+    List<SOrderSeasonA> getSOrderSeasonA(Long studentId);
 }

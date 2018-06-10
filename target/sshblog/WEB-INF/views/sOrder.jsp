@@ -69,6 +69,7 @@
                             </ul>
                         </li>
                         <li class="active"><a href="/sOrder">订单查看<span class="sr-only">(current)</span></a></li>
+                        <li><a href="/sOrderAnalyse">分析数据</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">

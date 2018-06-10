@@ -48,6 +48,8 @@ public class GradeServiceImpl implements GradeService {
         grade.setClassId(cid);
         grade.setGrade(gradeValue);
         createGrade(grade);
+        //@管理信息系统
+        repository.updateSOrderGradeA(grade);
     }
 
     @Override

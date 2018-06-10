@@ -9,6 +9,7 @@ import com.xrom.ssh.service.*;
 import net.sf.ehcache.search.expression.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -77,4 +78,19 @@ public class TestController {
         return "success";
     }
 
+    @RequestMapping(value = "/testJson", method = RequestMethod.POST)
+    @ResponseBody
+    public Student test1(@RequestBody String string){
+        System.out.println(string);
+        Student student = new Student();
+        student.setUserName("shelton");
+        student.setPassword("password");
+        student.setEmail("lixiao1k@163.com");
+        return student;
+    }
+
+    @RequestMapping(value = "/testPage", method = RequestMethod.GET)
+    public String testPage(){
+        return "sOrderAnalyse";
+    }
 }

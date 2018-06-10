@@ -2,7 +2,9 @@ package com.xrom.ssh.repository.impl;
 
 import com.xrom.ssh.entity.Grade;
 import com.xrom.ssh.entity.ModifyApplication;
+import com.xrom.ssh.entity.SOrderGradeA;
 import com.xrom.ssh.repository.GradeRepository;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -96,6 +98,59 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
 
     @Override
     public void update(Grade entity) {
+
+    }
+
+    //@管理信息系统
+    @Override
+    public void updateSOrderGradeA(Grade grade){
+        String level;
+        int gradeValue = grade.getGrade();
+        if(gradeValue >= 90){
+            level = "excellent";
+        }else if(gradeValue >= 75){
+            level = "good";
+        }else if(gradeValue >= 60){
+            level = "pass";
+        }else {
+            level = "fail";
+        }
+        Session session = getCurrentSession();
+        SOrderGradeA sOrderGradeA = (SOrderGradeA) session.createQuery("from SOrderGradeA where sid = :SID")
+                .setParameter("SID", grade.getStudentId())
+                .uniqueResult();
+        if(sOrderGradeA != null){
+            System.out.println("not null");
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("update SOrderGradeA gradeA set gradeA." + level + " = :AMOUNT where gradeA.sid = :SID");
+            if(gradeValue >= 90){
+                query.setParameter("AMOUNT", sOrderGradeA.getExcellent() + 1);
+            }else if (gradeValue >= 75){
+                query.setParameter("AMOUNT", sOrderGradeA.getGood() + 1);
+            }else if (gradeValue >= 60){
+                query.setParameter("AMOUNT", sOrderGradeA.getPass() + 1);
+            }else {
+                query.setParameter("AMOUNT", sOrderGradeA.getFail() + 1);
+            }
+            query.setParameter("SID", sOrderGradeA.getSid())
+                    .executeUpdate();
+            tx.commit();
+        }else {
+            sOrderGradeA = new SOrderGradeA();
+            sOrderGradeA.setSid(grade.getStudentId());
+            if(gradeValue >= 90){
+                sOrderGradeA.setExcellent(1);
+            }else if (gradeValue >= 75){
+                sOrderGradeA.setGood(1);
+            }else if (gradeValue >= 60){
+                sOrderGradeA.setPass(1);
+            }else {
+                sOrderGradeA.setFail(1);
+            }
+            Transaction tx = session.beginTransaction();
+            session.save(sOrderGradeA);
+            tx.commit();
+        }
 
     }
 }

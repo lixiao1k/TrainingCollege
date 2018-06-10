@@ -12,10 +12,7 @@ import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -116,7 +113,7 @@ public class OrderServiceImpl implements OrderService {
         classroomService.updateNumNow(order.getClassId(), 1);
         flush();
         //@管理信息系统
-        repository.payOrder(order);
+        repository.payOrBreakOrder(order, true);
     }
 
     @Override
@@ -147,6 +144,9 @@ public class OrderServiceImpl implements OrderService {
         repository.update(order);
         classroomService.updateNumNow(order.getClassId(), -1);
         flush();
+
+        //@管理信息系统
+        repository.payOrBreakOrder(order, false);
     }
 
     @Override
@@ -472,5 +472,76 @@ public class OrderServiceImpl implements OrderService {
 //        }
 //        return orderStatistics;
 //    }
+
+    @Override
+    public List<SOrderYearA> getSOrderYearA(Long studentId){
+        List<SOrderYearA> list = repository.getSOrderYearA(studentId);
+        if(list == null){
+            return null;
+        }else {
+            List<SOrderYearA> list1 = new ArrayList<>();
+            Collections.sort(list, new Comparator<SOrderYearA>() {
+                @Override
+                public int compare(SOrderYearA o1, SOrderYearA o2) {
+                    return o1.getYear() - o2.getYear();//升序
+                }
+            });
+            SOrderYearA oldest = list.get(0);
+            SOrderYearA newest = list.get(list.size()-1);
+
+            //将记录按年时间顺序排列，空缺补全
+            int index = 0;
+            for(int i = oldest.getYear(); i <= newest.getYear(); i++){
+                if(index == list.size()){
+                    break;
+                }
+                if(list.get(index).getYear() == i){
+                    list1.add(list.get(index));
+                    index++;
+                }else {
+                    SOrderYearA yearA = new SOrderYearA();
+                    yearA.setSid(studentId);
+                    yearA.setYear(i);
+                    list1.add(yearA);
+                }
+            }
+            return list1;
+        }
+    }
+
+    public List<SOrderSeasonA> getSOrderSeasonA(Long studentId){
+        List<SOrderSeasonA> list = repository.getSOrderSeasonA(studentId);
+        if(list == null){
+            return null;
+        }else {
+            List<SOrderSeasonA> list1 = new ArrayList<>();
+            Collections.sort(list, new Comparator<SOrderSeasonA>() {
+                @Override
+                public int compare(SOrderSeasonA o1, SOrderSeasonA o2) {
+                    return o1.getSeason() - o2.getSeason();
+                }
+            });
+            SOrderSeasonA oldest = list.get(0);
+            SOrderSeasonA newest = list.get(list.size()-1);
+
+            int index = 0;
+            for(int i = oldest.getSeason(); i <= newest.getSeason(); i++){
+                if(index == list.size()){
+                    break;
+                }
+                if(list.get(index).getSeason() == i){
+                    list1.add(list.get(index));
+                    index++;
+                }else {
+                    SOrderSeasonA sOrderSeasonA = new SOrderSeasonA();
+                    sOrderSeasonA.setSid(studentId);
+                    sOrderSeasonA.setSeason(i);
+                    list1.add(sOrderSeasonA);
+                }
+            }
+            return list1;
+        }
+    }
+
 
 }
