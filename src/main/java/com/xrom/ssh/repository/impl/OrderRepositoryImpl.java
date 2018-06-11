@@ -341,6 +341,15 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         return list;
     }
 
+    @Override
+    public SOrderTypeA getSOrderTypeA(Long studentId){
+        Session session = getCurrentSession();
+        SOrderTypeA sOrderTypeA = (SOrderTypeA) session.createQuery("from SOrderTypeA typeA where typeA.sid = :SID")
+                .setParameter("SID", studentId)
+                .uniqueResult();
+        return sOrderTypeA;
+    }
+
 }
 
 

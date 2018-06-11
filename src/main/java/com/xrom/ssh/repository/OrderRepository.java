@@ -1,9 +1,6 @@
 package com.xrom.ssh.repository;
 
-import com.xrom.ssh.entity.Order;
-import com.xrom.ssh.entity.SOrderMonthA;
-import com.xrom.ssh.entity.SOrderSeasonA;
-import com.xrom.ssh.entity.SOrderYearA;
+import com.xrom.ssh.entity.*;
 
 import java.util.List;
 
@@ -15,4 +12,5 @@ public interface OrderRepository extends DomainRepository<Order,Long> {
     List<SOrderYearA> getSOrderYearA(Long studentId);
     List<SOrderSeasonA> getSOrderSeasonA(Long studentId);
     List<SOrderMonthA> getSOrderMonthA(Long studentId);
+    SOrderTypeA getSOrderTypeA(Long studentId);
 }

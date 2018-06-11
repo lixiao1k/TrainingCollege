@@ -1,9 +1,6 @@
 package com.xrom.ssh.service;
 
-import com.xrom.ssh.entity.Order;
-import com.xrom.ssh.entity.SOrderMonthA;
-import com.xrom.ssh.entity.SOrderSeasonA;
-import com.xrom.ssh.entity.SOrderYearA;
+import com.xrom.ssh.entity.*;
 import com.xrom.ssh.entity.vo.BillsVO;
 import com.xrom.ssh.entity.vo.OrderVO;
 import com.xrom.ssh.entity.vo.SPayInfoVO;
@@ -57,4 +54,5 @@ public interface OrderService {
     List<SOrderYearA> getSOrderYearA(Long studentId);
     List<SOrderSeasonA> getSOrderSeasonA(Long studentId);
     List<SOrderMonthA> getSOrderMonthA(Long studentId);
+    SOrderTypeA getSOrderTypeA(Long studentId);
 }

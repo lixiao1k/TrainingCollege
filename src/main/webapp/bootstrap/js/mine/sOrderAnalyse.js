@@ -150,4 +150,81 @@ $(function () {
             })
         }
     });
+
+
+    //用户订单类型统计饼图
+    var sOrderTypeACharts = echarts.init(document.getElementById("type"));
+    var typeOption = {
+        title : {
+            text: '用户订单类型统计图',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['文','理','工','商','医']
+        },
+        series : [
+            {
+                name: '课程类型',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'文'},
+                    {value:310, name:'理'},
+                    {value:234, name:'工'},
+                    {value:135, name:'商'},
+                    {value:1548, name:'医'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    sOrderTypeACharts.setOption(typeOption);
+
+    $.ajax({
+        url:"/sOrderTypeA",
+        contentType: "application/json;charset=UTF-8",
+        type:"get",
+        dataType:"json",
+        success:function (data) {
+            var typeData = [];
+            var type1 = {};
+            type1["value"] = data.wenAmount;
+            type1["name"] = "文";
+            typeData.push(type1);
+            var type2 = {};
+            type2["value"] = data.liAmount;
+            type2["name"] = "理";
+            typeData.push(type2);
+            var type3 = {};
+            type3["value"] = data.gongAmount;
+            type3["name"] = "工";
+            typeData.push(type3);
+            var type4 = {};
+            type4["value"] = data.shangAmount;
+            type4["name"] = "商";
+            typeData.push(type4);
+            var type5 = {};
+            type5["value"] = data.yiAmount;
+            type5["name"] = "医";
+            typeData.push(type5);
+            typeOption.series[0].data = typeData;
+            sOrderTypeACharts.setOption(typeOption);
+        }
+    });
+
+
 });

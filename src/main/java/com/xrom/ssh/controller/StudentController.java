@@ -492,4 +492,11 @@ public class StudentController {
         List<SOrderMonthA> list = orderService.getSOrderMonthA(student.getId());
         return list;
     }
+
+    @RequestMapping(value = "/sOrderTypeA", method = RequestMethod.GET)
+    @ResponseBody
+    public SOrderTypeA sOrderTypeA(HttpSession session){
+        Student student = (Student) session.getAttribute("student");
+        return orderService.getSOrderTypeA(student.getId());
+    }
 }
