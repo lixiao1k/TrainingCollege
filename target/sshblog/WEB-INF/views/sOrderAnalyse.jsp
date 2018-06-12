@@ -135,6 +135,9 @@
             <div class="col-md-12" style="margin-top: 100px; margin-left: 300px">
                 <div id="type" style="width: 600px; height: 300px"></div>
             </div>
+            <div class="col-md-12" style="margin-top: 100px; margin-left: 300px">
+                <div id="grade" style="width: 600px; height: 300px"></div>
+            </div>
             <%--<div class="col-md-3"><button id="base_index" type="button"></button></div>--%>
 
             <!-- /.container -->

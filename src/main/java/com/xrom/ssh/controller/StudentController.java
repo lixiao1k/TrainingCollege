@@ -499,4 +499,11 @@ public class StudentController {
         Student student = (Student) session.getAttribute("student");
         return orderService.getSOrderTypeA(student.getId());
     }
+
+    @RequestMapping(value = "/sGradeA", method = RequestMethod.GET)
+    @ResponseBody
+    public SOrderGradeA sGradeA(HttpSession session){
+        Student student = (Student) session.getAttribute("student");
+        return orderService.getSOrderGradeA(student.getId());
+    }
 }

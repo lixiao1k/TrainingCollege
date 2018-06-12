@@ -226,5 +226,72 @@ $(function () {
         }
     });
 
+    var sGradeChart = echarts.init(document.getElementById("grade"));
+    var gradeOption = {
+        title : {
+            text: '用户成绩统计图',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['优秀','良好','及格','不及格']
+        },
+        series : [
+            {
+                name: '成绩类型',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'优秀'},
+                    {value:310, name:'良好'},
+                    {value:234, name:'及格'},
+                    {value:135, name:'不及格'},
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    $.ajax({
+        url:"/sGradeA",
+        contentType: "application/json;charset=UTF-8",
+        type:"get",
+        dataType:"json",
+        success:function (data) {
+            var gradeData = [];
+            var grade1 = {};
+            grade1["value"] = data.excellent;
+            grade1["name"] = "优秀";
+            gradeData.push(grade1);
+            var grade2 = {};
+            grade2["value"] = data.good;
+            grade2["name"] = "良好";
+            gradeData.push(grade2);
+            var grade3 = {};
+            grade3["value"] = data.pass;
+            grade3["name"] = "及格";
+            gradeData.push(grade3);
+            var grade4 = {};
+            grade4["value"] = data.fail;
+            grade4["name"] = "不及格";
+            gradeData.push(grade4);
+            gradeOption.series[0].data = gradeData;
+            sGradeChart.setOption(gradeOption);
+        }
+    });
+
+
+
 
 });

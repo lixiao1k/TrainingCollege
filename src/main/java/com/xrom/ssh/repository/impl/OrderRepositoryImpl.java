@@ -350,6 +350,16 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         return sOrderTypeA;
     }
 
+    @Override
+    public SOrderGradeA getSOrderGradeA(Long studentId){
+        Session session = getCurrentSession();
+        SOrderGradeA sOrderGradeA = (SOrderGradeA) session.createQuery("from SOrderGradeA gradeA where gradeA.sid = :SID")
+                .setParameter("SID", studentId)
+                .uniqueResult();
+        return sOrderGradeA;
+    }
+
+
 }
 
 

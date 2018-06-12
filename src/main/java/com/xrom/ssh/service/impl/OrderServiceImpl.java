@@ -592,5 +592,17 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
+    public SOrderGradeA getSOrderGradeA(Long studentId){
+        SOrderGradeA sOrderGradeA = repository.getSOrderGradeA(studentId);
+        if(sOrderGradeA == null){
+            sOrderGradeA = new SOrderGradeA();
+            sOrderGradeA.setSid(studentId);
+            return sOrderGradeA;
+        }else {
+            return sOrderGradeA;
+        }
+    }
+
 
 }
