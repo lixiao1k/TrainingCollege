@@ -176,12 +176,13 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         if(sOrderYearA != null){
             Transaction tx = session.beginTransaction();
             session.createQuery("update SOrderYearA yearA set yearA.payedOrder = :PAYED, yearA.totalPrice = :TOTAL, " +
-                    "yearA.perPrice = :PER where yearA.sid = :SID and yearA.year = :YEAR")
+                    "yearA.perPrice = :PER, yearA.brokenOrder = :BROKEN where yearA.sid = :SID and yearA.year = :YEAR")
                     .setParameter("PAYED",sOrderYearA.getPayedOrder() + (pay ? 1 : -1))//根据付款或者是退课做出不同的操作
                     .setParameter("TOTAL", sOrderYearA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
                     .setParameter("PER", (sOrderYearA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))/(sOrderYearA.getPayedOrder() + (pay ? 1 : -1)))
                     .setParameter("SID", order.getStudentId())
                     .setParameter("YEAR", year)
+                    .setParameter("BROKEN",sOrderYearA.getBrokenOrder() + (pay ? 0 : 1))
                     .executeUpdate();
             tx.commit();
         }else if(pay){
@@ -198,12 +199,13 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         if(sOrderSeasonA != null){
             Transaction tx = session.beginTransaction();
             session.createQuery("update SOrderSeasonA seasonA set seasonA.payedOrder = :PAYED, seasonA.totalPrice = :TOTAL, " +
-                    "seasonA.perPrice = :PER where seasonA.sid = :SID and seasonA.season = :SEASON")
+                    "seasonA.perPrice = :PER, seasonA.brokenOrder = :BROKEN where seasonA.sid = :SID and seasonA.season = :SEASON")
                     .setParameter("PAYED", sOrderSeasonA.getPayedOrder() + (pay ? 1 : -1))
                     .setParameter("TOTAL", sOrderSeasonA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
                     .setParameter("PER", (sOrderSeasonA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))/(sOrderSeasonA.getPayedOrder() + (pay ? 1 : -1)))
                     .setParameter("SID", order.getStudentId())
                     .setParameter("SEASON", season)
+                    .setParameter("BROKEN", sOrderSeasonA.getBrokenOrder() + (pay ? 0 : 1))
                     .executeUpdate();
             tx.commit();
         }else if(pay){
@@ -220,12 +222,13 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         if(sOrderMonthA != null){
             Transaction tx = session.beginTransaction();
             session.createQuery("update SOrderMonthA monthA set monthA.payedOrder = :PAYED, monthA.totalPrice = :TOTAL, " +
-                    "monthA.perPrice = :PER where monthA.sid = :SID and monthA.month = :MONTH")
+                    "monthA.perPrice = :PER, monthA.brokenOrder = :BROKEN where monthA.sid = :SID and monthA.month = :MONTH")
                     .setParameter("PAYED", sOrderMonthA.getPayedOrder() + (pay ? 1 : -1))
                     .setParameter("TOTAL", sOrderMonthA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
                     .setParameter("PER", (sOrderMonthA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))/(sOrderMonthA.getPayedOrder() + (pay ? 1 : -1)))
                     .setParameter("SID", order.getStudentId())
                     .setParameter("MONTH", month)
+                    .setParameter("BROKEN", sOrderMonthA.getBrokenOrder() + (pay ? 0 : 1))
                     .executeUpdate();
             tx.commit();
         }else if (pay){
@@ -244,6 +247,194 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         updateOrderTypeOfStu(order, pay);
 
     }
+
+    //@管理信息系统
+    //更新机构的订单统计信息
+    public void payOrBreakOrder4Institution(Order order, boolean pay){
+        Date payedTime = order.getPayedTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(payedTime);
+        int year = calendar.get(Calendar.YEAR);
+        int season = (int)Math.floor(calendar.get(Calendar.MONTH)/4) + (year - 2000)*4;
+        int month = (year - 2000)*12 + calendar.get(Calendar.MONTH);
+        Classroom classroom = classroomRepository.get(order.getClassId());
+        Course course = courseRepository.get(classroom.getCourseId());
+        Session session = getCurrentSession();
+        IOrderYearA iOrderYearA = (IOrderYearA) session
+                .createQuery("from IOrderYearA where code = :CODE and year = :YEAR")
+                .setParameter("CODE", course.getInstitutionCode())
+                .setParameter("YEAR", year)
+                .uniqueResult();
+
+        IOrderSeasonA iOrderSeasonA = (IOrderSeasonA) session
+                .createQuery("from IOrderSeasonA where code = :CODE and season = :SEASON")
+                .setParameter("CODE", course.getInstitutionCode())
+                .setParameter("SEASON", season)
+                .uniqueResult();
+
+        IOrderMonthA iOrderMonthA = (IOrderMonthA) session
+                .createQuery("from IOrderMonthA where code = :CODE and month = :MONTH")
+                .setParameter("CODE", course.getInstitutionCode())
+                .setParameter("MONTH", month)
+                .uniqueResult();
+
+        if(iOrderYearA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update IOrderYearA yearA set yearA.allOrder = :ALLORDER, " +
+                    "yearA.brokenOrder = :BROKENORDER, yearA.payedOffline = :OFFLINE, " +
+                    "yearA.payedOnline = :ONLINE, yearA.payedOrder = :PAYED, yearA.totalPrice = :TOTALPRICE" +
+                    " where yearA.code = :CODE and yearA.year = :YEAR")
+                    .setParameter("ALLORDER", iOrderYearA.getAllOrder() + (pay ? 1 : 0))
+                    .setParameter("BROKENORDER", iOrderYearA.getBrokenOrder() + (pay ? 0 : 1))
+                    .setParameter("OFFLINE", iOrderYearA.getPayedOffline() + (order.getIsPayedOffline() == 1 && pay ? 1 : 0))
+                    .setParameter("ONLINE", iOrderYearA.getPayedOnline() + (order.getIsPayedOffline() == 0 && pay ? 1 : 0))
+                    .setParameter("PAYED", iOrderYearA.getPayedOrder() + (pay ? 1 : -1))
+                    .setParameter("TOTALPRICE", iOrderYearA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("CODE", course.getInstitutionCode())
+                    .setParameter("YEAR", year)
+                    .executeUpdate();
+            tx.commit();
+        }else if(pay){
+            Transaction tx = session.beginTransaction();
+            iOrderYearA = new IOrderYearA();
+            iOrderYearA.setCode(course.getInstitutionCode());
+            iOrderYearA.setYear(year);
+            iOrderYearA.setAllOrder(1);
+            iOrderYearA.setPayedOrder(1);
+            iOrderYearA.setTotalPrice(order.getPrice());
+            if(order.getIsPayedOffline() == 1){
+                iOrderYearA.setPayedOffline(1);
+            }else {
+                iOrderYearA.setPayedOnline(1);
+            }
+            session.save(iOrderYearA);
+            tx.commit();
+        }
+
+        if(iOrderSeasonA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update IOrderSeasonA seasonA set seasonA.allOrder = :ALLORDER, " +
+                    "seasonA.brokenOrder = :BROKENORDER, seasonA.payedOffline = :OFFLINE, " +
+                    "seasonA.payedOnline = :ONLINE, seasonA.payedOrder = :PAYED, seasonA.totalPrice = :TOTALPRICE" +
+                    " where seasonA.code = :CODE and seasonA.season = :SEASON")
+                    .setParameter("ALLORDER", iOrderSeasonA.getAllOrder() + (pay ? 1 : 0))
+                    .setParameter("BROKENORDER", iOrderSeasonA.getBrokenOrder() + (pay ? 0 : 1))
+                    .setParameter("OFFLINE", iOrderSeasonA.getPayedOffline() + (order.getIsPayedOffline() == 1 && pay ? 1 : 0))
+                    .setParameter("ONLINE", iOrderSeasonA.getPayedOnline() + (order.getIsPayedOffline() == 0 && pay ? 1 : 0))
+                    .setParameter("PAYED", iOrderSeasonA.getPayedOrder() + (pay ? 1 : -1))
+                    .setParameter("TOTALPRICE", iOrderSeasonA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("CODE", course.getInstitutionCode())
+                    .setParameter("SEASON", season)
+                    .executeUpdate();
+            tx.commit();
+        }else if(pay){
+            Transaction tx = session.beginTransaction();
+            iOrderSeasonA = new IOrderSeasonA();
+            iOrderSeasonA.setCode(course.getInstitutionCode());
+            iOrderSeasonA.setAllOrder(1);
+            iOrderSeasonA.setPayedOrder(1);
+            iOrderSeasonA.setSeason(season);
+            iOrderSeasonA.setTotalPrice(order.getPrice());
+            if(order.getIsPayedOffline() == 1){
+                iOrderSeasonA.setPayedOffline(1);
+            }else {
+                iOrderSeasonA.setPayedOnline(1);
+            }
+            session.save(iOrderSeasonA);
+            tx.commit();
+        }
+
+        if(iOrderMonthA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update IOrderMonthA monthA set monthA.allOrder = :ALLORDER, " +
+                    "monthA.brokenOrder = :BROKENORDER, monthA.payedOffline = :OFFLINE, " +
+                    "monthA.payedOnline = :ONLINE, monthA.payedOrder = :PAYED, monthA.totalPrice = :TOTALPRICE " +
+                    "where monthA.code = :CODE and monthA.month = :MONTH")
+                    .setParameter("ALLORDER", iOrderMonthA.getAllOrder() + (pay ? 1 : 0))
+                    .setParameter("BROKENORDER", iOrderMonthA.getBrokenOrder() + (pay ? 0 : 1))
+
+                    .setParameter("OFFLINE", iOrderMonthA.getPayedOffline() + (order.getIsPayedOffline() == 1 && pay ? 1 : 0))
+                    .setParameter("ONLINE", iOrderMonthA.getPayedOnline() + (order.getIsPayedOffline() == 0 && pay ? 1 : 0))
+                    .setParameter("PAYED", iOrderMonthA.getPayedOrder() + (pay ? 1 : -1))
+                    .setParameter("TOTALPRICE", iOrderMonthA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("CODE", course.getInstitutionCode())
+                    .setParameter("MONTH", month)
+                    .executeUpdate();
+            tx.commit();
+        }else if (pay){
+            Transaction tx = session.beginTransaction();
+            iOrderMonthA = new IOrderMonthA();
+            iOrderMonthA.setCode(course.getInstitutionCode());
+            iOrderMonthA.setAllOrder(1);
+            iOrderMonthA.setPayedOrder(1);
+            iOrderMonthA.setMonth(month);
+            iOrderMonthA.setTotalPrice(order.getPrice());
+            if(order.getIsPayedOffline() == 1){
+                iOrderMonthA.setPayedOffline(1);
+            }else {
+                iOrderMonthA.setPayedOnline(1);
+            }
+            session.save(iOrderMonthA);
+            tx.commit();
+        }
+
+        //机构总订单的统计信息更新
+        IOrderA iOrderA = (IOrderA) session.createQuery("from IOrderA where code = :CODE")
+                .setParameter("CODE", course.getInstitutionCode())
+                .uniqueResult();
+
+        //机构学生信息统计
+        IStudentA iStudentA = (IStudentA) session.createQuery("from IStudentA where sid = :SID and code = :CODE")
+                .setParameter("SID", order.getStudentId())
+                .setParameter("CODE", course.getInstitutionCode())
+                .uniqueResult();
+
+        if(iOrderA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update IOrderA orderA set " +
+                    "orderA.allOrder = :ALLORDER, orderA.brokenOrder = :BROKENORDER, " +
+                    "orderA.payedOffline = :OFFLINE, orderA.payedOnline = :ONLINE, " +
+                    "orderA.payedOrder = :PAYED, orderA.studentAmount = :STUAMOUNT, " +
+                    "orderA.totalPrice = :TOTALPRICE where orderA.code = :CODE")
+                    .setParameter("ALLORDER", iOrderA.getAllOrder() + (pay ? 1 : 0))
+                    .setParameter("BROKENORDER", iOrderA.getBrokenOrder() + (pay ? 0 : 1))
+                    .setParameter("OFFLINE", iOrderA.getPayedOffline() + (order.getIsPayedOffline() == 1 && pay ? 1 : 0))
+                    .setParameter("ONLINE", iOrderA.getPayedOnline() + (order.getIsPayedOffline() == 1 && pay ? 0 : 1))
+                    .setParameter("PAYED", iOrderA.getPayedOrder() + (pay ? 1 : -1))
+                    .setParameter("STUAMOUNT", iOrderA.getStudentAmount() + (iStudentA == null && pay ? 1 : 0))
+                    .setParameter("TOTALPRICE", iOrderA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("CODE", course.getInstitutionCode())
+                    .executeUpdate();
+            tx.commit();
+        }else if (pay){
+            Transaction tx = session.beginTransaction();
+            iOrderA = new IOrderA();
+            iOrderA.setCode(course.getInstitutionCode());
+            iOrderA.setAllOrder(1);
+            iOrderA.setPayedOrder(1);
+            iOrderA.setTotalPrice(order.getPrice());
+            iOrderA.setStudentAmount(1);
+            if(order.getIsPayedOffline() == 1){
+                iOrderA.setPayedOffline(1);
+            }else {
+                iOrderA.setPayedOnline(1);
+            }
+            session.save(iOrderA);
+            tx.commit();
+        }
+
+        //此机构不存在此学生记录，加入
+        if(iStudentA == null){
+            Transaction tx = session.beginTransaction();
+            iStudentA = new IStudentA();
+            iStudentA.setSid(order.getStudentId());
+            iStudentA.setCode(course.getInstitutionCode());
+            session.save(iStudentA);
+            tx.commit();
+        }
+    }
+
+
 
     //@管理信息系统
     //学员各类型课程订单数的比例

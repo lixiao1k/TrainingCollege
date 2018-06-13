@@ -411,9 +411,10 @@ public class StudentController {
         Course course = courseService.getCourse(classroom.getCourseId());
         Long days = ((course.getBeginDate().getTime()-new Date().getTime())/(1000l*60l*60l*24l));
         if(days < -7){
-            modelMap.put("title", "退课失败");
-            modelMap.put("errorMessage", "退课失败，课程已经开始超过1周");
-            return new ModelAndView("alerts/sError");
+//            modelMap.put("title", "退课失败");
+//            modelMap.put("errorMessage", "退课失败，课程已经开始超过1周");
+//            return new ModelAndView("alerts/sError");
+            return new ModelAndView(new RedirectView("/sUnsubscribeInfo/"+order.getId()));
         }else {
             return new ModelAndView(new RedirectView("/sUnsubscribeInfo/"+order.getId()));
         }

@@ -114,6 +114,7 @@ public class OrderServiceImpl implements OrderService {
         flush();
         //@管理信息系统
         repository.payOrBreakOrder(order, true);
+        repository.payOrBreakOrder4Institution(order, true);
     }
 
     @Override
@@ -129,6 +130,10 @@ public class OrderServiceImpl implements OrderService {
         repository.update(order);
         classroomService.updateNumNow(order.getClassId(), 1);
         flush();
+
+        //@管理信息系统
+        repository.payOrBreakOrder(order, true);
+        repository.payOrBreakOrder4Institution(order, true);
     }
 
     @Override
@@ -147,6 +152,7 @@ public class OrderServiceImpl implements OrderService {
 
         //@管理信息系统
         repository.payOrBreakOrder(order, false);
+        repository.payOrBreakOrder4Institution(order, false);
     }
 
     @Override
