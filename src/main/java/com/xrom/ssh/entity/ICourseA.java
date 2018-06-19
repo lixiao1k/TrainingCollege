@@ -17,6 +17,7 @@ public class ICourseA implements Serializable{
     private static final long serialVersionUID = 773118L;
 
     @Id
+    @Column(name = "courseId")
     private Long courseId;
 
     @Column(name = "institutionCode", length = 7)

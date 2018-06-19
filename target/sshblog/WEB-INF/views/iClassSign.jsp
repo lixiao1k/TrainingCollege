@@ -152,7 +152,7 @@
                             <c:forEach items="${learnSigns}" var="learnSign">
                                 <tr>
                                     <td>${learnSign.studentId}</td>
-                                    <td>${learnSign.date}</td>
+                                    <td>第${learnSign.week}周</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -185,11 +185,30 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="datepicker" class="col-sm-4 control-label">日期</label>
+                                    <label for="week" class="col-sm-4 control-label">日期</label>
                                     <div class="col-sm-8">
-                                        <div class="input-group date">
-                                            <input type="text" class="form-control pull-right" id="datepicker" name="date">
-                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" name="week" id="week">
+                                            <option selected="selected">1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
                                     </div>
                                     <!-- /.input group -->
                                 </div>

@@ -18,8 +18,8 @@ public class ITeacherA implements Serializable{
 
     //教师ID
     @Id
-    private Long id;
-
+    @Column(name = "tid")
+    private Long tid;
 
     //所有成交订单数
     @Column(name = "payedOrder", columnDefinition = "INT default 0")
@@ -28,4 +28,8 @@ public class ITeacherA implements Serializable{
     //总课程预计招生数
     @Column(name = "studentNumPlan", columnDefinition = "INT default 0")
     private int studentNumPlan;
+
+    //教师总成交订单金额
+    @Column(name = "totalPrice", columnDefinition = "INT default 0")
+    private int totalPrice;
 }

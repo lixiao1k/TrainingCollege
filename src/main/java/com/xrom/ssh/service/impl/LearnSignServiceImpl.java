@@ -37,20 +37,19 @@ public class LearnSignServiceImpl implements LearnSignService {
     }
 
     @Override
-    public LearnSign get(Long sid, Long cid) {
-        return repository.get(sid, cid);
+    public LearnSign get(Long sid, Long cid, int week) {
+        return repository.get(sid, cid, week);
     }
 
     @Override
-    public void createSign(Long sid, Long cid) throws LearnSignExistException {
-        LearnSign sign = get(sid, cid);
+    public void createSign(Long sid, Long cid, int week){
+        LearnSign sign = get(sid, cid, week);
         if(sign == null){
             sign = new LearnSign();
-        }else {
-            throw new LearnSignExistException();
+            sign.setStudentId(sid);
+            sign.setClassId(cid);
+            sign.setWeek(week);
+            createSign(sign);
         }
-        sign.setStudentId(sid);
-        sign.setClassId(cid);
-        createSign(sign);
     }
 }

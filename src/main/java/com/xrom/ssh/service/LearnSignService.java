@@ -14,7 +14,7 @@ public interface LearnSignService {
 
     List<LearnSign> findAll(Long sid, Long cid);
 
-    LearnSign get(Long sid, Long cid);
+    LearnSign get(Long sid, Long cid, int week);
 
-    void createSign(Long sid, Long cid) throws LearnSignExistException;
+    void createSign(Long sid, Long cid, int week);
 }

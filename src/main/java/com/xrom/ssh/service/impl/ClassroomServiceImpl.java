@@ -97,6 +97,8 @@ public class ClassroomServiceImpl implements ClassroomService {
         classroom.setTeacherId(teacherId);
         Long id = saveClass(classroom);
         flush();
+        //@管理信息系统
+        repository.addClassUpdateA(classroom);
         return id;
     }
 

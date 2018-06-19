@@ -70,11 +70,6 @@ public class TestController {
     @RequestMapping(value = "/create", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String createSign(){
-        try {
-            learnSignService.createSign(4L, 5L);
-        } catch (LearnSignExistException e) {
-            return e.toString();
-        }
         return "success";
     }
 

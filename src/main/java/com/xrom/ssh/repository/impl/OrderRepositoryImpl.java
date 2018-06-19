@@ -250,6 +250,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
     //@管理信息系统
     //更新机构的订单统计信息
+    @Override
     public void payOrBreakOrder4Institution(Order order, boolean pay){
         Date payedTime = order.getPayedTime();
         Calendar calendar = Calendar.getInstance();
@@ -432,7 +433,121 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
             session.save(iStudentA);
             tx.commit();
         }
+
+        updateCourseA4Institution(order, pay);
+        updateTeacherA4Institution(order, pay);
+        updateCourseType4Institution(order, pay);
     }
+
+    //更新ICourseA表的payedOrder
+    private void updateCourseA4Institution(Order order, boolean pay){
+        Classroom classroom = classroomRepository.get(order.getClassId());
+        Course course = courseRepository.get(classroom.getCourseId());
+        Session session = getCurrentSession();
+        ICourseA iCourseA = (ICourseA) session.createQuery("from ICourseA where courseId = :COURSEID")
+                .setParameter("COURSEID",course.getId())
+                .uniqueResult();
+        if(iCourseA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update ICourseA courseA set courseA.payedOrder = :PAYED where " +
+                    "courseA.courseId = :ID")
+                    .setParameter("PAYED", iCourseA.getPayedOrder() + (pay ? 1 : -1))
+                    .setParameter("ID", course.getId())
+                    .executeUpdate();
+            tx.commit();
+        }
+    }
+
+
+    //更新ITeacherA中的教师订单总数、总订单金额
+    private void updateTeacherA4Institution(Order order, boolean pay){
+        Classroom classroom = classroomRepository.get(order.getClassId());
+        Session session = getCurrentSession();
+        ITeacherA iTeacherA = (ITeacherA) session.createQuery("from ITeacherA where tid = :ID")
+                .setParameter("ID", classroom.getTeacherId())
+                .uniqueResult();
+        if(iTeacherA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update ITeacherA teacherA set teacherA.payedOrder = :PAY, " +
+                    "teacherA.totalPrice = :TOTALPRICE where teacherA.tid = :ID")
+                    .setParameter("PAY", iTeacherA.getPayedOrder() + (pay ? 1 : -1))
+                    .setParameter("ID", classroom.getTeacherId())
+                    .setParameter("TOTALPRICE", iTeacherA.getTotalPrice() + (pay ? order.getPrice() : -order.getPrice()))
+                    .executeUpdate();
+            tx.commit();
+        }
+    }
+
+    //下单或者退课是更新ICOurseType，机构的课程类型分析表。记录课程类型的订单数和订单总额
+    private void updateCourseType4Institution(Order order, boolean pay){
+        Session session = getCurrentSession();
+        Classroom classroom = classroomRepository.get(order.getClassId());
+        Course course = courseRepository.get(classroom.getCourseId());
+        String type = course.getType();
+        String dbTypeName;
+        if(type.equals("文")){
+            dbTypeName = "wen";
+        }else if (type.equals("理")){
+            dbTypeName = "li";
+        }else if (type.equals("工")){
+            dbTypeName = "gong";
+        }else if (type.equals("商")){
+            dbTypeName = "shang";
+        }else {
+            dbTypeName = "yi";
+        }
+
+        ICourseTypeA iCourseTypeA = (ICourseTypeA) session.createQuery("from ICourseTypeA where code = :CODE")
+                .setParameter("CODE", course.getInstitutionCode())
+                .uniqueResult();
+        if(iCourseTypeA != null){
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("update ICourseTypeA typeA set typeA." + dbTypeName + "Orders = :PAY, " +
+                    "typeA." + dbTypeName + "TotalPrice = :PRICE where typeA.code = :CODE");
+            if(type.equals("文")){
+                query.setParameter("PAY", iCourseTypeA.getWenOrders() + (pay ? 1 : -1));
+                query.setParameter("PRICE", iCourseTypeA.getWenTotalPrice() + (pay ? order.getPrice() : -order.getPrice()));
+            }else if (type.equals("理")){
+                query.setParameter("PAY", iCourseTypeA.getLiOrders() + (pay ? 1 : -1));
+                query.setParameter("PRICE", iCourseTypeA.getLiTotalPrice() + (pay ? order.getPrice() : -order.getPrice()));
+            }else if (type.equals("工")){
+                query.setParameter("PAY", iCourseTypeA.getGongOrders() + (pay ? 1 : -1));
+                query.setParameter("PRICE", iCourseTypeA.getGongTotalPrice() + (pay ? order.getPrice() : -order.getPrice()));
+            }else if(type.equals("商")){
+                query.setParameter("PAY", iCourseTypeA.getShangOrders() + (pay ? 1 : -1));
+                query.setParameter("PRICE", iCourseTypeA.getShangTotalPrice() + (pay ? order.getPrice() : -order.getPrice()));
+            }else {
+                query.setParameter("PAY", iCourseTypeA.getYiOrders() + (pay ? 1 : -1));
+                query.setParameter("PRICE", iCourseTypeA.getYiTotalPrice() + (pay ? order.getPrice() : -order.getPrice()));
+            }
+            query.setParameter("CODE", course.getInstitutionCode());
+            query.executeUpdate();
+            tx.commit();
+        }else{
+            Transaction tx = session.beginTransaction();
+            iCourseTypeA = new ICourseTypeA();
+            iCourseTypeA.setCode(course.getInstitutionCode());
+            if(type.equals("文")){
+                iCourseTypeA.setWenOrders(1);
+                iCourseTypeA.setWenTotalPrice(order.getPrice());
+            }else if (type.equals("理")){
+                iCourseTypeA.setLiOrders(1);
+                iCourseTypeA.setLiTotalPrice(order.getPrice());
+            }else if (type.equals("工")){
+                iCourseTypeA.setGongOrders(1);
+                iCourseTypeA.setGongTotalPrice(order.getPrice());
+            }else if (type.equals("商")){
+                iCourseTypeA.setShangOrders(1);
+                iCourseTypeA.setShangTotalPrice(order.getPrice());
+            }else {
+                iCourseTypeA.setYiOrders(1);
+                iCourseTypeA.setYiTotalPrice(order.getPrice());
+            }
+            session.save(iCourseTypeA);
+            tx.commit();
+        }
+    }
+
 
 
 
@@ -446,7 +561,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         SOrderTypeA sOrderTypeA = (SOrderTypeA) session.createQuery("from SOrderTypeA where sid = :SID")
                 .setParameter("SID", order.getStudentId())
                 .uniqueResult();
-        String dbTypeName = "";
+        String dbTypeName;
         if(type.equals("文")){
             dbTypeName = "wenAmount";
         }else if (type.equals("理")){

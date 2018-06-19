@@ -1,4 +1,4 @@
-package com.xrom.ssh.entity.vo;
+package com.xrom.ssh.entity;
 
 import lombok.Data;
 
@@ -15,8 +15,8 @@ public class ICourseSignA implements Serializable{
     private static final long serialVersionUID = 1731438L;
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @Column(name = "courseId")
+    private Long courseId;
 
     @Column(name = "code", length = 7)
     private String code;

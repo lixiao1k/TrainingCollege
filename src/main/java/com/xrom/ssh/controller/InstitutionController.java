@@ -343,20 +343,12 @@ public class InstitutionController {
             return new ModelAndView(new RedirectView("/"));
         }
         Classroom classroom = (Classroom) httpSession.getAttribute("classroom");
+        Course course = courseService.getCourse(classroom.getCourseId());
         Long studentId = Long.parseLong(request.getParameter("studentId"));
-        String dateStr = request.getParameter("date");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(dateStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        int week = Integer.parseInt(request.getParameter("week"));
+        if(week <= course.getWeeks()){
+            learnSignService.createSign(studentId, classroom.getId(), week);
         }
-        LearnSign learnSign = new LearnSign();
-        learnSign.setClassId(classroom.getId());
-        learnSign.setStudentId(studentId);
-        learnSign.setDate(date);
-        learnSignService.createSign(learnSign);
         return new ModelAndView(new RedirectView("/iClassSignPage"));
     }
 

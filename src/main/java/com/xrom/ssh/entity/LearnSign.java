@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "learning_sign")
+@Table(name = "LearnSign")
 public class LearnSign implements Serializable{
 
     private static final long serialVersionUID = 748346728L;
@@ -23,6 +23,7 @@ public class LearnSign implements Serializable{
     @Column(name = "class_id")
     private Long classId;
 
-    @Column(name = "date")
-    private Date date;
+    //第几周的课签到，改为以周为单位，方便统计
+    @Column(name = "week")
+    private int week;
 }
