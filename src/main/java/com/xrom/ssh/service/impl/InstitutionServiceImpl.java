@@ -1,6 +1,7 @@
 package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Course;
+import com.xrom.ssh.entity.IOrderA;
 import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.entity.vo.BillsVO;
 import com.xrom.ssh.entity.vo.MInstitutionVO;
@@ -151,5 +152,12 @@ public class InstitutionServiceImpl implements InstitutionService {
                             ((mInstitutionVO.getPayedSum()+mInstitutionVO.getDroppedSum())*7/10 - mInstitutionVO.getPayedOffline()*3/10);
         }
         return mInstitutionVOS;
+    }
+
+
+    //@管理信息系统
+    @Override
+    public IOrderA getIOrderA(String code){
+        return institutionRepository.getIOrderA(code);
     }
 }

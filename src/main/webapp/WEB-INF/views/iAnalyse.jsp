@@ -125,7 +125,7 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">总数统计</li>
                 <li>
-                    <a href="pages/widgets.html">
+                    <a>
                         <i class="fa fa-circle-o text-green"></i> <span>总成交额</span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-green" id="totalPrice">0</small>
@@ -133,10 +133,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="pages/widgets.html">
+                    <a>
                         <i class="fa fa-circle-o text-aqua"></i> <span>总学员数</span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-blue" id="totalStudent">0</small>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-circle-o text-aqua"></i> <span>学员忠诚度</span>
+                        <span class="pull-right-container">
+                            <small class="label pull-right bg-orange" id="loyalty">0</small>
                         </span>
                     </a>
                 </li>
@@ -146,9 +154,9 @@
                         <span>订单总数</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                        <li id="li1_1"><a><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li id="li1_2"><a><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li id="li1_3"><a><i class="fa fa-circle-o"></i> 月份</a></li>
                     </ul>
                 </li>
                 <li class="treeview" id="li2">
@@ -156,9 +164,9 @@
                         <span>成交总额</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                        <li id="li2_1"><a><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li id="li2_2"><a><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li id="li2_3"><a><i class="fa fa-circle-o"></i> 月份</a></li>
                     </ul>
                 </li>
                 <li class="treeview" id="li3">
@@ -166,19 +174,19 @@
                         <span>总成交率</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                        <li id="li3_1"><a><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li id="li3_2"><a><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li id="li3_3"><a><i class="fa fa-circle-o"></i> 月份</a></li>
                     </ul>
                 </li>
                 <li class="treeview" id="li4">
                     <a>
-                        <span>学员忠诚度</span>
+                        <span>购买方式比例</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                        <li id="li4_1"><a><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li id="li4_2"><a><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li id="li4_3"><a><i class="fa fa-circle-o"></i> 月份</a></li>
                     </ul>
                 </li>
                 <li class="" id="li5">
@@ -201,6 +209,16 @@
                         <span>教师数据统计</span>
                     </a>
                 </li>
+                <li class="treeview" id="li9">
+                    <a>
+                        <span>平均订单单价</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li id="li9_1"><a><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li id="li9_2"><a><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li id="li9_3"><a><i class="fa fa-circle-o"></i> 月份</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -208,6 +226,12 @@
 
     <!-- Full Width Column -->
     <div class="content-wrapper">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <div class="col-md-12" style="margin-top: 200px">
+                <div id="charts" style="width: 700px; height: 350px"></div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- ./wrapper -->
@@ -224,79 +248,8 @@
 <script src=".<%=basePath%>bootstrap/js/mine/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>bootstrap/js/mine/demo.js"></script>
-<script>
-    $(function () {
-        $("#li1").attr("onclick", "click1()");
-        $("#li2").attr("onclick", "click2()");
-        $("#li3").attr("onclick", "click3()");
-        $("#li4").attr("onclick", "click4()");
-        $("#li5").attr("onclick", "click5()");
-        $("#li6").attr("onclick", "click6()");
-        $("#li7").attr("onclick", "click7()");
-        $("#li8").attr("onclick", "click8()");
-    });
-
-    function click1() {
-        if($("#li1").attr("class") == "treeview"){
-            remove();
-            $("#li1").attr("class", "active treeview");
-        }else{
-            $("#li1").attr("class", "treeview");
-        }
-
-    }
-    function click2() {
-        if($("#li2").attr("class") == "treeview"){
-            remove();
-            $("#li2").attr("class", "active treeview");
-        }else{
-            $("#li2").attr("class", "treeview");
-        }
-    }
-
-    function click3() {
-        if($("#li3").attr("class") == "treeview"){
-            remove();
-            $("#li3").attr("class", "active treeview");
-        }else{
-            $("#li3").attr("class", "treeview");
-        }
-    }
-
-    function click4() {
-        if($("#li4").attr("class") == "treeview"){
-            remove();
-            $("#li4").attr("class", "active treeview");
-        }else{
-            $("#li4").attr("class", "treeview");
-        }
-    }
-
-    function click5() {
-        remove();
-        $("#li5").attr("class", "active");
-    }
-
-    function click6() {
-        remove();
-        $("#li6").attr("class", "active");
-    }
-
-    function click7() {
-        remove();
-        $("#li7").attr("class", "active");
-    }
-
-    function click8() {
-        remove();
-        $("#li8").attr("class", "active");
-    }
-
-
-    function remove() {
-        $("#li1, #li2, #li3, #li4").attr("class", "treeview");
-        $("#li5, #li6, #li7, #li8").attr("class", "");
-    }
-</script>
+<script src="<%=basePath%>bootstrap/js/echarts.min.js"></script>
+<%--管理信息系统--%>
+<script src="<%=basePath%>bootstrap/js/mine/iAnalyse.js"></script>
 </body>
 </html>

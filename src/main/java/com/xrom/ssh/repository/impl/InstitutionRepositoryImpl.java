@@ -1,5 +1,6 @@
 package com.xrom.ssh.repository.impl;
 
+import com.xrom.ssh.entity.IOrderA;
 import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.repository.InstitutionRepository;
 import org.hibernate.SQLQuery;
@@ -95,5 +96,15 @@ public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements Ins
         }else {
             return list.get(0);
         }
+    }
+
+    //@管理信息系统
+    @Override
+    public IOrderA getIOrderA(String code) {
+        Session session = getCurrentSession();
+        IOrderA iOrderA = (IOrderA) session.createQuery("from IOrderA where code = :CODE")
+                .setParameter("CODE", code)
+                .uniqueResult();
+        return iOrderA;
     }
 }

@@ -15,10 +15,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.jws.WebParam;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -494,9 +496,52 @@ public class InstitutionController {
         return new ModelAndView(new RedirectView("/"));
     }
 
-
+    //@管理信息系统
     @RequestMapping(value = "/iAnalyse")
-    public ModelAndView iAnalyse(){
+    public ModelAndView iAnalyse(HttpSession session){
+        if(session.getAttribute("institution")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
         return new ModelAndView("/iAnalyse");
     }
+
+
+    //获取IOrderA
+    @RequestMapping(value = "/iGetIOrderA")
+    @ResponseBody
+    public IOrderA iGetIOrderA(HttpSession session){
+        if(session.getAttribute("institution") == null){
+            return null;
+        }
+        Institution institution = (Institution) session.getAttribute("institution");
+        IOrderA iOrderA = institutionService.getIOrderA(institution.getCode());
+        return iOrderA;
+    }
+
+
+    @RequestMapping(value = "/iGetOrderYearA")
+    @ResponseBody
+    public List<IOrderYearA> iGetOrderYearA(HttpSession session){
+        Institution institution = (Institution) session.getAttribute("institution");
+        List<IOrderYearA> list = orderService.getIOrderYearA(institution.getCode());
+        return list;
+    }
+
+
+    @RequestMapping(value = "/iGetOrderSeasonA")
+    @ResponseBody
+    public List<IOrderSeasonA> iGetOrderSeasonA(HttpSession session){
+        Institution institution = (Institution) session.getAttribute("institution");
+        List<IOrderSeasonA> list = orderService.getIOrderSeasonA(institution.getCode());
+        return list;
+    }
+
+    @RequestMapping(value = "/iGetOrderMonthA")
+    @ResponseBody
+    public List<IOrderMonthA> iGetOrderMonthA(HttpSession session){
+        Institution institution = (Institution) session.getAttribute("institution");
+        List<IOrderMonthA> list = orderService.getIOrderMonthA(institution.getCode());
+        return list;
+    }
+
 }

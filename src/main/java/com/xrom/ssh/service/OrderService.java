@@ -56,4 +56,7 @@ public interface OrderService {
     List<SOrderMonthA> getSOrderMonthA(Long studentId);
     SOrderTypeA getSOrderTypeA(Long studentId);
     SOrderGradeA getSOrderGradeA(Long studentId);
+    List<IOrderYearA> getIOrderYearA(String code);
+    List<IOrderSeasonA> getIOrderSeasonA(String code);
+    List<IOrderMonthA> getIOrderMonthA(String code);
 }

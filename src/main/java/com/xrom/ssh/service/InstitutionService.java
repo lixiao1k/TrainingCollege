@@ -1,5 +1,6 @@
 package com.xrom.ssh.service;
 
+import com.xrom.ssh.entity.IOrderA;
 import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.entity.vo.MInstitutionVO;
 
@@ -20,4 +21,5 @@ public interface InstitutionService {
     List<MInstitutionVO> getAllMInstitutionVOs();
     //获得所有机构的财务汇总
     List<MInstitutionVO> getAllInstitutionFinancial();
+    IOrderA getIOrderA(String code);
 }

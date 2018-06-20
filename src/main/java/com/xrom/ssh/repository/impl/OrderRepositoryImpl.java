@@ -630,10 +630,28 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
     }
 
     @Override
+    public List<IOrderYearA> getIOrderYearA(String code){
+        Session session = getCurrentSession();
+        List<IOrderYearA> list = session.createQuery("from IOrderYearA where code = :CODE")
+                .setParameter("CODE", code)
+                .list();
+        return list;
+    }
+
+    @Override
     public List<SOrderSeasonA> getSOrderSeasonA(Long studentId){
         Session session = getCurrentSession();
         List<SOrderSeasonA> list = session.createQuery("from SOrderSeasonA seasonA where seasonA.sid = :SID")
                 .setParameter("SID", studentId)
+                .list();
+        return list;
+    }
+
+    @Override
+    public List<IOrderSeasonA> getIOrderSeasonA(String code){
+        Session session = getCurrentSession();
+        List<IOrderSeasonA> list = session.createQuery("from IOrderSeasonA where code = :CODE")
+                .setParameter("CODE", code)
                 .list();
         return list;
     }
@@ -647,6 +665,14 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         return list;
     }
 
+    @Override
+    public List<IOrderMonthA> getIOrderMonthA(String code){
+        Session session = getCurrentSession();
+        List<IOrderMonthA> list = session.createQuery("from IOrderMonthA where code = :CODE")
+                .setParameter("CODE", code)
+                .list();
+        return list;
+    }
     @Override
     public SOrderTypeA getSOrderTypeA(Long studentId){
         Session session = getCurrentSession();

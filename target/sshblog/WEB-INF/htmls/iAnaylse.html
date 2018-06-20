@@ -227,6 +227,14 @@
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <!-- /.container -->
+        <div class="content-wrapper">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                <div class="col-md-12" style="margin-top: 200px">
+                    <div id="charts" style="width: 700px; height: 350px"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- ./wrapper -->
@@ -241,6 +249,8 @@
 <script src="../../bootstrap/js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../../bootstrap/js/adminlte.min.js"></script>
+
+<script src="../../bootstrap/js/echarts.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../bootstrap/js/demo.js"></script>
 <script>
@@ -253,6 +263,7 @@
         $("#li6").attr("onclick", "click6()");
         $("#li7").attr("onclick", "click7()");
         $("#li8").attr("onclick", "click8()");
+        click1_1();
     });
 
     function click1() {
@@ -262,7 +273,30 @@
         }else{
             $("#li1").attr("class", "treeview");
         }
+    }
+    //点击订单总数年
+    function click1_1() {
+        var myChart = echarts.init(document.getElementById("charts"));
 
+        var option = {
+            title:{
+                text:'ECharts 入门示例'
+            },
+            tooltip:{},
+            legend:{
+                data:['销量']
+            },
+            xAxis:{
+                data:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis:{},
+            series:[{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+        myChart.setOption(option);
     }
     function click2() {
         if($("#li2").attr("class") == "treeview"){

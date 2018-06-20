@@ -516,6 +516,43 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<IOrderYearA> getIOrderYearA(String code){
+        List<IOrderYearA> list = repository.getIOrderYearA(code);
+        if(list == null){
+            return null;
+        }else {
+            List<IOrderYearA> list1 = new ArrayList<>();
+            Collections.sort(list, new Comparator<IOrderYearA>() {
+                @Override
+                public int compare(IOrderYearA o1, IOrderYearA o2) {
+                    return o1.getYear() - o2.getYear();
+                }
+            });
+            IOrderYearA oldest = list.get(0);
+            IOrderYearA newest = list.get(list.size() - 1);
+
+            int index = 0;
+            for(int i = oldest.getYear(); i <= newest.getYear(); i++){
+                if(index == list.size()){
+                    break;
+                }
+                if(list.get(index).getYear() == i){
+                    list1.add(list.get(index));
+                    index++;
+                }else {
+                    IOrderYearA yearA = new IOrderYearA();
+                    yearA.setCode(code);
+                    yearA.setYear(i);
+                    list1.add(yearA);
+                }
+            }
+            return list1;
+        }
+    }
+
+
+
+    @Override
     public List<SOrderSeasonA> getSOrderSeasonA(Long studentId){
         List<SOrderSeasonA> list = repository.getSOrderSeasonA(studentId);
         if(list == null){
@@ -544,6 +581,41 @@ public class OrderServiceImpl implements OrderService {
                     sOrderSeasonA.setSid(studentId);
                     sOrderSeasonA.setSeason(i);
                     list1.add(sOrderSeasonA);
+                }
+            }
+            return list1;
+        }
+    }
+
+    @Override
+    public List<IOrderSeasonA> getIOrderSeasonA(String code){
+        List<IOrderSeasonA> list = repository.getIOrderSeasonA(code);
+        if(list == null) {
+            return null;
+        }else {
+            List<IOrderSeasonA> list1 = new ArrayList<>();
+            Collections.sort(list, new Comparator<IOrderSeasonA>() {
+                @Override
+                public int compare(IOrderSeasonA o1, IOrderSeasonA o2) {
+                    return o1.getSeason() - o2.getSeason();
+                }
+            });
+            IOrderSeasonA oldest = list.get(0);
+            IOrderSeasonA newest = list.get(list.size() - 1);
+
+            int index = 0;
+            for(int i = oldest.getSeason(); i <= newest.getSeason(); i++){
+                if(index == list.size()){
+                    break;
+                }
+                if(list.get(index).getSeason() == i){
+                    list1.add(list.get(index));
+                    index++;
+                }else {
+                    IOrderSeasonA iOrderSeasonA = new IOrderSeasonA();
+                    iOrderSeasonA.setCode(code);
+                    iOrderSeasonA.setSeason(i);
+                    list1.add(iOrderSeasonA);
                 }
             }
             return list1;
@@ -580,6 +652,42 @@ public class OrderServiceImpl implements OrderService {
                     sOrderMonthA.setSid(studentId);
                     sOrderMonthA.setMonth(i);
                     list1.add(sOrderMonthA);
+                }
+            }
+            return list1;
+        }
+    }
+
+    @Override
+    public List<IOrderMonthA> getIOrderMonthA(String code){
+        List<IOrderMonthA> list = repository.getIOrderMonthA(code);
+        if(list == null){
+            return null;
+        }else {
+            List<IOrderMonthA> list1 = new ArrayList<>();
+            Collections.sort(list, new Comparator<IOrderMonthA>() {
+                @Override
+                public int compare(IOrderMonthA o1, IOrderMonthA o2) {
+                    return o1.getMonth() - o2.getMonth();
+                }
+            });
+
+            IOrderMonthA oldest = list.get(0);
+            IOrderMonthA newest = list.get(list.size() - 1);
+
+            int index = 0;
+            for(int i = oldest.getMonth(); i <= newest.getMonth(); i++){
+                if(index == list.size()){
+                    break;
+                }
+                if(list.get(index).getMonth() == i){
+                    list1.add(list.get(index));
+                    index++;
+                }else {
+                    IOrderMonthA iOrderMonthA = new IOrderMonthA();
+                    iOrderMonthA.setCode(code);
+                    iOrderMonthA.setMonth(i);
+                    list1.add(iOrderMonthA);
                 }
             }
             return list1;
