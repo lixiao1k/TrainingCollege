@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: shelton
-  Date: 2018/3/24
-  Time: 下午11:19
+  Date: 2018/3/10
+  Time: 下午10:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -17,7 +17,7 @@
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>线下支付</title>
+    <title>机构信息主页</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -57,7 +57,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="/iHome">机构信息</a></li>
+                        <li><a href="/iHome">机构信息<span class="sr-only">(current)</span></a></li>
                         <li><a href="/iTeachers">师资</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">计划<span class="caret"></span></a>
@@ -76,7 +76,7 @@
                             </ul>
                         </li>
                         <li><a href="/iBillsPage">财务</a></li>
-                        <li><a href="/iAnalyse">分析</a></li>
+                        <li class="active"><a href="/iAnalyse">分析</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -118,37 +118,96 @@
             <!-- /.container-fluid -->
         </nav>
     </header>
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">总数统计</li>
+                <li>
+                    <a href="pages/widgets.html">
+                        <i class="fa fa-circle-o text-green"></i> <span>总成交额</span>
+                        <span class="pull-right-container">
+                            <small class="label pull-right bg-green" id="totalPrice">0</small>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/widgets.html">
+                        <i class="fa fa-circle-o text-aqua"></i> <span>总学员数</span>
+                        <span class="pull-right-container">
+                            <small class="label pull-right bg-blue" id="totalStudent">0</small>
+                        </span>
+                    </a>
+                </li>
+                <li class="header">分析子项导航</li>
+                <li class="treeview" id="li1">
+                    <a>
+                        <span>订单总数</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                    </ul>
+                </li>
+                <li class="treeview" id="li2">
+                    <a>
+                        <span>成交总额</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                    </ul>
+                </li>
+                <li class="treeview" id="li3">
+                    <a>
+                        <span>总成交率</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                    </ul>
+                </li>
+                <li class="treeview" id="li4">
+                    <a>
+                        <span>学员忠诚度</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="index.html"><i class="fa fa-circle-o"></i> 年度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 季度</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 月份</a></li>
+                    </ul>
+                </li>
+                <li class="" id="li5">
+                    <a>
+                        <span>销售额增长率</span>
+                    </a>
+                </li>
+                <li class="" id="li6">
+                    <a>
+                        <span>各类型课程成交金额</span>
+                    </a>
+                </li>
+                <li class="" id="li7">
+                    <a>
+                        <span>课程数据统计</span>
+                    </a>
+                </li>
+                <li class="" id="li8">
+                    <a>
+                        <span>教师数据统计</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
     <!-- Full Width Column -->
     <div class="content-wrapper">
-        <div class="container">
-            <div class="col-md-6" style="margin-top: 100pt; margin-left: 230pt">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <i class="fa fa-text-width"></i>
-
-                        <h3 class="box-title">支付信息预览</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <dl class="dl-horizontal">
-                            <dt>订单号</dt>
-                            <dd>${Order.id}</dd>
-                            <dt>订单金额</dt>
-                            <dd>${Order.price}</dd>
-                            <dt>下单时间</dt>
-                            <dd>${Order.createTime}</dd>
-                        </dl>
-                        <div class="box-footer">
-                            <a href="/iPayOfflineCancel" class="btn btn-default">取消</a>
-                            <a href="/iPayOfflineEnsure/${Order.id}" class="btn btn-info pull-right">确定支付</a>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
-        </div>
-        <!-- /.container -->
     </div>
 </div>
 <!-- ./wrapper -->
@@ -165,5 +224,79 @@
 <script src=".<%=basePath%>bootstrap/js/mine/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>bootstrap/js/mine/demo.js"></script>
+<script>
+    $(function () {
+        $("#li1").attr("onclick", "click1()");
+        $("#li2").attr("onclick", "click2()");
+        $("#li3").attr("onclick", "click3()");
+        $("#li4").attr("onclick", "click4()");
+        $("#li5").attr("onclick", "click5()");
+        $("#li6").attr("onclick", "click6()");
+        $("#li7").attr("onclick", "click7()");
+        $("#li8").attr("onclick", "click8()");
+    });
+
+    function click1() {
+        if($("#li1").attr("class") == "treeview"){
+            remove();
+            $("#li1").attr("class", "active treeview");
+        }else{
+            $("#li1").attr("class", "treeview");
+        }
+
+    }
+    function click2() {
+        if($("#li2").attr("class") == "treeview"){
+            remove();
+            $("#li2").attr("class", "active treeview");
+        }else{
+            $("#li2").attr("class", "treeview");
+        }
+    }
+
+    function click3() {
+        if($("#li3").attr("class") == "treeview"){
+            remove();
+            $("#li3").attr("class", "active treeview");
+        }else{
+            $("#li3").attr("class", "treeview");
+        }
+    }
+
+    function click4() {
+        if($("#li4").attr("class") == "treeview"){
+            remove();
+            $("#li4").attr("class", "active treeview");
+        }else{
+            $("#li4").attr("class", "treeview");
+        }
+    }
+
+    function click5() {
+        remove();
+        $("#li5").attr("class", "active");
+    }
+
+    function click6() {
+        remove();
+        $("#li6").attr("class", "active");
+    }
+
+    function click7() {
+        remove();
+        $("#li7").attr("class", "active");
+    }
+
+    function click8() {
+        remove();
+        $("#li8").attr("class", "active");
+    }
+
+
+    function remove() {
+        $("#li1, #li2, #li3, #li4").attr("class", "treeview");
+        $("#li5, #li6, #li7, #li8").attr("class", "");
+    }
+</script>
 </body>
 </html>

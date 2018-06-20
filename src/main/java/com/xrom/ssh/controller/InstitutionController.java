@@ -493,4 +493,10 @@ public class InstitutionController {
         session.invalidate();
         return new ModelAndView(new RedirectView("/"));
     }
+
+
+    @RequestMapping(value = "/iAnalyse")
+    public ModelAndView iAnalyse(){
+        return new ModelAndView("/iAnalyse");
+    }
 }

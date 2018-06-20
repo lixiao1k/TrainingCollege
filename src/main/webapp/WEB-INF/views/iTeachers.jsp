@@ -77,6 +77,7 @@
                             </ul>
                         </li>
                         <li><a href="/iBillsPage">财务</a></li>
+                        <li><a href="/iAnalyse">分析</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
