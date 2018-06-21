@@ -10,6 +10,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -151,5 +154,15 @@ public class LearnSignRepositoryImpl extends BaseRepositoryImpl implements Learn
     @Override
     public void update(LearnSign entity) {
         getCurrentSession().update(entity);
+    }
+
+
+    @Override
+    public List<ICourseSignA> getICourseSignA(Long courseId){
+        Session session = getCurrentSession();
+        List<ICourseSignA> list = session.createQuery("from ICourseSignA where courseId = :CID")
+                .setParameter("CID", courseId)
+                .list();
+        return list;
     }
 }

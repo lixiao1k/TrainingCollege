@@ -1087,22 +1087,21 @@
       <DataType>varchar(7)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="240" name="signAmount">
+    <column id="273" parent="240" name="courseId">
       <Position>3</Position>
-      <DataType>int(11)|0</DataType>
-      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <DataType>bigint(20)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="274" parent="240" name="week">
+    <column id="274" parent="240" name="signAmount">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="240" name="courseId">
+    <column id="275" parent="240" name="week">
       <Position>5</Position>
-      <DataType>bigint(20)|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="276" parent="240" name="PRIMARY">

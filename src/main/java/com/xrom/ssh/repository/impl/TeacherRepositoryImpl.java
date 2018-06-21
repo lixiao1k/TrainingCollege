@@ -1,5 +1,6 @@
 package com.xrom.ssh.repository.impl;
 
+import com.xrom.ssh.entity.ITeacherA;
 import com.xrom.ssh.entity.Teacher;
 import com.xrom.ssh.repository.TeacherRepository;
 import org.hibernate.SQLQuery;
@@ -78,5 +79,14 @@ public class TeacherRepositoryImpl extends BaseRepositoryImpl implements Teacher
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public ITeacherA getTeacherA(Long tid){
+        Session session = getCurrentSession();
+        ITeacherA iTeacherA = (ITeacherA) session.createQuery("from ITeacherA where tid = :TID")
+                .setParameter("TID", tid)
+                .uniqueResult();
+        return iTeacherA;
     }
 }

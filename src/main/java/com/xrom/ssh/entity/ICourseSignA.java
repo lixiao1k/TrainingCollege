@@ -15,6 +15,9 @@ public class ICourseSignA implements Serializable{
     private static final long serialVersionUID = 1731438L;
 
     @Id
+    @GeneratedValue
+    private Long id;
+
     @Column(name = "courseId")
     private Long courseId;
 

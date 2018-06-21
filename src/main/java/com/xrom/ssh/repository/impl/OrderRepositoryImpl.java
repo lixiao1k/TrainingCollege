@@ -691,7 +691,6 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         return sOrderGradeA;
     }
 
-
 }
 
 

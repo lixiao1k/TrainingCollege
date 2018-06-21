@@ -2,6 +2,7 @@ package com.xrom.ssh.service;
 
 import com.xrom.ssh.entity.Teacher;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface TeacherService {
@@ -14,4 +15,5 @@ public interface TeacherService {
     List<Teacher> findTeachersOfInstitution(String institution_code);
     void flush();
     void createTeacher(String name, String phone, String type, String institutionCode);
+    HashMap getITeacherA(String code);
 }

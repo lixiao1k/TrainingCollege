@@ -118,6 +118,7 @@
             <!-- /.container-fluid -->
         </nav>
     </header>
+
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -142,7 +143,7 @@
                 </li>
                 <li>
                     <a>
-                        <i class="fa fa-circle-o text-aqua"></i> <span>学员忠诚度</span>
+                        <i class="fa fa-circle-o text-orange"></i> <span>学员忠诚度</span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-orange" id="loyalty">0</small>
                         </span>
@@ -226,10 +227,12 @@
 
     <!-- Full Width Column -->
     <div class="content-wrapper">
-        <div class="col-md-4"></div>
-        <div class="col-md-8">
-            <div class="col-md-12" style="margin-top: 200px">
-                <div id="charts" style="width: 700px; height: 350px"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            <div class="col-md-12" style="margin-top: 20px">
+                <div id="table_panel">
+                </div>
+                <div id="charts" style="width: 700px; height: 350px; margin-left: 200px; margin-top: 200px"></div>
             </div>
         </div>
     </div>

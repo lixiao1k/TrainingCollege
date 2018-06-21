@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -544,4 +545,36 @@ public class InstitutionController {
         return list;
     }
 
+    @RequestMapping(value = "/iGetCourseTypeA")
+    @ResponseBody
+    public ICourseTypeA iGetCourseTypeA(HttpSession session){
+        Institution institution = (Institution) session.getAttribute("institution");
+        return courseService.getICourseTypeA(institution.getCode());
+    }
+
+    @RequestMapping(value = "/iGetCourseA")
+    @ResponseBody
+    public HashMap iGetCourseA(HttpSession session){
+        Institution institution = (Institution) session.getAttribute("institution");
+        return courseService.getICourseA(institution.getCode());
+    }
+
+    @RequestMapping(value = "/iGetCourseSignA/{courseId}")
+    @ResponseBody
+    public HashMap iGetCourseSignA(@PathVariable Long courseId){
+        ICourseA iCourseA = courseService.getICourseA(courseId);
+        List<ICourseSignA> courseSignAS = learnSignService.getICourseSignA(courseId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("courseA", iCourseA);
+        hashMap.put("courseSignAS", courseSignAS);
+        return hashMap;
+    }
+
+
+    @RequestMapping(value = "/iGetTeacherA")
+    @ResponseBody
+    public HashMap iGetTeacherA(HttpSession session){
+        Institution institution = (Institution) session.getAttribute("institution");
+        return teacherService.getITeacherA(institution.getCode());
+    }
 }

@@ -2,6 +2,8 @@ package com.xrom.ssh.service.impl;
 
 import com.xrom.ssh.entity.Course;
 import com.xrom.ssh.entity.Grade;
+import com.xrom.ssh.entity.ICourseA;
+import com.xrom.ssh.entity.ICourseTypeA;
 import com.xrom.ssh.entity.vo.OrderVO;
 import com.xrom.ssh.entity.vo.SCourseVO;
 import com.xrom.ssh.enums.OrderState;
@@ -12,9 +14,7 @@ import com.xrom.ssh.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -152,5 +152,38 @@ public class CourseServiceImpl implements CourseService {
         }else {
             return oCourse;
         }
+    }
+
+
+    @Override
+    public ICourseTypeA getICourseTypeA(String code){
+        return courseRepository.getICourseTypeA(code);
+    }
+
+
+    @Override
+    public HashMap getICourseA(String code){
+        List<Course> courses = courseRepository.findAll(code);
+        List<ICourseA> iCourseAS = new ArrayList<>();
+        for(Course course : courses){
+            ICourseA iCourseA = courseRepository.getICourseA(course.getId());
+            if(iCourseA == null){
+                iCourseA = new ICourseA();
+                iCourseA.setCourseId(course.getId());
+                iCourseA.setInstitutionCode(course.getInstitutionCode());
+                iCourseAS.add(iCourseA);
+            }else {
+                iCourseAS.add(iCourseA);
+            }
+        }
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("courses", courses);
+        hashMap.put("iCourseAS", iCourseAS);
+        return hashMap;
+    }
+
+    @Override
+    public ICourseA getICourseA(Long courseId) {
+        return courseRepository.getICourseA(courseId);
     }
 }

@@ -1,12 +1,15 @@
 package com.xrom.ssh.repository.impl;
 
 import com.xrom.ssh.entity.Course;
+import com.xrom.ssh.entity.ICourseA;
+import com.xrom.ssh.entity.ICourseTypeA;
 import com.xrom.ssh.repository.CourseRepository;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -112,4 +115,24 @@ public class CourseRepositoryImpl extends BaseRepositoryImpl implements CourseRe
         }
         return list;
     }
+
+    @Override
+    public ICourseTypeA getICourseTypeA(String code){
+        Session session = getCurrentSession();
+        ICourseTypeA iCourseTypeA = (ICourseTypeA) session.createQuery("from ICourseTypeA where code = :CODE")
+                .setParameter("CODE", code)
+                .uniqueResult();
+        return iCourseTypeA;
+    }
+
+
+    @Override
+    public ICourseA getICourseA(Long courseId){
+        Session session = getCurrentSession();
+        ICourseA iCourseA = (ICourseA) session.createQuery("from ICourseA where courseId = :CID")
+                .setParameter("CID", courseId)
+                .uniqueResult();
+        return iCourseA;
+    }
+
 }
