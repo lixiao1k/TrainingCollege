@@ -1519,16 +1519,19 @@
     <column id="350" parent="252" name="totalInstitutions">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="351" parent="252" name="totalMoney">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="352" parent="252" name="totalOrders">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="353" parent="252" name="PRIMARY">
@@ -1576,21 +1579,25 @@
     <column id="361" parent="254" name="newInstitutions">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="362" parent="254" name="newStudents">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="363" parent="254" name="totalMoney">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="364" parent="254" name="totalOrders">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="365" parent="254" name="PRIMARY">
@@ -1607,11 +1614,13 @@
     <column id="367" parent="255" name="totalMoney">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="368" parent="255" name="totalOrders">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="369" parent="255" name="PRIMARY">

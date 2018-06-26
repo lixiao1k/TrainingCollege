@@ -1,10 +1,7 @@
 package com.xrom.ssh.controller;
 
 import com.sun.media.sound.ModelAbstractChannelMixer;
-import com.xrom.ssh.entity.Institution;
-import com.xrom.ssh.entity.ModifyApplication;
-import com.xrom.ssh.entity.RegisterApplication;
-import com.xrom.ssh.entity.Student;
+import com.xrom.ssh.entity.*;
 import com.xrom.ssh.entity.vo.BillsVO;
 import com.xrom.ssh.entity.vo.MInstitutionVO;
 import com.xrom.ssh.entity.vo.MStudentVO;
@@ -16,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.rmi.StubNotFoundException;
 import java.security.PublicKey;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -223,7 +222,44 @@ public class MasterController {
         return new ModelAndView(new RedirectView("/"));
     }
 
+    @RequestMapping(value = "/mAnalyse")
+    public ModelAndView mAnalyse(HttpSession session){
+        if(session.getAttribute("master")==null){
+            return new ModelAndView(new RedirectView("/"));
+        }
+        return new ModelAndView("/mAnalyse");
+    }
 
 
+    @RequestMapping(value = "/mGetOrderA")
+    @ResponseBody
+    public MOrderA mGetOrderA(HttpSession session){
+        return orderService.getMOrderA();
+    }
+
+
+    @RequestMapping(value = "/mGetMAreaA")
+    @ResponseBody
+    public List<MAreaA> mGetMAreaA(){
+        return orderService.getMAreaAs();
+    }
+
+    @RequestMapping(value = "/mGetMTypeA")
+    @ResponseBody
+    public List<MTypeA> mGetMTypeA(){
+        return orderService.getMTypeA();
+    }
+
+    @RequestMapping(value = "/mGetMOrderMonthA")
+    @ResponseBody
+    public List<MOrderMonthA> mGetMOrderMonthA(){
+        return orderService.getMOrderMonthA();
+    }
+
+    @RequestMapping(value = "/mGetAllInstitutionA")
+    @ResponseBody
+    public HashMap mGetAllInstitutionA(){
+        return institutionService.getAllInstitutionA();
+    }
 
 }

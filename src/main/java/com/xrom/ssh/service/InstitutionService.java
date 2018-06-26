@@ -4,6 +4,7 @@ import com.xrom.ssh.entity.IOrderA;
 import com.xrom.ssh.entity.Institution;
 import com.xrom.ssh.entity.vo.MInstitutionVO;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface InstitutionService {
@@ -22,4 +23,5 @@ public interface InstitutionService {
     //获得所有机构的财务汇总
     List<MInstitutionVO> getAllInstitutionFinancial();
     IOrderA getIOrderA(String code);
+    HashMap getAllInstitutionA();
 }

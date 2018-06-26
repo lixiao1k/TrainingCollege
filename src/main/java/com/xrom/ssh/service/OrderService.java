@@ -7,6 +7,7 @@ import com.xrom.ssh.entity.vo.SPayInfoVO;
 import com.xrom.ssh.enums.OrderState;
 
 import javax.swing.event.ListDataEvent;
+import java.util.HashMap;
 import java.util.List;
 
 public interface OrderService {
@@ -59,4 +60,8 @@ public interface OrderService {
     List<IOrderYearA> getIOrderYearA(String code);
     List<IOrderSeasonA> getIOrderSeasonA(String code);
     List<IOrderMonthA> getIOrderMonthA(String code);
+    MOrderA getMOrderA();
+    List<MAreaA> getMAreaAs();
+    List<MTypeA> getMTypeA();
+    List<MOrderMonthA> getMOrderMonthA();
 }

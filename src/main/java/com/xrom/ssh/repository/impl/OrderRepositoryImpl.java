@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -796,6 +797,37 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
                 .uniqueResult();
         return sOrderGradeA;
     }
+
+    @Override
+    public MOrderA getMOrderA(){
+        Session session = getCurrentSession();
+        MOrderA mOrderA = (MOrderA) session.createQuery("from MOrderA where id = 1").uniqueResult();
+        return mOrderA;
+    }
+
+    @Override
+    public List<MAreaA> getMAreaAs(){
+        Session session = getCurrentSession();
+        List<MAreaA> list = session.createQuery("from MAreaA").list();
+        return list;
+    }
+
+    @Override
+    public List<MTypeA> getMTypeA(){
+        Session session = getCurrentSession();
+        List<MTypeA> list = session.createQuery("from MTypeA").list();
+        return list;
+    }
+
+
+    @Override
+    public List<MOrderMonthA> getMOrderMonthA(){
+        Session session = getCurrentSession();
+        List<MOrderMonthA> list = session.createQuery("from MOrderMonthA").list();
+        return list;
+    }
+
+
 
 }
 

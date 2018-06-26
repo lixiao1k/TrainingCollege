@@ -57,7 +57,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/mInstitutionFinancial">结算<span class="sr-only">(current)</span></a></li>
+                        <li ><a href="/mInstitutionFinancial">结算<span class="sr-only">(current)</span></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">申请<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -76,7 +76,7 @@
                                 <li><a href="/mBillsPage">财务情况</a></li>
                             </ul>
                         </li>
-                        <li><a href="/mAnalyse">分析数据</a></li>
+                        <li class="active"><a href="/mAnalyse">分析数据</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -97,11 +97,85 @@
     </header>
     <!-- Full Width Column -->
     <div class="content-wrapper">
-        <div class="container">
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+
+                    <li class="">
+                        <a id="li1">
+                            <span>平台信息</span>
+                        </a>
+                    </li>
+                    <li class="header">地域相关信息</li>
+                    <li class="">
+                        <a id="li2">
+                            <span>成交额</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a id="li3">
+                            <span>成交订单数</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a id="li4">
+                            <span>机构数量</span>
+                        </a>
+                    </li>
+                    <li class="header">课程类型相关信息</li>
+                    <li>
+                        <a id="li5">
+                            <span>成交额</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="li6">
+                            <span>成交订单数</span>
+                        </a>
+                    </li>
+                    <li class="header">月度信息统计</li>
+                    <li class="">
+                        <a id="li7">
+                            <span>成交额</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a id="li8">
+                            <span>新增学员数</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a id="li9">
+                            <span>新增机构数</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a id="li10">
+                            <span>销售额增长率</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a id="li11">
+                            <span>全平台机构统计</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <div class="content-wrapper">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <div id="content">
+                </div>
+                <div id="charts" style="width: 700px; height: 350px; margin-left: 200px; margin-top: 200px"></div>
+            </div>
         </div>
-        <!-- /.container -->
     </div>
 </div>
+</body>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
@@ -116,5 +190,15 @@
 <script src=".<%=basePath%>bootstrap/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>bootstrap/js/demo.js"></script>
-</body>
+<script src="<%=basePath%>bootstrap/js/mine/mAnalyse.js"></script>
+<script src="<%=basePath%>bootstrap/js/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 </html>

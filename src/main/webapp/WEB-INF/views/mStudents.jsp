@@ -87,9 +87,10 @@
                                 <li class="divider"></li>
                                 <li><a href="/mStudents">学员信息</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">财务情况</a></li>
+                                <li><a href="/mBillsPage">财务情况</a></li>
                             </ul>
                         </li>
+                        <li><a href="/mAnalyse">分析数据</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">

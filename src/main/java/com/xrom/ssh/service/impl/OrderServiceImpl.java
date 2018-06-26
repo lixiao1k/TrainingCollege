@@ -11,6 +11,8 @@ import com.xrom.ssh.repository.OrderRepository;
 import com.xrom.ssh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
@@ -720,4 +722,56 @@ public class OrderServiceImpl implements OrderService {
             return sOrderGradeA;
         }
     }
+
+    @Override
+    public MOrderA getMOrderA(){
+        return repository.getMOrderA();
+    }
+
+    @Override
+    public List<MAreaA> getMAreaAs(){
+        List<MAreaA> list1 = repository.getMAreaAs();
+        return list1;
+    }
+
+    @Override
+    public List<MTypeA> getMTypeA(){
+        return repository.getMTypeA();
+    }
+
+    @Override
+    public List<MOrderMonthA> getMOrderMonthA(){
+        List<MOrderMonthA> list = repository.getMOrderMonthA();
+        if(list == null){
+            return null;
+        }else {
+            List<MOrderMonthA> list1 = new ArrayList<>();
+            Collections.sort(list, new Comparator<MOrderMonthA>() {
+                @Override
+                public int compare(MOrderMonthA o1, MOrderMonthA o2) {
+                    return o1.getMonth() - o2.getMonth();
+                }
+            });
+
+            MOrderMonthA oldest = list.get(0);
+            MOrderMonthA newest = list.get(list.size() - 1);
+
+            int index = 0;
+            for(int i = oldest.getMonth(); i <= newest.getMonth(); i++){
+                if(index == list.size()){
+                    break;
+                }
+                if(list.get(index).getMonth() == i){
+                    list1.add(list.get(index));
+                    index++;
+                }else {
+                    MOrderMonthA mOrderMonthA = new MOrderMonthA();
+                    mOrderMonthA.setMonth(i);
+                    list1.add(mOrderMonthA);
+                }
+            }
+            return list1;
+        }
+    }
+
 }

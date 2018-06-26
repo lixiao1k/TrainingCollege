@@ -12,9 +12,8 @@ import com.xrom.ssh.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import javax.persistence.Column;
+import java.util.*;
 
 @Service
 public class InstitutionServiceImpl implements InstitutionService {
@@ -159,5 +158,35 @@ public class InstitutionServiceImpl implements InstitutionService {
     @Override
     public IOrderA getIOrderA(String code){
         return institutionRepository.getIOrderA(code);
+    }
+
+    @Override
+    public HashMap getAllInstitutionA(){
+        List<Institution> list = institutionRepository.findAll();
+        List<IOrderA> list1 = new ArrayList<>();
+        for(Institution institution : list){
+            IOrderA iOrderA = institutionRepository.getIOrderA(institution.getCode());
+            if(iOrderA != null){
+                list1.add(iOrderA);
+            }else {
+                iOrderA = new IOrderA();
+                iOrderA.setCode(institution.getCode());
+                list1.add(iOrderA);
+            }
+        }
+        Collections.sort(list1, new Comparator<IOrderA>() {
+            @Override
+            public int compare(IOrderA o1, IOrderA o2) {
+                return o2.getTotalPrice() - o1.getTotalPrice();
+            }
+        });
+        list = new ArrayList<>();
+        for(IOrderA iOrderA : list1){
+            list.add(institutionRepository.get(iOrderA.getCode()));
+        }
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("institutions", list);
+        hashMap.put("institutionAs",list1);
+        return hashMap;
     }
 }

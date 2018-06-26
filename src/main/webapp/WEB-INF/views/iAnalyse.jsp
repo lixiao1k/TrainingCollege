@@ -238,7 +238,7 @@
     </div>
 </div>
 <!-- ./wrapper -->
-
+</body>
 <!-- jQuery 3 -->
 <script src="<%=basePath%>bootstrap/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -254,5 +254,4 @@
 <script src="<%=basePath%>bootstrap/js/echarts.min.js"></script>
 <%--管理信息系统--%>
 <script src="<%=basePath%>bootstrap/js/mine/iAnalyse.js"></script>
-</body>
 </html>

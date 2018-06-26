@@ -90,6 +90,7 @@
                                 <li><a href="/mBillsPage">财务情况</a></li>
                             </ul>
                         </li>
+                        <li><a href="/mAnalyse">分析数据</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
