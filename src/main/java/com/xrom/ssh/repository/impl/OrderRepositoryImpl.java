@@ -3,6 +3,7 @@ package com.xrom.ssh.repository.impl;
 import com.xrom.ssh.entity.*;
 import com.xrom.ssh.repository.ClassroomRepository;
 import com.xrom.ssh.repository.CourseRepository;
+import com.xrom.ssh.repository.InstitutionRepository;
 import com.xrom.ssh.repository.OrderRepository;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -22,6 +23,9 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
     @Autowired(required = true)
     private ClassroomRepository classroomRepository;
+
+    @Autowired(required = true)
+    private InstitutionRepository institutionRepository;
 
     @Override
     public List<Order> findAll(Long studentId) {
@@ -245,7 +249,109 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
 
         //课程类型分析数据
         updateOrderTypeOfStu(order, pay);
+    }
 
+    //@管理信息系统
+    //更新平台的订单相关统计信息
+    @Override
+    public void payOrBreakOrder4Master(Order order, boolean pay){
+        Session session = getCurrentSession();
+        MOrderA mOrderA = (MOrderA) session.createQuery("from MOrderA where id = 1").uniqueResult();
+        if(mOrderA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MOrderA orderA set orderA.totalMoney =: MONEY, orderA.totalOrders = " +
+                    ":ORDERS where orderA.id = 1")
+                    .setParameter("MONEY", mOrderA.getTotalMoney() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("ORDERS", mOrderA.getTotalOrders() + (pay ? 1 : -1))
+                    .executeUpdate();
+            tx.commit();
+        }else if(pay){
+            Transaction tx = session.beginTransaction();
+            mOrderA = new MOrderA();
+            mOrderA.setId((long) 1);
+            mOrderA.setTotalMoney(order.getPrice());
+            mOrderA.setTotalOrders(1);
+            session.save(mOrderA);
+            tx.commit();
+        }
+
+
+        // 地域相关信息更新
+        Classroom classroom = classroomRepository.get(order.getClassId());
+        Course course = courseRepository.get(classroom.getCourseId());
+        Institution institution = institutionRepository.get(course.getInstitutionCode());
+        MAreaA mAreaA = (MAreaA) session.createQuery("from MAreaA where province = :PROVINCE")
+                .setParameter("PROVINCE", institution.getAddress())
+                .uniqueResult();
+        if(mAreaA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MAreaA areaA set areaA.totalMoney = :MONEY, areaA.totalOrders = :ORDERS " +
+                    "where areaA.province = :PROVINCE")
+                    .setParameter("MONEY", mAreaA.getTotalMoney() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("ORDERS", mAreaA.getTotalOrders() + (pay ? 1 : -1))
+                    .setParameter("PROVINCE", institution.getAddress())
+                    .executeUpdate();
+            tx.commit();
+        }else if(pay){
+            Transaction tx = session.beginTransaction();
+            mAreaA = new MAreaA();
+            mAreaA.setProvince(institution.getAddress());
+            mAreaA.setTotalMoney(order.getPrice());
+            mAreaA.setTotalOrders(1);
+            session.save(mAreaA);
+            tx.commit();
+        }
+
+        //更新type相关操作
+        MTypeA mTypeA = (MTypeA) session.createQuery("from MTypeA where type = :TYPE")
+                .setParameter("TYPE", course.getType())
+                .uniqueResult();
+        if(mTypeA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MTypeA typeA set typeA.totalMoney = :MONEY, typeA.totalOrders = :ORDERS " +
+                    "where typeA.type = :TYPE")
+                    .setParameter("MONEY", mTypeA.getTotalMoney() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("ORDERS", mTypeA.getTotalOrders() + (pay ? 1 : -1))
+                    .setParameter("TYPE", course.getType())
+                    .executeUpdate();
+            tx.commit();
+        }else if (pay){
+            Transaction tx = session.beginTransaction();
+            mTypeA = new MTypeA();
+            mTypeA.setType(course.getType());
+            mTypeA.setTotalMoney(order.getPrice());
+            mTypeA.setTotalOrders(1);
+            session.save(mTypeA);
+            tx.commit();
+        }
+
+        //更新月度统计信息
+        Date payedTime = order.getPayedTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(payedTime);
+        int year = calendar.get(Calendar.YEAR);
+        int month =  (year - 2000)*12 + calendar.get(Calendar.MONTH);
+        MOrderMonthA mOrderMonthA = (MOrderMonthA) session.createQuery("from MOrderMonthA where month = :MONTH")
+                .setParameter("MONTH", month)
+                .uniqueResult();
+        if(mOrderMonthA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MOrderMonthA monthA set monthA.totalMoney = :MONEY, monthA.totalOrders = :ORDER" +
+                    " where monthA.month = :MONTH")
+                    .setParameter("MONEY", mOrderMonthA.getTotalMoney() + (pay ? order.getPrice() : -order.getPrice()))
+                    .setParameter("ORDER", mOrderMonthA.getTotalMoney() + (pay ? 1 : -1))
+                    .setParameter("MONTH", month)
+                    .executeUpdate();
+            tx.commit();
+        }else if (pay){
+            Transaction tx = session.beginTransaction();
+            mOrderMonthA = new MOrderMonthA();
+            mOrderMonthA.setMonth(month);
+            mOrderMonthA.setTotalMoney(order.getPrice());
+            mOrderMonthA.setTotalOrders(1);
+            session.save(mOrderMonthA);
+            tx.commit();
+        }
     }
 
     //@管理信息系统

@@ -1,5 +1,7 @@
 package com.xrom.ssh.repository.impl;
 
+import com.xrom.ssh.entity.MOrderA;
+import com.xrom.ssh.entity.MOrderMonthA;
 import com.xrom.ssh.entity.Student;
 import com.xrom.ssh.repository.StudentRepository;
 import org.hibernate.SQLQuery;
@@ -9,6 +11,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -48,7 +52,54 @@ public class StudentRepositoryImpl extends BaseRepositoryImpl implements Student
 
     @Override
     public Long save(Student entity) {
+        addStudentA(entity);
         return (Long) getCurrentSession().save(entity);
+    }
+
+    //@管理信息系统
+    private void addStudentA(Student entity){
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        int year = calendar.get(Calendar.YEAR);
+        int month =  (year - 2000)*12 + calendar.get(Calendar.MONTH);
+
+        Session session = getCurrentSession();
+        MOrderMonthA mOrderMonthA = (MOrderMonthA) session.createQuery("from MOrderMonthA where month = :MONTH")
+                .setParameter("MONTH", month)
+                .uniqueResult();
+        if(mOrderMonthA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MOrderMonthA monthA set monthA.newStudents = :NEW " +
+                    "where monthA.month = :MONTH")
+                    .setParameter("NEW", mOrderMonthA.getNewStudents() + 1)
+                    .setParameter("MONTH", month)
+                    .executeUpdate();
+            tx.commit();
+        }else {
+            Transaction tx = session.beginTransaction();
+            mOrderMonthA = new MOrderMonthA();
+            mOrderMonthA.setMonth(month);
+            mOrderMonthA.setNewStudents(1);
+            tx.commit();
+        }
+
+        MOrderA mOrderA = (MOrderA) session.createQuery("from MOrderA where id = 1");
+        if(mOrderA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MOrderA orderA set orderA.totalStudents = :STUDENTS " +
+                    "where id = 1")
+                    .setParameter("STUDENTS", mOrderA.getTotalStudents() + 1)
+                    .executeUpdate();
+            tx.commit();
+        }else {
+            Transaction tx = session.beginTransaction();
+            mOrderA = new MOrderA();
+            mOrderA.setTotalStudents(1);
+            mOrderA.setId((long) 1);
+            session.save(mOrderA);
+            tx.commit();
+        }
     }
 
     @Override

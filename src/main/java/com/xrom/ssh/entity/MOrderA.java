@@ -21,16 +21,16 @@ public class MOrderA implements Serializable{
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "totalMoney")
+    @Column(name = "totalMoney", columnDefinition = "INT default 0")
     private int totalMoney;
 
-    @Column(name = "totalOrders")
+    @Column(name = "totalOrders", columnDefinition = "INT default 0")
     private int totalOrders;
 
-    @Column(name = "totalInstitution")
+    @Column(name = "totalInstitution", columnDefinition = "INT default 0")
     private int totalInstitution;
 
-    @Column(name = "totalStudents")
+    @Column(name = "totalStudents", columnDefinition = "INT default 0")
     private int totalStudents;
 
 }

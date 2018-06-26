@@ -18,4 +18,5 @@ public interface OrderRepository extends DomainRepository<Order,Long> {
     List<IOrderYearA> getIOrderYearA(String code);
     List<IOrderSeasonA> getIOrderSeasonA(String code);
     List<IOrderMonthA> getIOrderMonthA(String code);
+    void payOrBreakOrder4Master(Order order, boolean pay);
 }

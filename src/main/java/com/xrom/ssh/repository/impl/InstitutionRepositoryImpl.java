@@ -2,6 +2,8 @@ package com.xrom.ssh.repository.impl;
 
 import com.xrom.ssh.entity.IOrderA;
 import com.xrom.ssh.entity.Institution;
+import com.xrom.ssh.entity.MAreaA;
+import com.xrom.ssh.entity.MOrderMonthA;
 import com.xrom.ssh.repository.InstitutionRepository;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -10,6 +12,10 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.xml.crypto.Data;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -106,5 +112,53 @@ public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements Ins
                 .setParameter("CODE", code)
                 .uniqueResult();
         return iOrderA;
+    }
+
+    //@管理信息系统
+    public void addInstitution(Institution institution){
+        Session session = getCurrentSession();
+        MAreaA mAreaA = (MAreaA) session.createQuery("from MAreaA where province = :PROVINCE")
+                .setParameter("PROVINCE", institution.getAddress())
+                .uniqueResult();
+        if(mAreaA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MAreaA areaA set areaA.totalInstitution = :INSTITUTION " +
+                    "where areaA.province = :PROVINCE")
+                    .setParameter("INSTITUTION", mAreaA.getTotalInstitutions() + 1)
+                    .setParameter("PROVINCE", institution.getAddress())
+                    .executeUpdate();
+            tx.commit();
+        }else{
+            mAreaA = new MAreaA();
+            mAreaA.setProvince(institution.getAddress());
+            mAreaA.setTotalInstitutions(1);
+        }
+
+
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        int year = calendar.get(Calendar.YEAR);
+        int month =  (year - 2000)*12 + calendar.get(Calendar.MONTH);
+
+        //更新月度新增机构数
+        MOrderMonthA mOrderMonthA = (MOrderMonthA) session.createQuery("from MOrderMonthA where month = :MONTH")
+                .setParameter("MONTH", month)
+                .uniqueResult();
+        if(mOrderMonthA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MOrderMonthA monthA set monthA.newInstitution = :NEW " +
+                    "where monthA.month = :MONTH")
+                    .setParameter("NEW", mOrderMonthA.getNewInstitutions() + 1)
+                    .setParameter("MONTH", month)
+                    .executeUpdate();
+            tx.commit();
+        }else {
+            Transaction tx = session.beginTransaction();
+            mOrderMonthA = new MOrderMonthA();
+            mOrderMonthA.setMonth(month);
+            mOrderMonthA.setNewInstitutions(1);
+            tx.commit();
+        }
     }
 }

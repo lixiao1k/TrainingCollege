@@ -115,6 +115,7 @@ public class OrderServiceImpl implements OrderService {
         //@管理信息系统
         repository.payOrBreakOrder(order, true);
         repository.payOrBreakOrder4Institution(order, true);
+        repository.payOrBreakOrder4Master(order,true);
     }
 
     @Override
@@ -134,6 +135,7 @@ public class OrderServiceImpl implements OrderService {
         //@管理信息系统
         repository.payOrBreakOrder(order, true);
         repository.payOrBreakOrder4Institution(order, true);
+        repository.payOrBreakOrder4Master(order,true);
     }
 
     @Override
@@ -153,6 +155,7 @@ public class OrderServiceImpl implements OrderService {
         //@管理信息系统
         repository.payOrBreakOrder(order, false);
         repository.payOrBreakOrder4Institution(order, false);
+        repository.payOrBreakOrder4Master(order,false);
     }
 
     @Override
