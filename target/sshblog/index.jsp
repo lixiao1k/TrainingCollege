@@ -40,9 +40,6 @@
                     <a class="btn btn-primary btn-large" href="/mSignInPage">经理</a>
                 </div>
             </div>
-            <div class="col-md-4">
-                <a class="btn btn-primary btn-large" href="/testPage">test</a>
-            </div>
         </div>
     </div>
 </div>
