@@ -3,15 +3,21 @@ package com.xrom.ssh.repository.impl;
 import com.xrom.ssh.entity.ModifyApplication;
 import com.xrom.ssh.entity.RegisterApplication;
 import com.xrom.ssh.repository.RegisterApplicationRepository;
+import com.xrom.ssh.service.InstitutionService;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class RegisterApplicationRepositoryImpl extends BaseRepositoryImpl implements RegisterApplicationRepository {
+
+    @Autowired(required = true)
+    private InstitutionRepositoryImpl institutionRepository;
+
     @Override
     public void agree(Long id) {
         RegisterApplication application = get(id);
@@ -19,6 +25,7 @@ public class RegisterApplicationRepositoryImpl extends BaseRepositoryImpl implem
         application.setIs_rejected(0);
         update(application);
         flush();
+        institutionRepository.addInstitution(application);
     }
 
     @Override

@@ -101,8 +101,6 @@ public class ModifyApplicationServiceImpl implements ModifyApplicationService{
         institution.setPhone(application.getPhone());
         institution.setName(application.getName());
         institutionRepository.update(institution);
-        //@管理信息系统，更新平台机构统计信息
-        institutionRepository.addInstitution(institution);
         flush();
     }
 

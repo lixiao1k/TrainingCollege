@@ -70,9 +70,9 @@ public class StudentRepositoryImpl extends BaseRepositoryImpl implements Student
                 .uniqueResult();
         if(mOrderMonthA != null){
             Transaction tx = session.beginTransaction();
-            session.createQuery("update MOrderMonthA monthA set monthA.newStudents = :NEW " +
+            session.createQuery("update MOrderMonthA monthA set monthA.newStudents = :STUDENT " +
                     "where monthA.month = :MONTH")
-                    .setParameter("NEW", mOrderMonthA.getNewStudents() + 1)
+                    .setParameter("STUDENT", mOrderMonthA.getNewStudents() + 1)
                     .setParameter("MONTH", month)
                     .executeUpdate();
             tx.commit();
@@ -84,7 +84,7 @@ public class StudentRepositoryImpl extends BaseRepositoryImpl implements Student
             tx.commit();
         }
 
-        MOrderA mOrderA = (MOrderA) session.createQuery("from MOrderA where id = 1");
+        MOrderA mOrderA = (MOrderA) session.createQuery("from MOrderA where id = 1").uniqueResult();
         if(mOrderA != null){
             Transaction tx = session.beginTransaction();
             session.createQuery("update MOrderA orderA set orderA.totalStudents = :STUDENTS " +

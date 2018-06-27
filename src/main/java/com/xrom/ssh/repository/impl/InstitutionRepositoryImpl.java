@@ -1,9 +1,6 @@
 package com.xrom.ssh.repository.impl;
 
-import com.xrom.ssh.entity.IOrderA;
-import com.xrom.ssh.entity.Institution;
-import com.xrom.ssh.entity.MAreaA;
-import com.xrom.ssh.entity.MOrderMonthA;
+import com.xrom.ssh.entity.*;
 import com.xrom.ssh.repository.InstitutionRepository;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -115,14 +112,14 @@ public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements Ins
     }
 
     //@管理信息系统
-    public void addInstitution(Institution institution){
+    public void addInstitution(RegisterApplication institution){
         Session session = getCurrentSession();
         MAreaA mAreaA = (MAreaA) session.createQuery("from MAreaA where province = :PROVINCE")
                 .setParameter("PROVINCE", institution.getAddress())
                 .uniqueResult();
         if(mAreaA != null){
             Transaction tx = session.beginTransaction();
-            session.createQuery("update MAreaA areaA set areaA.totalInstitution = :INSTITUTION " +
+            session.createQuery("update MAreaA areaA set areaA.totalInstitutions = :INSTITUTION " +
                     "where areaA.province = :PROVINCE")
                     .setParameter("INSTITUTION", mAreaA.getTotalInstitutions() + 1)
                     .setParameter("PROVINCE", institution.getAddress())
@@ -147,9 +144,9 @@ public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements Ins
                 .uniqueResult();
         if(mOrderMonthA != null){
             Transaction tx = session.beginTransaction();
-            session.createQuery("update MOrderMonthA monthA set monthA.newInstitution = :NEW " +
+            session.createQuery("update MOrderMonthA monthA set monthA.newInstitutions = :INSTITUTION " +
                     "where monthA.month = :MONTH")
-                    .setParameter("NEW", mOrderMonthA.getNewInstitutions() + 1)
+                    .setParameter("INSTITUTION", mOrderMonthA.getNewInstitutions() + 1)
                     .setParameter("MONTH", month)
                     .executeUpdate();
             tx.commit();
@@ -158,6 +155,22 @@ public class InstitutionRepositoryImpl extends BaseRepositoryImpl implements Ins
             mOrderMonthA = new MOrderMonthA();
             mOrderMonthA.setMonth(month);
             mOrderMonthA.setNewInstitutions(1);
+            tx.commit();
+        }
+
+        MOrderA mOrderA = (MOrderA) session.createQuery("from MOrderA where id=1").uniqueResult();
+        if(mOrderA != null){
+            Transaction tx = session.beginTransaction();
+            session.createQuery("update MOrderA orderA set orderA.totalInstitution = :INSTITUTION " +
+                    "where orderA.id = 1")
+                    .setParameter("INSTITUTION", mOrderA.getTotalInstitution() + 1)
+                    .executeUpdate();
+            tx.commit();
+        }else {
+            Transaction tx = session.beginTransaction();
+            mOrderA = new MOrderA();
+            mOrderA.setId((long) 1);
+            mOrderA.setTotalInstitution(1);
             tx.commit();
         }
     }

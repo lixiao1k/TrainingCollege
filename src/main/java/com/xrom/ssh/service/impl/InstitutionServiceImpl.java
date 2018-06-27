@@ -30,7 +30,6 @@ public class InstitutionServiceImpl implements InstitutionService {
     @Override
     public String createInstitution(Institution institution) {
         String code = UUID.randomUUID().toString().replace("-","").substring(0,7);
-        System.out.print(code);
         institution.setCode(code);
         return institutionRepository.save(institution);
     }

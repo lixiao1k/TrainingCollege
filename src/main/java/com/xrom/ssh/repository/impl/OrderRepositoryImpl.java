@@ -260,7 +260,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
         MOrderA mOrderA = (MOrderA) session.createQuery("from MOrderA where id = 1").uniqueResult();
         if(mOrderA != null){
             Transaction tx = session.beginTransaction();
-            session.createQuery("update MOrderA orderA set orderA.totalMoney =: MONEY, orderA.totalOrders = " +
+            session.createQuery("update MOrderA orderA set orderA.totalMoney = :MONEY, orderA.totalOrders = " +
                     ":ORDERS where orderA.id = 1")
                     .setParameter("MONEY", mOrderA.getTotalMoney() + (pay ? order.getPrice() : -order.getPrice()))
                     .setParameter("ORDERS", mOrderA.getTotalOrders() + (pay ? 1 : -1))
@@ -340,7 +340,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl implements OrderRepo
             session.createQuery("update MOrderMonthA monthA set monthA.totalMoney = :MONEY, monthA.totalOrders = :ORDER" +
                     " where monthA.month = :MONTH")
                     .setParameter("MONEY", mOrderMonthA.getTotalMoney() + (pay ? order.getPrice() : -order.getPrice()))
-                    .setParameter("ORDER", mOrderMonthA.getTotalMoney() + (pay ? 1 : -1))
+                    .setParameter("ORDER", mOrderMonthA.getTotalOrders() + (pay ? 1 : -1))
                     .setParameter("MONTH", month)
                     .executeUpdate();
             tx.commit();
